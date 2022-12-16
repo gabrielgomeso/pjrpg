@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, watch } from "vue";
 import type { Ref } from "vue";
 
 const races: Object = {
@@ -20,7 +20,16 @@ const attributes: Object = {
 const raceList = Object.keys(races);
 
 const selectedRace: Ref<string> = ref("");
-const groupOptions = computed(() => races[selectedRace.value]);
+const groupOptions: Ref<any> = ref([]);
+console.log(groupOptions.value.length);
+
+function setGroups(selected: string) {
+  groupOptions.value = races[selected];
+}
+
+watch(selectedRace, (newSelected) => {
+  setGroups(newSelected);
+});
 </script>
 
 <template>
@@ -57,7 +66,15 @@ const groupOptions = computed(() => races[selectedRace.value]);
       <label for="character-group">
         Character group:
         <select name="character-group">
-          <option v-for="group in groupOptions" :key="group" :value="group">
+          <option v-if="groupOptions.length == 0" value="undefined" selected>
+            Select characters race
+          </option>
+          <option
+            v-else
+            v-for="group in groupOptions"
+            :key="group"
+            :value="group"
+          >
             {{ group }}
           </option>
         </select>
