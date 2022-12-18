@@ -1,40 +1,52 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
+import { AttributeField, StatusDisplay } from "@/components";
+import * as items from "../../items.json";
+import * as habilities from "../../habilities.json";
+
+const itemsList = items.items;
+const habilitiesList = habilities.habilities;
 
 const races: Object = {
-  demigod: ["sons of Ares", "sons of Hermes"],
+  demigod: ["ares", "hermes"],
   spirit: ["satyr", "nynph"],
   monster: ["minotaur", "dracaena"],
-};
-
-const attributes: Object = {
-  strenght: 0,
-  agility: 0,
-  wisdom: 0,
-  intelligence: 0,
-  constitution: 0,
-  charisma: 0,
 };
 
 const raceList = Object.keys(races);
 
 const selectedRace: Ref<string> = ref("");
+const selectedGroup: Ref<string> = ref("");
 const groupOptions: Ref<any> = ref([]);
-console.log(groupOptions.value.length);
+const groupPowers: Ref<any> = ref([]);
 
 function setGroups(selected: string) {
   groupOptions.value = races[selected];
 }
 
-watch(selectedRace, (newSelected) => {
-  setGroups(newSelected);
+function setPowers(selected: string) {
+  // PRECISO MAPEAR, DA LISTA DE HABILIDADES DE DETERMINADO GRUPO, TODOS OS PODERES LEVEL 1
+  groupPowers.value = habilitiesList[selected];
+}
+
+// OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
+watch(selectedRace, (newSelectedRace) => {
+  setGroups(newSelectedRace);
+});
+
+// OBSERVA O GRUPO E SETA OS PODERES DAQUELE GRUPO
+watch(selectedGroup, (newGroupSelected) => {
+  setPowers(newGroupSelected);
+  console.log(groupPowers.value);
 });
 </script>
 
 <template>
   <main>
-    <form class="character-form" action="">
+    <form class="character-form" action="" @submit.prevent>
+      <StatusDisplay />
+
       <label for="character-name">
         Character name:
         <input
@@ -65,7 +77,7 @@ watch(selectedRace, (newSelected) => {
 
       <label for="character-group">
         Character group:
-        <select name="character-group">
+        <select v-model="selectedGroup" name="character-group">
           <option v-if="groupOptions.length == 0" value="undefined" selected>
             Select characters race
           </option>
@@ -81,21 +93,23 @@ watch(selectedRace, (newSelected) => {
       </label>
 
       <h2>Attributes</h2>
-      <label for="strenght"> Strenght: {{ attributes.strenght }}</label>
+      <AttributeField :attribute="'strenght'" />
+      <AttributeField :attribute="'agility'" />
+      <AttributeField :attribute="'wisdom'" />
+      <AttributeField :attribute="'intelligence'" />
+      <AttributeField :attribute="'constitution'" />
+      <AttributeField :attribute="'charisma'" />
 
-      <label for="agility"> Agility: {{ attributes.agility }} </label>
-
-      <label for="wisdom"> Wisdom: {{ attributes.wisdom }} </label>
-
-      <label for="intelligence">
-        Intelligence: {{ attributes.intelligence }}
+      <h2>Select first item</h2>
+      <label v-for="item in itemsList" :key="item.name" :for="item.name">
+        <input type="radio" name="item" :id="item.name" :value="item.name" />
+        {{ item.name }}
       </label>
 
-      <label for="constitution">
-        Constitution: {{ attributes.constitution }}
-      </label>
-
-      <label for="charisma"> Charisma: {{ attributes.charisma }} </label>
+      <h2>Select first two powers</h2>
+      <div v-if="selectedGroup != ''">
+        {{ groupPowers }}
+      </div>
     </form>
   </main>
 </template>
