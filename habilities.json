@@ -1,0 +1,58 @@
+{
+  "habilities": {
+    "ares": [
+      {
+        "name": "Ataque Poderoso",
+        "levels": [
+          {
+            "level": 1,
+            "cost": 1,
+            "statusCost": "energy",
+            "effect": "1d6 de dano extra"
+          },
+          {
+            "level": 2,
+            "cost": 1,
+            "statusCost": "energy",
+            "effect": "1d12 de dano extra"
+          },
+          {
+            "level": 3,
+            "cost": 1,
+            "statusCost": "energy",
+            "effect": "1d20 de dano extra"
+          }
+        ]
+      },
+      {
+        "name": "Fúria",
+        "levels": [
+          {
+            "level": 1,
+            "cost": 1,
+            "statusCost": "energy",
+            "effect": "+1 de ataque"
+          },
+          {
+            "level": 2,
+            "cost": 1,
+            "statusCost": "energy",
+            "effect": "+2 de ataque"
+          },
+          {
+            "level": 3,
+            "cost": 1,
+            "statusCost": "energy",
+            "effect": "+3 de ataque"
+          }
+        ]
+      }
+    ],
+    "hermes": [
+
+    ],
+    "minotaur": [
+
+    ]
+  }
+}

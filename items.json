@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+     "name": "spear",
+     "damage-dice": "1d8",
+     "description": "Long spear of wood with a celestial bronze tip",
+     "reach": "Two squares" 
+    },
+    {
+      "name": "sword",
+      "damage-dice": "1d10",
+      "description": "A short sword with a celestial bronze blade",
+      "reach": "One square"
+     }
+  ]
+}
