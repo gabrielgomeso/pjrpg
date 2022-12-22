@@ -18,16 +18,26 @@ const raceList = Object.keys(races);
 
 const selectedRace: Ref<string> = ref("");
 const selectedGroup: Ref<string> = ref("");
+const selectedPowers: Ref<any> = ref([]);
 const groupOptions: Ref<any> = ref([]);
 const groupPowers: Ref<any> = ref([]);
+
+function retrievePowers(item: any, group: string) {
+  if (item.group == group) {
+    return {
+      name: item.name,
+      description: item.description,
+      effect: item["1"],
+    };
+  }
+}
 
 function setGroups(selected: string) {
   groupOptions.value = races[selected];
 }
 
 function setPowers(selected: string) {
-  // PRECISO MAPEAR, DA LISTA DE HABILIDADES DE DETERMINADO GRUPO, TODOS OS PODERES LEVEL 1
-  groupPowers.value = habilitiesList[selected];
+  groupPowers.value = habilitiesList.map((x) => retrievePowers(x, selected));
 }
 
 // OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
@@ -38,7 +48,6 @@ watch(selectedRace, (newSelectedRace) => {
 // OBSERVA O GRUPO E SETA OS PODERES DAQUELE GRUPO
 watch(selectedGroup, (newGroupSelected) => {
   setPowers(newGroupSelected);
-  console.log(groupPowers.value);
 });
 </script>
 
@@ -108,7 +117,23 @@ watch(selectedGroup, (newGroupSelected) => {
 
       <h2>Select first two powers</h2>
       <div v-if="selectedGroup != ''">
-        {{ groupPowers }}
+        <li v-for="power in groupPowers" :key="power.name">
+          <label>
+            <input
+              type="checkbox"
+              v-model="selectedPowers"
+              :value="power"
+              :disabled="
+                selectedPowers.length > 1 &&
+                selectedPowers.indexOf(power) === -1
+              "
+              number
+            />
+            <p>Name: {{ power.name }}</p>
+            <p>Description: {{ power.description }}</p>
+            <p>Level 1 Effect: {{ power.effect }}</p>
+          </label>
+        </li>
       </div>
     </form>
   </main>
