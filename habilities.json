@@ -1,58 +1,44 @@
 {
-  "habilities": {
-    "ares": [
-      {
-        "name": "Ataque Poderoso",
-        "levels": [
-          {
-            "level": 1,
-            "cost": 1,
-            "statusCost": "energy",
-            "effect": "1d6 de dano extra"
-          },
-          {
-            "level": 2,
-            "cost": 1,
-            "statusCost": "energy",
-            "effect": "1d12 de dano extra"
-          },
-          {
-            "level": 3,
-            "cost": 1,
-            "statusCost": "energy",
-            "effect": "1d20 de dano extra"
-          }
-        ]
-      },
-      {
-        "name": "Fúria",
-        "levels": [
-          {
-            "level": 1,
-            "cost": 1,
-            "statusCost": "energy",
-            "effect": "+1 de ataque"
-          },
-          {
-            "level": 2,
-            "cost": 1,
-            "statusCost": "energy",
-            "effect": "+2 de ataque"
-          },
-          {
-            "level": 3,
-            "cost": 1,
-            "statusCost": "energy",
-            "effect": "+3 de ataque"
-          }
-        ]
-      }
-    ],
-    "hermes": [
-
-    ],
-    "minotaur": [
-
-    ]
-  }
+  "habilities": [
+    { 
+      "group": "minotaur", 
+      "name": "Tamanho Maior",
+      "description": "Como a criatura ancestral, os minotauros podem atingir grandes proporções. O tamanho inicial da criatura é de 1,90. Essa habilidade pode ser um problema ou uma solução.",
+      "1": "O minotauro atinge 2,30m.",
+      "2": "O minotauro atinge 3m.",
+      "3": "O minotauro atinge 4m."
+    },
+    { 
+      "group": "minotaur", 
+      "name": "Carregada",
+      "description": "O minotauro dispara em direção aos seus inimigos, causando dano e empurrando-os. Ele precisa de um turno para preparar o avanço. A distância do empurrão é igual ao valor de força mais o nível da habilidade. O custo da carregada é de 10 de Energia. O oponente pode fazer uma resistência de força para não ser empurrado.",
+      "1": "2d10 de dano",
+      "2": "3d10 de dano",
+      "3": "4d10 de dano"
+    },
+    { 
+      "group": "minotaur", 
+      "name": "Comandar",
+      "description": "O minotauro pode usar de sua lendária presença para comandar outros monstros. Eles devem fazer um teste de sabedoria para evitar o comando. O custo é de 10 de Magia por monstro e 5 de Magia por turno para manter os monstros sob controle.",
+      "1": "Pode comandar até 1 monstros.",
+      "2": "Pode comandar até 2 monstros.",
+      "3": "Pode comandar até 4 monstros."
+    },
+    { 
+      "group": "minotaur", 
+      "name": "Manipulação da Névoa",
+      "description": "Monstros no geral podem manipular a névoa para se disfarçarem entre os humanos. Essa habilidade se amplia, dando a possibilidade de que criem pequenas ilusões. Custa 10 de Magia por quadrado que o objeto ocupa.",
+      "1": "Você pode manipular a névoa para alterar sua aparência.",
+      "2": "Você pode manipular a névoa para alterar a aparência de algum objeto de tamanho médio, como um carro.",
+      "3": "Você pode manipular a névoa para alterar a aparência de um objeto grande, como um prédio."
+    },
+    { 
+      "group": "minotaur", 
+      "name": "Rugido Tenebroso",
+      "description": "O som assustador que o minotauro faz assusta a qualquer um. Custa 10 de Magia. Os inimigos precisam fazer um teste de resistência de sabedoria para não sofrerem o rugido.",
+      "1": "O rugido assusta por 1 turno e o inimigo tenta fugir.",
+      "2": "O rugido assusta por 2 turnos e o inimigo tenta fugir.",
+      "3": "O rugido deixa o inimigo catatônico por 2 turnos."
+    }
+  ]
 }
