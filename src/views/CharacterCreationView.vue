@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";import { useCharacterStore } from "@/stores/character";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
+import { useCharacterStore } from "@/stores/character";
 import {
-  AttributeField,
+  AttributeSelection,
   StatusDisplay,
   CharacterInformation,
   HabilitiesSelection,
@@ -13,6 +15,7 @@ const { createCharacter } = useCharacterStore();
 const data = character.character_data.value;
 const status = character.status.value;
 const attributes = character.attributes.value;
+const step = ref(1);
 
 const createdCharacter = {
   attributes: attributes,
@@ -38,23 +41,25 @@ async function sendForm() {
 <template>
   <main class="character-creation-main">
     <form class="character-form" action="" @submit.prevent>
-      <CharacterInformation />
+      <CharacterInformation v-if="step == 1" />
 
-      <h2>Attributes</h2>
-      <AttributeField :attribute="'strenght'" />
-      <AttributeField :attribute="'agility'" />
-      <AttributeField :attribute="'wisdom'" />
-      <AttributeField :attribute="'intelligence'" />
-      <AttributeField :attribute="'constitution'" />
-      <AttributeField :attribute="'charisma'" />
+      <AttributeSelection v-if="step == 2" />
 
-      <StatusDisplay />
+      <StatusDisplay v-if="step == 2" />
 
-      <HabilitiesSelection />
+      <HabilitiesSelection v-if="step == 3" />
 
-      <ItemsSelection />
+      <ItemsSelection v-if="step == 4" />
 
-      <button @click="sendForm()">Create Character</button>
+      <button v-if="step > 1" class="form-button" @click="step -= 1">
+        Previous
+      </button>
+      <button v-if="step < 4" class="form-button" @click="step += 1">
+        Next
+      </button>
+      <button v-if="step == 4" class="form-button" @click="sendForm()">
+        Create Character
+      </button>
     </form>
   </main>
 </template>
@@ -68,6 +73,7 @@ async function sendForm() {
 
 .character-form {
   display: grid;
+  gap: 1rem;
   width: 50vw;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
