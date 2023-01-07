@@ -53,8 +53,9 @@ watch(selectedGroup, (newGroupSelected) => {
 </script>
 
 <template>
+  <h2>Character Information</h2>
   <label class="form-label" for="character-name">
-    Character name:
+    Name:
     <input
       class="form-input"
       v-model="data.name"
@@ -65,7 +66,7 @@ watch(selectedGroup, (newGroupSelected) => {
   </label>
 
   <label class="form-label" for="character-age">
-    Character age:
+    Age:
     <input
       class="form-input"
       v-model="data.age"
@@ -76,7 +77,7 @@ watch(selectedGroup, (newGroupSelected) => {
   </label>
 
   <label class="form-label" for="character-race">
-    Character race:
+    Race:
     <select class="form-input" v-model="selectedRace" name="character-race">
       <option value="undefined" selected>Select characters race</option>
       <option v-for="race in raceList" :key="race" :value="race">
@@ -86,7 +87,7 @@ watch(selectedGroup, (newGroupSelected) => {
   </label>
 
   <label class="form-label" for="character-group">
-    Character group:
+    Group:
     <select class="form-input" v-model="selectedGroup" name="character-group">
       <option v-if="groupOptions.length == 0" value="undefined" selected>
         Select characters race
