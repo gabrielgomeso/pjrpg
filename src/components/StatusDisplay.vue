@@ -27,10 +27,18 @@ const heroicPoints = computed(
 </script>
 
 <template>
-  <div class="attribute-field">
+  <h2>Status</h2>
+
+  <div class="status-field">
     <label for="healthPoints"> Health Points: {{ healthPoints }}</label>
     <label for="energyPoints">Energy Points: {{ energyPoints }}</label>
     <label for="magicPoints">Magic Points: {{ magicPoints }}</label>
     <label for="heroicPoints">Heroic Points: {{ heroicPoints }}</label>
   </div>
 </template>
+
+<style>
+.status-field {
+  display: grid;
+}
+</style>

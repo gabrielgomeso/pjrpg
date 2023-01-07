@@ -1,16 +1,24 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import type { IAttributes, IStatus } from "../data/models";
+import type { IAttributes, IStatus, ICharacterData } from "../data/models";
 import type { Ref } from "vue";
+import { supabase } from "@/lib/supabase";
 
-export const useCharacterStore = defineStore("counter", () => {
+export const useCharacterStore = defineStore("character", () => {
+  const character_data: Ref<ICharacterData> = ref({
+    name: "",
+    age: 0,
+    race: "",
+    group: "",
+  });
+
   const attributes: Ref<IAttributes> = ref({
-    strenght: 0,
-    agility: 0,
-    wisdom: 0,
-    intelligence: 0,
-    constitution: 0,
-    charisma: 0,
+    strenght: 1,
+    agility: 1,
+    wisdom: 1,
+    intelligence: 1,
+    constitution: 1,
+    charisma: 1,
   });
 
   const status: Ref<IStatus> = ref({
@@ -29,5 +37,35 @@ export const useCharacterStore = defineStore("counter", () => {
     attributes.value[attribute] -= 1;
   }
 
-  return { attributes, increase, decrease, status, inventory };
+  async function createCharacter(character: string): Promise<any | string> {
+    try {
+      const { data, error } = await supabase
+        .from("characters")
+        .insert(character)
+        .single();
+
+      if (error) {
+        alert(error.message);
+        console.error("There was an error inserting", error);
+        return null;
+      }
+
+      console.log("created a new character");
+      return data;
+    } catch (err) {
+      alert("Error");
+      console.error("Unknown problem inserting to db", err);
+      return null;
+    }
+  }
+
+  return {
+    attributes,
+    character_data,
+    status,
+    inventory,
+    increase,
+    decrease,
+    createCharacter,
+  };
 });
