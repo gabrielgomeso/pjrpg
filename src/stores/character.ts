@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase";
 export const useCharacterStore = defineStore("character", () => {
   const character_data: Ref<ICharacterData> = ref({
     name: "",
-    age: 0,
+    age: "",
     race: "",
     group: "",
   });

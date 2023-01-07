@@ -1,6 +1,6 @@
 export interface ICharacterData {
   name: String;
-  age: Number;
+  age: String;
   race: String;
   group: String;
 }
