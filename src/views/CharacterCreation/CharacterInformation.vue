@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useCharacterStore } from "@/stores/character";
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
 import { StepLayout } from "@/components/layout";
 import * as habilities from "../../../habilities.json";
 
-const character = storeToRefs(useCharacterStore());
-const data = character.character_data.value;
 const habilitiesList = habilities.habilities;
 const races: Object = {
   demigod: ["ares", "hermes"],
@@ -20,6 +16,27 @@ const selectedRace: Ref<string> = ref("");
 const selectedGroup: Ref<string> = ref("");
 const groupOptions: Ref<any> = ref([]);
 const groupPowers: Ref<any> = ref([]);
+const formInvalid = ref(true);
+const alert = ref(false);
+const alertText: Ref<Array<string>> = ref([]);
+
+interface IForm {
+  name: string;
+  age: string;
+  group: string;
+  race: string;
+}
+
+const form: Ref<IForm> = ref({
+  name: "",
+  age: "",
+  group: "",
+  race: "",
+});
+
+function setGroups(selected: string) {
+  groupOptions.value = races[selected];
+}
 
 function retrievePowers(item: any, group: string) {
   if (item.group == group) {
@@ -31,27 +48,51 @@ function retrievePowers(item: any, group: string) {
   }
 }
 
-function setGroups(selected: string) {
-  groupOptions.value = races[selected];
-}
-
 function setPowers(selected: string) {
   groupPowers.value = habilitiesList.map((x) => retrievePowers(x, selected));
+}
+
+function validateNameInput(inputValue: string) {
+  if (inputValue.length == 0 || /\d/.test(inputValue)) {
+    alert.value = true;
+    alertText.value.push(
+      "O campo de nome não pode conter números e nem ser vazio."
+    );
+  }
+}
+
+function validateAgeInput(inputValue: string) {
+  if (inputValue.length == 0 || /[a-z]/i.test(inputValue)) {
+    alert.value = true;
+    alertText.value.push(
+      "O campo de idade só pode conter números e não pode ser vazio."
+    );
+  }
+}
+
+function validateForm(form: IForm) {
+  formInvalid.value = true;
+  alert.value = false;
+  alertText.value = [];
+  validateNameInput(form.name);
+  validateAgeInput(form.age);
+
+  if (alertText.value.length == 0) {
+    formInvalid.value = false;
+  }
 }
 
 // OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
 watch(selectedRace, (newSelectedRace) => {
   setGroups(newSelectedRace);
-  data.race = newSelectedRace;
+  form.value.race = newSelectedRace;
 });
 
 // OBSERVA O GRUPO E SETA OS PODERES DAQUELE GRUPO
 watch(selectedGroup, (newGroupSelected) => {
   setPowers(newGroupSelected);
-  data.group = newGroupSelected;
+  form.value.group = newGroupSelected;
 });
-
-const formInvalid = false;
 </script>
 
 <template>
@@ -60,7 +101,8 @@ const formInvalid = false;
       Name:
       <input
         class="form-input"
-        v-model="data.name"
+        v-model="form.name"
+        @keyup="validateForm(form)"
         type="text"
         name="character-name"
         placeholder="Insert the character's name"
@@ -71,7 +113,8 @@ const formInvalid = false;
       Age:
       <input
         class="form-input"
-        v-model="data.age"
+        @keyup="validateForm(form)"
+        v-model="form.age"
         type="number"
         name="character-age"
         placeholder="Insert the characters age"
@@ -105,6 +148,13 @@ const formInvalid = false;
     >
       Next
     </router-link>
+
+    <div v-show="alert">
+      Alerta! Os campos possuem os seguintes erros:
+      <ul>
+        <li v-for="text in alertText" :key="text">{{ text }}</li>
+      </ul>
+    </div>
   </StepLayout>
 </template>
 
