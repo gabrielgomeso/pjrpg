@@ -52,6 +52,13 @@ function setPowers(selected: string) {
   groupPowers.value = habilitiesList.map((x) => retrievePowers(x, selected));
 }
 
+function validateSelectInput(inputValue: string, fieldName: string) {
+  if (inputValue == "") {
+    alert.value = true;
+    alertText.value.push(`O campo de ${fieldName} deve ser selecionado.`);
+  }
+}
+
 function validateNameInput(inputValue: string) {
   if (inputValue.length == 0 || /\d/.test(inputValue)) {
     alert.value = true;
@@ -76,6 +83,8 @@ function validateForm(form: IForm) {
   alertText.value = [];
   validateNameInput(form.name);
   validateAgeInput(form.age);
+  validateSelectInput(form.race, "raça");
+  validateSelectInput(form.group, "grupo");
 
   if (alertText.value.length == 0) {
     formInvalid.value = false;
@@ -123,7 +132,12 @@ watch(selectedGroup, (newGroupSelected) => {
 
     <label class="form-label" for="character-race">
       Race:
-      <select class="form-input" v-model="selectedRace" name="character-race">
+      <select
+        @click="validateForm(form)"
+        class="form-input"
+        v-model="selectedRace"
+        name="character-race"
+      >
         <option value="undefined" selected>Select characters race</option>
         <option v-for="race in raceList" :key="race" :value="race">
           {{ race }}
@@ -133,7 +147,12 @@ watch(selectedGroup, (newGroupSelected) => {
 
     <label class="form-label" for="character-group">
       Group:
-      <select class="form-input" v-model="selectedGroup" name="character-group">
+      <select
+        @click="validateForm(form)"
+        class="form-input"
+        v-model="selectedGroup"
+        name="character-group"
+      >
         <option value="undefined" selected>Select characters group</option>
         <option v-for="group in groupOptions" :key="group" :value="group">
           {{ group }}
