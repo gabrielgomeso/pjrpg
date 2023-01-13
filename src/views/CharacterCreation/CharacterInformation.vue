@@ -167,14 +167,42 @@ watch(selectedGroup, (newGroupSelected) => {
     >
       Next
     </router-link>
-
-    <div v-show="alert">
-      Alerta! Os campos possuem os seguintes erros:
-      <ul>
-        <li v-for="text in alertText" :key="text">{{ text }}</li>
-      </ul>
-    </div>
+    <Transition>
+      <div class="alert-box" v-show="alert">
+        <h3>Alerta!</h3>
+        <p>Os campos possuem os seguintes erros:</p>
+        <ul>
+          <li v-for="text in alertText" :key="text">{{ text }}</li>
+        </ul>
+      </div>
+    </Transition>
   </StepLayout>
 </template>
 
-<style></style>
+<style>
+.alert-box {
+  max-width: 350px;
+  border: 1px solid red;
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 0.13);
+  padding: 1rem;
+}
+
+.alert-box > ul {
+  list-style-type: none;
+}
+
+.alert-box > p {
+  font-weight: bold;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
