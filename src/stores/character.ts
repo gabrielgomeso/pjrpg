@@ -19,6 +19,7 @@ export const useCharacterStore = defineStore("character", () => {
     intelligence: 1,
     constitution: 1,
     charisma: 1,
+    available: 10,
   });
 
   const status: Ref<IStatus> = ref({
@@ -30,11 +31,21 @@ export const useCharacterStore = defineStore("character", () => {
   const inventory: Ref<Object> = ref({});
 
   function increase(attribute: string) {
-    attributes.value[attribute] += 1;
+    if (hasAvailablePoints()) {
+      attributes.value[attribute] += 1;
+      attributes.value.available -= 1;
+    }
   }
 
   function decrease(attribute: string) {
-    attributes.value[attribute] -= 1;
+    if (attributes.value[attribute] > 1) {
+      attributes.value[attribute] -= 1;
+      attributes.value.available += 1;
+    }
+  }
+
+  function hasAvailablePoints() {
+    return attributes.value.available > 0;
   }
 
   async function createCharacter(character: string): Promise<any | string> {
@@ -67,5 +78,6 @@ export const useCharacterStore = defineStore("character", () => {
     increase,
     decrease,
     createCharacter,
+    hasAvailablePoints,
   };
 });

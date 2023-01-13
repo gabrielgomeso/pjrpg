@@ -5,4 +5,5 @@ export interface IAttributes {
   intelligence: number;
   constitution: number;
   charisma: number;
+  available: number;
 }
