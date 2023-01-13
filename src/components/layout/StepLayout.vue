@@ -29,15 +29,11 @@ defineProps<{
 .character-creation-main {
   display: grid;
   place-items: center;
-  width: 100vw;
-  height: var(--full-height);
 }
 
 .character-form {
   display: grid;
   gap: 1rem;
-  width: 50vw;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  min-width: 50vw;
 }
 </style>
