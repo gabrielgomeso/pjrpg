@@ -11,7 +11,12 @@ import { RouterLink, RouterView } from "vue-router";
     </nav>
   </header>
 
-  <RouterView />
+  <RouterView class="main" />
 </template>
 
-<style></style>
+<style>
+.main {
+  width: 100vw;
+  height: var(--full-height);
+}
+</style>
