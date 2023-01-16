@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useCharacterStore } from "@/stores/character";
 
-const { decrease, increase, hasAvailablePoints, attributes } =
-  useCharacterStore();
+const { decrease, increase, attributes } = useCharacterStore();
 
 const props = defineProps<{
   attribute: string;
