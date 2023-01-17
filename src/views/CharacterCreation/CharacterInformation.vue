@@ -16,9 +16,6 @@ const selectedRace: Ref<string> = ref("");
 const selectedGroup: Ref<string> = ref("");
 const groupOptions: Ref<any> = ref([]);
 const groupPowers: Ref<any> = ref([]);
-const formInvalid = ref(true);
-const alert = ref(false);
-const alertText: Ref<Array<string>> = ref([]);
 
 interface IForm {
   name: string;
@@ -52,45 +49,6 @@ function setPowers(selected: string) {
   groupPowers.value = habilitiesList.map((x) => retrievePowers(x, selected));
 }
 
-function validateSelectInput(inputValue: string, fieldName: string) {
-  if (inputValue == "") {
-    alert.value = true;
-    alertText.value.push(`O campo de ${fieldName} deve ser selecionado.`);
-  }
-}
-
-function validateNameInput(inputValue: string) {
-  if (inputValue.length == 0 || /\d/.test(inputValue)) {
-    alert.value = true;
-    alertText.value.push(
-      "O campo de nome não pode conter números e nem ser vazio."
-    );
-  }
-}
-
-function validateAgeInput(inputValue: string) {
-  if (inputValue.length == 0 || /[a-z]/i.test(inputValue)) {
-    alert.value = true;
-    alertText.value.push(
-      "O campo de idade só pode conter números e não pode ser vazio."
-    );
-  }
-}
-
-function validateForm(form: IForm) {
-  formInvalid.value = true;
-  alert.value = false;
-  alertText.value = [];
-  validateNameInput(form.name);
-  validateAgeInput(form.age);
-  validateSelectInput(form.race, "raça");
-  validateSelectInput(form.group, "grupo");
-
-  if (alertText.value.length == 0) {
-    formInvalid.value = false;
-  }
-}
-
 // OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
 watch(selectedRace, (newSelectedRace) => {
   setGroups(newSelectedRace);
@@ -111,7 +69,6 @@ watch(selectedGroup, (newGroupSelected) => {
       <input
         class="form-input"
         v-model="form.name"
-        @keyup="validateForm(form)"
         type="text"
         name="character-name"
         placeholder="Insert the character's name"
@@ -122,7 +79,6 @@ watch(selectedGroup, (newGroupSelected) => {
       Age:
       <input
         class="form-input"
-        @keyup="validateForm(form)"
         v-model="form.age"
         type="number"
         name="character-age"
@@ -132,12 +88,7 @@ watch(selectedGroup, (newGroupSelected) => {
 
     <label class="form-label" for="character-race">
       Race:
-      <select
-        @click="validateForm(form)"
-        class="form-input"
-        v-model="selectedRace"
-        name="character-race"
-      >
+      <select class="form-input" v-model="selectedRace" name="character-race">
         <option value="undefined" selected>Select characters race</option>
         <option v-for="race in raceList" :key="race" :value="race">
           {{ race }}
@@ -147,12 +98,7 @@ watch(selectedGroup, (newGroupSelected) => {
 
     <label class="form-label" for="character-group">
       Group:
-      <select
-        @click="validateForm(form)"
-        class="form-input"
-        v-model="selectedGroup"
-        name="character-group"
-      >
+      <select class="form-input" v-model="selectedGroup" name="character-group">
         <option value="undefined" selected>Select characters group</option>
         <option v-for="group in groupOptions" :key="group" :value="group">
           {{ group }}
@@ -162,20 +108,11 @@ watch(selectedGroup, (newGroupSelected) => {
 
     <router-link
       class="form-button"
-      :class="{ 'form-button-disabled': formInvalid }"
+      :class="{ 'form-button-disabled': false }"
       to="attribute_selection"
     >
       Next
     </router-link>
-    <Transition>
-      <div class="alert-box" v-show="alert">
-        <h3>Alerta!</h3>
-        <p>Os campos possuem os seguintes erros:</p>
-        <ul>
-          <li v-for="text in alertText" :key="text">{{ text }}</li>
-        </ul>
-      </div>
-    </Transition>
   </StepLayout>
 </template>
 
