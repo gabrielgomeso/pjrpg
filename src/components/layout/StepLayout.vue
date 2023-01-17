@@ -27,8 +27,9 @@ defineProps<{
 
 <style>
 .character-creation-main {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .character-form {
