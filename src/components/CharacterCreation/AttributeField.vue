@@ -13,7 +13,7 @@ const capitalizedAttribute =
 
 <template>
   <div class="attribute-field">
-    <label for="strenght">
+    <label :for="attribute">
       {{ capitalizedAttribute }}: {{ attributes[attribute] }}
     </label>
     <button class="attribute-button" @click="increase(attribute)">+</button>
@@ -24,7 +24,7 @@ const capitalizedAttribute =
 <style>
 .attribute-field {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1fr repeat(2, minmax(100px, auto));
   gap: 5px;
 }
 
@@ -36,6 +36,7 @@ const capitalizedAttribute =
   text-align: center;
   color: black;
   border: 0;
+  max-width: 100px;
 }
 
 .attribute-button:active {
