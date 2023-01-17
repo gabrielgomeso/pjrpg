@@ -19,7 +19,7 @@ export const useCharacterStore = defineStore("character", () => {
     intelligence: 1,
     constitution: 1,
     charisma: 1,
-    available: 10,
+    available: 15,
   });
 
   const status: Ref<IStatus> = ref({
