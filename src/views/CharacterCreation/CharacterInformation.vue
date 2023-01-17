@@ -116,30 +116,4 @@ watch(selectedGroup, (newGroupSelected) => {
   </StepLayout>
 </template>
 
-<style>
-.alert-box {
-  max-width: 350px;
-  border: 1px solid red;
-  border-radius: 10px;
-  background-color: rgba(255, 0, 0, 0.13);
-  padding: 1rem;
-}
-
-.alert-box > ul {
-  list-style-type: none;
-}
-
-.alert-box > p {
-  font-weight: bold;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>
+<style></style>
