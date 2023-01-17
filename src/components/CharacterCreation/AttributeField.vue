@@ -24,6 +24,7 @@ const capitalizedAttribute =
 <style>
 .attribute-field {
   display: grid;
+  max-width: 400px;
   grid-template-columns: 1fr repeat(2, minmax(100px, auto));
   gap: 5px;
 }
