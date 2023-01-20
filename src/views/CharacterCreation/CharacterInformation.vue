@@ -2,9 +2,11 @@
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
 import { StepLayout } from "@/components/layout";
-import * as habilities from "../../../habilities.json";
+import type { ICharacterData } from "@/data/models";
+import { storeToRefs } from "pinia";
+import { useCharacterStore } from "@/stores/character";
+const { character_data } = storeToRefs(useCharacterStore());
 
-const habilitiesList = habilities.habilities;
 const races: Object = {
   demigod: ["ares", "hermes"],
   spirit: ["satyr", "nynph"],
@@ -15,16 +17,8 @@ const raceList = Object.keys(races);
 const selectedRace: Ref<string> = ref("");
 const selectedGroup: Ref<string> = ref("");
 const groupOptions: Ref<any> = ref([]);
-const groupPowers: Ref<any> = ref([]);
 
-interface IForm {
-  name: string;
-  age: string;
-  group: string;
-  race: string;
-}
-
-const form: Ref<IForm> = ref({
+const form: Ref<ICharacterData> = ref({
   name: "",
   age: "",
   group: "",
@@ -35,18 +29,8 @@ function setGroups(selected: string) {
   groupOptions.value = races[selected];
 }
 
-function retrievePowers(item: any, group: string) {
-  if (item.group == group) {
-    return {
-      name: item.name,
-      description: item.description,
-      effect: item["1"],
-    };
-  }
-}
-
-function setPowers(selected: string) {
-  groupPowers.value = habilitiesList.map((x) => retrievePowers(x, selected));
+function setCharacterInformationToStore() {
+  character_data.value = form.value;
 }
 
 // OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
@@ -57,7 +41,6 @@ watch(selectedRace, (newSelectedRace) => {
 
 // OBSERVA O GRUPO E SETA OS PODERES DAQUELE GRUPO
 watch(selectedGroup, (newGroupSelected) => {
-  setPowers(newGroupSelected);
   form.value.group = newGroupSelected;
 });
 </script>
@@ -110,6 +93,7 @@ watch(selectedGroup, (newGroupSelected) => {
       class="form-button"
       :class="{ 'form-button-disabled': false }"
       to="attribute_selection"
+      @click="setCharacterInformationToStore()"
     >
       Next
     </router-link>
