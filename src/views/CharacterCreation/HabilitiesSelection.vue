@@ -36,7 +36,7 @@ onMounted(() => {
     :current-step="3"
     :step-title="`Select first two ${group} powers`"
     :previous-step="'attribute_selection'"
-    :next-step="'items_selection'"
+    :next-step="'feats_selection'"
   >
     <div class="hability-card--list">
       <label
