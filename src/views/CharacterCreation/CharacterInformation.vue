@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 import type { Ref } from "vue";
 import { StepLayout } from "@/components/layout";
-import type { ICharacterData } from "@/data/models";
+// import type { ICharacterData } from "@/data/models";
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
 const { character_data } = storeToRefs(useCharacterStore());
@@ -14,34 +14,24 @@ const races: Object = {
 };
 const raceList = Object.keys(races);
 
-const selectedRace: Ref<string> = ref("");
-const selectedGroup: Ref<string> = ref("");
-const groupOptions: Ref<any> = ref([]);
-
-const form: Ref<ICharacterData> = ref({
-  name: "",
-  age: "",
-  group: "",
-  race: "",
-});
+const selectedRace: Ref<string> = ref(character_data.value.race);
+const selectedGroup: Ref<string> = ref(character_data.value.group);
+const groupOptions: Ref<any> = ref(races[selectedGroup.value]);
 
 function setGroups(selected: string) {
   groupOptions.value = races[selected];
 }
 
-function setCharacterInformationToStore() {
-  character_data.value = form.value;
-}
-
 // OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
 watch(selectedRace, (newSelectedRace) => {
+  console.log(newSelectedRace);
   setGroups(newSelectedRace);
-  form.value.race = newSelectedRace;
+  character_data.value.race = newSelectedRace;
 });
 
 // OBSERVA O GRUPO E SETA OS PODERES DAQUELE GRUPO
 watch(selectedGroup, (newGroupSelected) => {
-  form.value.group = newGroupSelected;
+  character_data.value.group = newGroupSelected;
 });
 </script>
 
@@ -51,7 +41,7 @@ watch(selectedGroup, (newGroupSelected) => {
       Name:
       <input
         class="form-input"
-        v-model="form.name"
+        v-model="character_data.name"
         type="text"
         name="character-name"
         placeholder="Insert the character's name"
@@ -62,7 +52,7 @@ watch(selectedGroup, (newGroupSelected) => {
       Age:
       <input
         class="form-input"
-        v-model="form.age"
+        v-model="character_data.age"
         type="number"
         name="character-age"
         placeholder="Insert the characters age"
@@ -93,7 +83,6 @@ watch(selectedGroup, (newGroupSelected) => {
       class="form-button"
       :class="{ 'form-button-disabled': false }"
       to="attribute_selection"
-      @click="setCharacterInformationToStore()"
     >
       Next
     </router-link>
