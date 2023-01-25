@@ -4,7 +4,9 @@ import {
   AttributeSelection,
   CharacterInformation,
   HabilitiesSelection,
+  FeatsSelection,
   ItemsSelection,
+  CharacterOverview,
 } from "@/views/CharacterCreation";
 
 const router = createRouter({
@@ -18,22 +20,39 @@ const router = createRouter({
     {
       path: "/character_creation",
       name: "character_creation",
-      component: CharacterInformation,
-    },
-    {
-      path: "/attribute_selection",
-      name: "attribute_selection",
-      component: AttributeSelection,
-    },
-    {
-      path: "/habilities_selection",
-      name: "habilities_selection",
-      component: HabilitiesSelection,
-    },
-    {
-      path: "/items_selection",
-      name: "items_selection",
-      component: ItemsSelection,
+      redirect: { name: "character_information" },
+      children: [
+        {
+          path: "/character_information",
+          name: "character_information",
+          component: CharacterInformation,
+        },
+        {
+          path: "/attribute_selection",
+          name: "attribute_selection",
+          component: AttributeSelection,
+        },
+        {
+          path: "/habilities_selection",
+          name: "habilities_selection",
+          component: HabilitiesSelection,
+        },
+        {
+          path: "/feats_selection",
+          name: "feats_selection",
+          component: FeatsSelection,
+        },
+        {
+          path: "/items_selection",
+          name: "items_selection",
+          component: ItemsSelection,
+        },
+        {
+          path: "/character_overview",
+          name: "character_overview",
+          component: CharacterOverview,
+        },
+      ],
     },
     {
       path: "/about",
