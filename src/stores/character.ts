@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import type { IAttributes, IStatus, ICharacterData } from "../data/models";
 import type { Ref } from "vue";
 import { supabase } from "@/lib/supabase";
+import { STATUS_MULTIPLIER, HEROIC_MULTIPLIER } from "@/assets/ts/constants";
 
 export const useCharacterStore = defineStore("character", () => {
   const character_data: Ref<ICharacterData> = ref({
@@ -22,13 +23,25 @@ export const useCharacterStore = defineStore("character", () => {
     available: 15,
   });
 
-  const status: Ref<IStatus> = ref({
-    healthPoints: 0,
-    energyPoints: 0,
-    magicPoints: 0,
-  });
+  const status = {
+    healthPoints: attributes.value.constitution * STATUS_MULTIPLIER,
+    energyPoints:
+      (attributes.value.agility + attributes.value.strenght) *
+      STATUS_MULTIPLIER,
+    magicPoints:
+      (attributes.value.intelligence + attributes.value.wisdom) *
+      STATUS_MULTIPLIER,
+    heroicPoints: attributes.value.charisma * HEROIC_MULTIPLIER,
+  };
 
   const inventory: Ref<Object> = ref({});
+
+  const character = {
+    character_data: character_data.value,
+    attributes: attributes.value,
+    status: status,
+    inventory: inventory.value,
+  };
 
   function increase(attribute: string) {
     if (hasAvailablePoints()) {
@@ -48,11 +61,12 @@ export const useCharacterStore = defineStore("character", () => {
     return attributes.value.available > 0;
   }
 
-  async function createCharacter(character: string): Promise<any | string> {
+  async function createCharacter() {
+    console.log(character);
     try {
       const { data, error } = await supabase
         .from("characters")
-        .insert(character)
+        .insert({ character_info: character })
         .single();
 
       if (error) {
