@@ -1,0 +1,37 @@
+{
+  "talents": [
+    "Prontidão (SAB)",
+    "Esquiva (AGI)",
+    "Empatia (SAB)",
+    "Expressão (CAR)",
+    "Intimidação (CAR)",
+    "Liderança (CAR)",
+    "Manha (CAR)",
+    "Lábia (CAR)"
+  ],
+  "skills": [
+    "Empatia com Animais (SAB)",
+    "Ofícios - Especificar ofício (INT)",
+    "Condução - Especificar veículo (INT)",
+    "Etiqueta (CAR)",
+    "Armas Brancas (FOR)",
+    "Briga (FOR)",
+    "Esporte (AGI)",
+    "Performance - Especificar instrumento ou tipo (CAR)",
+    "Segurança (FOR)",
+    "Furtividade (AGI)",
+    "Sobrevivência (SAB)"
+  ],
+  "knowledges": [
+    "Acadêmicos (INT)",
+    "Computador (INT)",
+    "Finanças (INT)",
+    "Investigação (INT)",
+    "Direito (INT)",
+    "Linguística (INT)",
+    "Medicina (INT)",
+    "Mitologia (INT)",
+    "Política (INT)",
+    "Ciência (INT)"
+  ]
+}
