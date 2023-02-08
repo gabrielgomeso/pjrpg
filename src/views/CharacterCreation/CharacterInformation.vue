@@ -1,42 +1,75 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
-import type { Ref } from "vue";
+// import { ref, watch, onMounted } from "vue";
+// import type { Ref } from "vue";
 import { StepLayout } from "@/components/layout";
 // import type { ICharacterData } from "@/data/models";
-import { storeToRefs } from "pinia";
-import { useCharacterStore } from "@/stores/character";
-const { character_data } = storeToRefs(useCharacterStore());
+// import { storeToRefs } from "pinia";
+// import { useCharacterStore } from "@/stores/character";
+// const { character_data } = storeToRefs(useCharacterStore());
+import { Howl } from "howler";
+import buttonClick from "@/assets/sounds/button_click.mp3";
+let demigods = [
+  "Zeus",
+  "Hera",
+  "Poseidon",
+  "Demeter",
+  "Ares",
+  "Athena",
+  "Apollo",
+  "Artemis",
+  "Hephaestus",
+  "Aphrodite",
+  "Hermes",
+  "Dionysus",
+  "Hades",
+];
 
-const races: Object = {
-  demigod: ["ares", "hermes"],
-  spirit: ["satyr", "nynph"],
-  monster: ["minotaur", "dracaena"],
+let spirits = [
+  "Satyrs",
+  "Nymphs",
+  "Dryads",
+  "Naiads",
+  "Nereids",
+  "Oreads",
+  "Tritons",
+];
+
+let monsters = [
+  "Minotaurs",
+  "Cyclops",
+  "Harpys",
+  "Sirens",
+  "Gorgons",
+  "Centaurs",
+];
+
+const races = {
+  demigod: {
+    name: "Demigod",
+    image: "https://i.imgur.com/hImxcsa.png",
+    description:
+      "Filhos de deuses e de humanos, possuem habilidades especiais e são capazes de realizar feitos incríveis.",
+  },
+  spirit: {
+    name: "Nature Spirit",
+    image: "https://i.imgur.com/EApAFGM.png",
+    description:
+      "Seres místicos conectados à natureza, possuem habilidades especiais relacionadas aos elementos da natureza.",
+  },
+  monster: {
+    name: "Monster",
+    image: "https://i.imgur.com/N6LHoB2.png",
+    description:
+      "Seres mitológicos com poderes especiais ou habilidades naturais, como força, velocidade e resistência incomuns.",
+  },
 };
-const raceList = Object.keys(races);
 
-const selectedRace: Ref<string> = ref(character_data.value.race);
-const selectedGroup: Ref<string> = ref(character_data.value.group);
-const groupOptions: Ref<any> = ref(races[selectedGroup.value]);
-
-function setGroups(selected: string) {
-  groupOptions.value = races[selected];
+function selectRace() {
+  const buttonClickSound = new Howl({
+    src: [buttonClick],
+  });
+  buttonClickSound.play();
 }
-
-// OBSERVA AS RAÇAS E SETA OS GRUPOS DAQUELA RAÇA
-watch(selectedRace, (newSelectedRace) => {
-  console.log(newSelectedRace);
-  setGroups(newSelectedRace);
-  character_data.value.race = newSelectedRace;
-});
-
-// OBSERVA O GRUPO E SETA OS PODERES DAQUELE GRUPO
-watch(selectedGroup, (newGroupSelected) => {
-  character_data.value.group = newGroupSelected;
-});
-
-onMounted(() => {
-  if (character_data.value.race) setGroups(character_data.value.race);
-});
 </script>
 
 <template>
@@ -62,8 +95,9 @@ onMounted(() => {
         placeholder="Insert the characters age"
       />
     </label> -->
+
     <div class="container">
-      <div class="wrapper">
+      <!-- <div class="wrapper">
         <div class="clash-card barbarian">
           <div class="clash-card__image clash-card__image--barbarian">
             <img src="https://i.imgur.com/hImxcsa.png" alt="barbarian" />
@@ -72,8 +106,8 @@ onMounted(() => {
           <div class="clash-card__unit-name">Demigod</div>
           <div class="clash-card__unit-description">
             The Barbarian is a kilt-clad Scottish warrior with an angry,
-            battle-ready expression, hungry for destruction. He has Killer yellow
-            horseshoe mustache.
+            battle-ready expression, hungry for destruction. He has Killer
+            yellow horseshoe mustache.
           </div>
         </div>
       </div>
@@ -87,19 +121,32 @@ onMounted(() => {
           <div class="clash-card__unit-name">Monster</div>
           <div class="clash-card__unit-description">
             The Barbarian is a kilt-clad Scottish warrior with an angry,
-            battle-ready expression, hungry for destruction. He has Killer yellow
-            horseshoe mustache.
+            battle-ready expression, hungry for destruction. He has Killer
+            yellow horseshoe mustache.
           </div>
+        </div>
+      </div> -->
+
+      <div v-for="race in races" :key="race.name" class="wrapper">
+        <div class="clash-card barbarian">
+          <div class="clash-card__image clash-card__image--monsters">
+            <img :src="race.image" alt="barbarian" />
+          </div>
+          <div class="clash-card__level clash-card__level--barbarian">Race</div>
+          <div class="clash-card__unit-name">{{ race.name }}</div>
+          <div class="clash-card__unit-description">
+            {{ race.description }}
+          </div>
+          <router-link
+            class="form-button"
+            to="attribute_selection"
+            @click="selectRace()"
+          >
+            Select
+          </router-link>
         </div>
       </div>
     </div>
-    <router-link
-      class="form-button"
-      :class="{ 'form-button-disabled': false }"
-      to="attribute_selection"
-    >
-      Next
-    </router-link>
   </StepLayout>
 </template>
 
