@@ -1,4 +1,5 @@
-export { default as CharacterInformation } from "./CharacterInformation.vue";
+export { default as CharacterRace } from "./CharacterRace.vue";
+export { default as CharacterGroup } from "./CharacterGroup.vue";
 export { default as AttributeSelection } from "./AttributeSelection.vue";
 export { default as HabilitiesSelection } from "./HabilitiesSelection.vue";
 export { default as FeatsSelection } from "./FeatsSelection.vue";
