@@ -3,12 +3,14 @@
 // import type { Ref } from "vue";
 import { StepLayout } from "@/components/layout";
 // import type { ICharacterData } from "@/data/models";
-// import { storeToRefs } from "pinia";
-// import { useCharacterStore } from "@/stores/character";
-// const { character_data } = storeToRefs(useCharacterStore());
+import { storeToRefs } from "pinia";
+import { useCharacterStore } from "@/stores/character";
 import { Howl } from "howler";
 import buttonClick from "@/assets/sounds/button_click.mp3";
-let demigods = [
+
+const { character_data } = storeToRefs(useCharacterStore());
+
+let demigod = [
   "Zeus",
   "Hera",
   "Poseidon",
@@ -24,7 +26,7 @@ let demigods = [
   "Hades",
 ];
 
-let spirits = [
+let spirit = [
   "Satyrs",
   "Nymphs",
   "Dryads",
@@ -34,7 +36,7 @@ let spirits = [
   "Tritons",
 ];
 
-let monsters = [
+let monster = [
   "Minotaurs",
   "Cyclops",
   "Harpys",
@@ -46,25 +48,26 @@ let monsters = [
 const races = {
   demigod: {
     name: "Demigod",
-    image: "https://i.imgur.com/hImxcsa.png",
+    image: "https://i.imgur.com/J5YYmUP.png",
     description:
       "Filhos de deuses e de humanos, possuem habilidades especiais e são capazes de realizar feitos incríveis.",
   },
   spirit: {
     name: "Nature Spirit",
-    image: "https://i.imgur.com/EApAFGM.png",
+    image: "https://i.imgur.com/XK7XTJT.png",
     description:
       "Seres místicos conectados à natureza, possuem habilidades especiais relacionadas aos elementos da natureza.",
   },
   monster: {
     name: "Monster",
-    image: "https://i.imgur.com/N6LHoB2.png",
+    image: "https://i.imgur.com/OPBctol.png",
     description:
       "Seres mitológicos com poderes especiais ou habilidades naturais, como força, velocidade e resistência incomuns.",
   },
 };
 
-function selectRace() {
+function selectRace(selectedRace: string) {
+  character_data.value.race = selectedRace;
   const buttonClickSound = new Howl({
     src: [buttonClick],
   });
@@ -97,36 +100,6 @@ function selectRace() {
     </label> -->
 
     <div class="container">
-      <!-- <div class="wrapper">
-        <div class="clash-card barbarian">
-          <div class="clash-card__image clash-card__image--barbarian">
-            <img src="https://i.imgur.com/hImxcsa.png" alt="barbarian" />
-          </div>
-          <div class="clash-card__level clash-card__level--barbarian">Race</div>
-          <div class="clash-card__unit-name">Demigod</div>
-          <div class="clash-card__unit-description">
-            The Barbarian is a kilt-clad Scottish warrior with an angry,
-            battle-ready expression, hungry for destruction. He has Killer
-            yellow horseshoe mustache.
-          </div>
-        </div>
-      </div>
-
-      <div class="wrapper">
-        <div class="clash-card barbarian">
-          <div class="clash-card__image clash-card__image--monsters">
-            <img src="https://i.imgur.com/N6LHoB2.png" alt="barbarian" />
-          </div>
-          <div class="clash-card__level clash-card__level--barbarian">Race</div>
-          <div class="clash-card__unit-name">Monster</div>
-          <div class="clash-card__unit-description">
-            The Barbarian is a kilt-clad Scottish warrior with an angry,
-            battle-ready expression, hungry for destruction. He has Killer
-            yellow horseshoe mustache.
-          </div>
-        </div>
-      </div> -->
-
       <div v-for="race in races" :key="race.name" class="wrapper">
         <div class="clash-card barbarian">
           <div class="clash-card__image clash-card__image--monsters">
@@ -140,7 +113,7 @@ function selectRace() {
           <router-link
             class="form-button"
             to="attribute_selection"
-            @click="selectRace()"
+            @click="selectRace(race.name)"
           >
             Select
           </router-link>
@@ -157,12 +130,11 @@ function selectRace() {
 
 .container {
   display: flex;
+  flex-direction: column;
   gap: 150px;
 }
 
 .wrapper {
-  padding-top: 40px;
-  padding-bottom: 40px;
   background: transparent;
 }
 
@@ -171,6 +143,8 @@ function selectRace() {
 }
 
 .clash-card {
+  box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+  animation: float 3s ease-in-out infinite;
   background: transparent;
   width: 300px;
   display: inline-block;
@@ -201,18 +175,11 @@ function selectRace() {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
 }
 
-.clash-card__image--barbarian img {
-  width: 400px;
-  position: absolute;
-  top: -45px;
-  left: -40px;
-}
-
 .clash-card__image--monsters img {
-  width: 400px;
+  width: 320px;
   position: absolute;
-  top: -115px;
-  left: -45px;
+  top: -30px;
+  left: 0px;
 }
 
 .clash-card__level {
@@ -289,5 +256,26 @@ sup {
 
 .no-border {
   border-right: none;
+}
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    transform: translatey(-10px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    flex-direction: row;
+  }
 }
 </style>
