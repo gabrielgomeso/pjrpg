@@ -11,7 +11,7 @@ import { RouterLink, RouterView } from "vue-router";
     </nav>
   </header>
 
-  <RouterView v-slot="{ Component }" mode="out-in" class="main">
+  <RouterView v-slot="{ Component }" mode="out-in">
     <transition name="slide">
       <component :is="Component" />
     </transition>
@@ -19,11 +19,6 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 
 <style>
-.main {
-  width: 100vw;
-  height: var(--full-height);
-}
-
 .slide-enter-active,
 .slide-leave-active {
   transition: opacity 1s, transform 1s;
