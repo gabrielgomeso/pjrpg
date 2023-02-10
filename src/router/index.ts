@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import {
   AttributeSelection,
-  CharacterInformation,
+  CharacterRace,
+  CharacterGroup,
   HabilitiesSelection,
   FeatsSelection,
   ItemsSelection,
@@ -20,12 +21,17 @@ const router = createRouter({
     {
       path: "/character_creation",
       name: "character_creation",
-      redirect: { name: "character_information" },
+      redirect: { name: "character_race" },
       children: [
         {
-          path: "/character_information",
-          name: "character_information",
-          component: CharacterInformation,
+          path: "/character_race",
+          name: "character_race",
+          component: CharacterRace,
+        },
+        {
+          path: "/character_group",
+          name: "character_group",
+          component: CharacterGroup,
         },
         {
           path: "/attribute_selection",
