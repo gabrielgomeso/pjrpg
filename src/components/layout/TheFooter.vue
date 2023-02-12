@@ -2,7 +2,7 @@
   <footer class="footer">
     <p>
       Made with love by
-      <a href="gabrielgo.dev" target="_blank">Gabriel Gomes</a>
+      <a href="https://www.gabrielgo.dev" target="_blank">Gabriel Gomes</a>
     </p>
   </footer>
 </template>
@@ -14,5 +14,6 @@
   padding: 1rem;
   margin-top: 1rem;
   background-color: var(--vt-c-black-mute);
+  min-height: 100px;
 }
 </style>
