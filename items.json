@@ -1,16 +1,44 @@
 {
   "items": [
     {
-     "name": "spear",
-     "damage-dice": "1d8",
-     "description": "Long spear of wood with a celestial bronze tip",
-     "reach": "Two squares" 
+      "slug": "spear",
+      "name": "Long Spear",
+      "damageDice": "1d8",
+      "description": "Long spear of wood with a celestial bronze tip",
+      "reach": "Two squares",
+      "image": "https://i.imgur.com/34ozzPT.png"
     },
     {
-      "name": "sword",
-      "damage-dice": "1d10",
+      "slug": "short-sword",
+      "name": "Short Sword",
+      "damageDice": "1d10",
       "description": "A short sword with a celestial bronze blade",
-      "reach": "One square"
-     }
+      "reach": "One square",
+      "image": "https://i.imgur.com/cQ1iHHb.png"
+    },
+    {
+      "slug": "short-bow",
+      "name": "Short Bow",
+      "damageDice": "1d8",
+      "description": "A short bow with 20 arrows with celestial bronze tips",
+      "reach": "Ten squares",
+      "image": "https://i.imgur.com/TTNHPuA.png"
+    },
+    {
+      "slug": "wooden-staff",
+      "name": "Wooden Staff",
+      "damageDice": "1d6",
+      "description": "A simple wooden staff with a celestial bronze tip",
+      "reach": "Two squares",
+      "image": "https://i.imgur.com/2xvWCEf.png"
+    },
+    {
+      "slug": "scythe",
+      "name": "Scythe",
+      "damageDice": "1d10",
+      "description": "A scythe with a blade of celestial bronze",
+      "reach": "Two squares",
+      "image": "https://i.imgur.com/2LeoOS5.png"
+    }
   ]
 }
