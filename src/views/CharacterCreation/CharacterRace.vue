@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { StepLayout } from "@/components/layout";
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
 import { buttonSounds } from "@/assets/ts/utils";
@@ -39,7 +38,8 @@ function selectRace(selectedRace: string) {
 </script>
 
 <template>
-  <StepLayout :current-step="1" :step-title="'Character Information'">
+  <div class="step-container">
+    <h2 class="step-title">Choose character race</h2>
     <div class="container">
       <div v-for="race in races" :key="race.name" class="wrapper">
         <div class="race-card">
@@ -51,29 +51,16 @@ function selectRace(selectedRace: string) {
           <div class="race-card__unit-description">
             {{ race.description }}
           </div>
-          <router-link
-            class="form-button"
-            to="attribute_selection"
-            @click="selectRace(race.slug)"
-          >
+          <button class="form-buttonp" @click="selectRace(race.slug)">
             Select
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
-  </StepLayout>
+  </div>
 </template>
 
 <style>
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-  min-height: 800px;
-}
-
 .wrapper {
   background: transparent;
 }
