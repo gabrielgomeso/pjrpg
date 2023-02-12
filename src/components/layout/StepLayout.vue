@@ -5,10 +5,10 @@ defineProps<{
 </script>
 
 <template>
-  <main>
+  <section>
     <h2 class="step-layout--title">{{ stepTitle }}</h2>
     <slot></slot>
-  </main>
+  </section>
 </template>
 
 <style>
