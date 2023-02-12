@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import type { IAttributes, IStatus, ICharacterData } from "../data/models";
+import type { IAttributes, ICharacterData } from "../data/models";
 import type { Ref } from "vue";
 import { supabase } from "@/lib/supabase";
 import { STATUS_MULTIPLIER, HEROIC_MULTIPLIER } from "@/assets/ts/constants";
@@ -34,7 +34,7 @@ export const useCharacterStore = defineStore("character", () => {
     heroicPoints: attributes.value.charisma * HEROIC_MULTIPLIER,
   };
 
-  const inventory: Ref<Object> = ref({});
+  const inventory: Ref<any> = ref([]);
 
   const character = {
     character_data: character_data.value,
