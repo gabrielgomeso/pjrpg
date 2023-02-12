@@ -33,22 +33,22 @@ onMounted(() => {
     ];
   } else if (character_data.value.race == "spirit") {
     groupList.value = [
-      "Satyrs",
-      "Nymphs",
-      "Dryads",
-      "Naiads",
-      "Nereids",
-      "Oreads",
-      "Tritons",
+      "Satyr",
+      "Nymph",
+      "Dryad",
+      "Naiad",
+      "Nereid",
+      "Oread",
+      "Triton",
     ];
   } else {
     groupList.value = [
-      "Minotaurs",
-      "Cyclops",
-      "Harpys",
-      "Sirens",
-      "Gorgons",
-      "Centaurs",
+      "Minotaur",
+      "Cyclop",
+      "Harpy",
+      "Siren",
+      "Gorgon",
+      "Centaur",
     ];
   }
 });
