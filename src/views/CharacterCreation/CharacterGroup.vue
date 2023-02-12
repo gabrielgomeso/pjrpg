@@ -9,7 +9,8 @@ import router from "@/router";
 const { character_data } = storeToRefs(useCharacterStore());
 const groupList: any = ref([""]);
 
-function selectGroup() {
+function selectGroup(selectedGroup: string) {
+  character_data.value.group = selectedGroup;
   buttonSounds.buttonClickSound.play();
   router.push({ path: "/attribute_selection" });
 }
@@ -55,18 +56,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <StepLayout :step-title="'Character Group'">
+  <div class="step-container">
+    <h2 class="step-title">Character Group</h2>
     <div class="group-selection--group-list">
       <div
         v-for="group in groupList"
         :key="group"
         class="group-selection--group-button form-button"
-        @click="selectGroup()"
+        @click="selectGroup(group)"
       >
         {{ group }}
       </div>
     </div>
-  </StepLayout>
+  </div>
 </template>
 
 <style>
