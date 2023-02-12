@@ -70,7 +70,7 @@ function selectRace(selectedRace: string) {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 150px;
+  gap: 2rem;
   min-height: 800px;
 }
 
