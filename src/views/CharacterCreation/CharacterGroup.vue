@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import { StepLayout } from "@/components/layout";
-import { Howl } from "howler";
-import buttonClick from "@/assets/sounds/button_click.mp3";
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
 import { onMounted, ref } from "vue";
+import { buttonSounds } from "@/assets/ts/utils";
+import router from "@/router";
 
 const { character_data } = storeToRefs(useCharacterStore());
 const groupList: any = ref([""]);
 
 function selectGroup() {
-  const buttonClickSound = new Howl({
-    src: [buttonClick],
-  });
-  buttonClickSound.play();
+  buttonSounds.buttonClickSound.play();
+  router.push({ path: "/attribute_selection" });
 }
 
 onMounted(() => {
@@ -53,30 +51,34 @@ onMounted(() => {
       "Centaurs",
     ];
   }
-  console.log(character_data.value.race);
 });
 </script>
 
 <template>
   <StepLayout :step-title="'Character Group'">
-    <div>
-      <div v-for="group in groupList" :key="group" class="group-list">
+    <div class="group-selection--group-list">
+      <div
+        v-for="group in groupList"
+        :key="group"
+        class="group-selection--group-button form-button"
+        @click="selectGroup()"
+      >
         {{ group }}
-        <router-link
-          class="form-button"
-          to="attribute_selection"
-          @click="selectGroup()"
-        >
-          Select
-        </router-link>
       </div>
     </div>
   </StepLayout>
 </template>
 
 <style>
-.group-list {
+.group-selection--group-list {
   display: flex;
-  flex-direction: row;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.group-selection--group-button {
+  width: 350px;
 }
 </style>
