@@ -116,7 +116,12 @@ async function sendForm() {
 
       <section class="character-inventory-section">
         <h3 class="character-inventory-section__title">Inventory</h3>
-        <div class="character-inventory-section__box">Teste</div>
+        <div class="character-inventory-section__box">
+          <p v-for="item in inventory" :key="item.slug">
+            {{ item.name }} - {{ item.damageDice }} - {{ item.reach }} -
+            {{ item.description }}
+          </p>
+        </div>
       </section>
     </div>
     <button @click="sendForm()">Create Character</button>
