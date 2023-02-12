@@ -1,32 +1,40 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
+import { TheHeader, TheFooter } from "@/components/layout";
 </script>
 
 <template>
-  <header>
-    <nav class="navigation">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/character_creation">Character Creation</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-  </header>
+  <TheHeader />
 
-  <RouterView v-slot="{ Component }" mode="out-in">
+  <RouterView v-slot="{ Component }" class="main" mode="out-in">
     <transition name="slide">
       <component :is="Component" />
     </transition>
   </RouterView>
+
+  <TheFooter />
 </template>
 
 <style>
+.main {
+  min-height: 100vh;
+}
+
 .slide-enter-active,
 .slide-leave-active {
+  display: block;
+  position: absolute;
+  top: var(--navigation-size);
+  left: 0;
+  right: 0;
+  bottom: 0;
   transition: opacity 1s, transform 1s;
 }
 
 .slide-enter-from,
 .slide-leave-to {
   opacity: 0;
-  transform: translateX(-30%);
+  top: var(--navigation-size);
+  transform: translateX(30%);
 }
 </style>
