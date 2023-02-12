@@ -5,17 +5,15 @@ defineProps<{
 </script>
 
 <template>
-  <main class="step-layout--main">
-    <h2 class="step">{{ stepTitle }}</h2>
+  <main>
+    <h2 class="step-layout--title">{{ stepTitle }}</h2>
     <slot></slot>
   </main>
 </template>
 
 <style>
-.step-layout--main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.step-layout--title {
+  width: 100%;
+  text-align: center;
 }
 </style>
