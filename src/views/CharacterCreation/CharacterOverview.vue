@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { StepLayout } from "@/components/layout";
 import { useCharacterStore } from "@/stores/character";
+import { isDemigod } from "@/assets/ts/utils";
+import { computed } from "vue";
 
 const { createCharacter, character_data, attributes, status, inventory } =
   useCharacterStore();
@@ -15,14 +16,19 @@ async function sendForm() {
     console.error("Unknown error when adding todo", err);
   }
 }
+
+const groupOrAffiliation = computed(() => {
+  if (isDemigod(character_data.race)) {
+    return "Affiliation";
+  } else {
+    return "Group";
+  }
+});
 </script>
 
 <template>
-  <StepLayout
-    :current-step="7"
-    :step-title="'Character Overview'"
-    :previous-step="'items_selection'"
-  >
+  <div class="step-container">
+    <h2 class="step-title">Character Overview</h2>
     <div class="character-overview">
       <section class="character-info-section">
         <h3 class="character-info-section__title">Character Information</h3>
@@ -39,7 +45,7 @@ async function sendForm() {
             <span>{{ character_data.race }}</span>
           </span>
           <span>
-            Group:
+            {{ groupOrAffiliation }}:
             <span>{{ character_data.group }}</span>
           </span>
         </div>
@@ -124,21 +130,11 @@ async function sendForm() {
         </div>
       </section>
     </div>
-    <button @click="sendForm()">Create Character</button>
-  </StepLayout>
+    <button class="form-button" @click="sendForm()">Create Character</button>
+  </div>
 </template>
 
 <style>
-.character-overview {
-  display: grid;
-  grid-template-areas:
-    "information information"
-    "attributes status"
-    "attributes habilities"
-    "feats habilities"
-    "inventory inventory";
-  gap: 1rem;
-}
 .character-info-section,
 .character-attributes-section,
 .character-status-section,
@@ -150,36 +146,13 @@ async function sendForm() {
   padding: 1rem;
 }
 
-.character-info-section {
-  grid-area: information;
-}
-.character-attributes-section {
-  grid-area: attributes;
-}
-
-.character-status-section {
-  grid-area: status;
-}
-
-.character-habilities-section {
-  grid-area: habilities;
-}
-
-.character-feats-section {
-  grid-area: feats;
-}
-
-.character-inventory-section {
-  grid-area: inventory;
-}
-
 .character-info-section__title {
   margin-bottom: 1rem;
 }
 
 .character-info-section__box {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr minmax(50px, auto);
   grid-template-rows: 1fr 1fr;
 }
 
@@ -211,5 +184,47 @@ async function sendForm() {
   border: 1px solid gray;
   padding: 5px;
   flex-direction: column;
+}
+
+.character-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .character-overview {
+    display: grid;
+    grid-template-areas:
+      "information information"
+      "attributes status"
+      "attributes habilities"
+      "feats habilities"
+      "inventory inventory";
+    gap: 1rem;
+  }
+
+  .character-info-section {
+    grid-area: information;
+  }
+  .character-attributes-section {
+    grid-area: attributes;
+  }
+
+  .character-status-section {
+    grid-area: status;
+  }
+
+  .character-habilities-section {
+    grid-area: habilities;
+  }
+
+  .character-feats-section {
+    grid-area: feats;
+  }
+
+  .character-inventory-section {
+    grid-area: inventory;
+  }
 }
 </style>
