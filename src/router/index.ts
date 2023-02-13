@@ -9,6 +9,7 @@ import {
   FeatsSelection,
   ItemsSelection,
   CharacterOverview,
+  CharacterInformation,
 } from "@/views/CharacterCreation";
 
 const routes = [
@@ -38,6 +39,21 @@ const routes = [
         component: AttributeSelection,
       },
       {
+        path: "/items_selection",
+        name: "items_selection",
+        component: ItemsSelection,
+      },
+      {
+        path: "/character_information",
+        name: "character_information",
+        component: CharacterInformation,
+      },
+      {
+        path: "/character_overview",
+        name: "character_overview",
+        component: CharacterOverview,
+      },
+      {
         path: "/habilities_selection",
         name: "habilities_selection",
         component: HabilitiesSelection,
@@ -46,16 +62,6 @@ const routes = [
         path: "/feats_selection",
         name: "feats_selection",
         component: FeatsSelection,
-      },
-      {
-        path: "/items_selection",
-        name: "items_selection",
-        component: ItemsSelection,
-      },
-      {
-        path: "/character_overview",
-        name: "character_overview",
-        component: CharacterOverview,
       },
     ],
   },
