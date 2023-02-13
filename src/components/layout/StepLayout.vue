@@ -11,9 +11,4 @@ defineProps<{
   </section>
 </template>
 
-<style>
-.step-layout--title {
-  width: 100%;
-  text-align: center;
-}
-</style>
+<style></style>
