@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { StepLayout } from "@/components/layout";
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
 import { onMounted, ref } from "vue";
@@ -75,7 +74,7 @@ onMounted(() => {
 .group-selection--group-list {
   display: flex;
   width: 100%;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
 }
