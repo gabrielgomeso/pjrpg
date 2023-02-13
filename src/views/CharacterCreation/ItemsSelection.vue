@@ -11,7 +11,7 @@ const { inventory } = storeToRefs(useCharacterStore());
 function selectItem(selectedItem: object) {
   inventory.value.push(selectedItem);
   buttonSounds.buttonClickSound.play();
-  router.push({ path: "/character_overview" });
+  router.push({ path: "/character_information" });
 }
 </script>
 
@@ -22,7 +22,7 @@ function selectItem(selectedItem: object) {
       <div v-for="item in itemsList" :key="item.name" class="wrapper">
         <div class="item-card">
           <div class="item-card__image">
-            <img :src="item.image" :alt="'A group of ' + item.name" />
+            <img :src="item.image" :alt="item.name" />
           </div>
           <div class="item-card__level">item</div>
           <div class="item-card__unit-name">{{ item.name }}</div>
@@ -31,7 +31,9 @@ function selectItem(selectedItem: object) {
             <p>Damage dice: {{ item.damageDice }}</p>
             <p>Weapon reach: {{ item.reach }}</p>
           </div>
-          <button class="form-button" @click="selectItem(item)">Select</button>
+          <button class="form-button full-width" @click="selectItem(item)">
+            Select
+          </button>
         </div>
       </div>
     </div>
