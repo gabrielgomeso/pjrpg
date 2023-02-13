@@ -51,7 +51,7 @@ function selectRace(selectedRace: string) {
           <div class="race-card__unit-description">
             {{ race.description }}
           </div>
-          <button class="form-buttonp" @click="selectRace(race.slug)">
+          <button class="form-button full-width" @click="selectRace(race.slug)">
             Select
           </button>
         </div>
