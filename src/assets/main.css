@@ -10,6 +10,27 @@
   padding: 0 1rem;
 }
 
+.step-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(100px, auto) repeat(12, 1fr);
+}
+
+.step-title {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-content {
+  grid-row: 2 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -17,11 +38,6 @@
   flex-direction: column;
   gap: 2rem;
   flex-wrap: wrap;
-}
-
-.step-title {
-  width: 100%;
-  text-align: center;
 }
 
 .form-label {
