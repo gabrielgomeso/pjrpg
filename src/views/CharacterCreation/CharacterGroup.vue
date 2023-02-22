@@ -55,16 +55,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="step-container">
-    <h2 class="step-title">Character Group</h2>
-    <div class="group-selection--group-list">
-      <div
-        v-for="group in groupList"
-        :key="group"
-        class="group-selection--group-button form-button"
-        @click="selectGroup(group)"
-      >
-        {{ group }}
+  <div class="step-layout">
+    <h2 class="step-title">Choose the character's group</h2>
+    <div class="step-content">
+      <div class="group-selection--group-list">
+        <div
+          v-for="group in groupList"
+          :key="group"
+          class="group-selection--group-button form-button"
+          @click="selectGroup(group)"
+        >
+          {{ group }}
+        </div>
       </div>
     </div>
   </div>
@@ -73,10 +75,10 @@ onMounted(() => {
 <style>
 .group-selection--group-list {
   display: flex;
-  width: 100%;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: center;
+  justify-content: center;
 }
 
 .group-selection--group-button {

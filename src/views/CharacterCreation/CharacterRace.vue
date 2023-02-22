@@ -38,22 +38,27 @@ function selectRace(selectedRace: string) {
 </script>
 
 <template>
-  <div class="step-container">
-    <h2 class="step-title">Choose character race</h2>
-    <div class="container">
-      <div v-for="race in races" :key="race.name" class="wrapper">
-        <div class="race-card">
-          <div class="race-card__image">
-            <img :src="race.image" :alt="'A group of ' + race.name" />
+  <div class="step-layout">
+    <h2 class="step-title">Choose the character's race</h2>
+    <div class="step-content">
+      <div class="container">
+        <div v-for="race in races" :key="race.name" class="wrapper">
+          <div class="race-card">
+            <div class="race-card__image">
+              <img :src="race.image" :alt="'A group of ' + race.name" />
+            </div>
+            <div class="race-card__level">Race</div>
+            <div class="race-card__unit-name">{{ race.name }}</div>
+            <div class="race-card__unit-description">
+              {{ race.description }}
+            </div>
+            <button
+              class="form-button full-width"
+              @click="selectRace(race.slug)"
+            >
+              Select
+            </button>
           </div>
-          <div class="race-card__level">Race</div>
-          <div class="race-card__unit-name">{{ race.name }}</div>
-          <div class="race-card__unit-description">
-            {{ race.description }}
-          </div>
-          <button class="form-button full-width" @click="selectRace(race.slug)">
-            Select
-          </button>
         </div>
       </div>
     </div>

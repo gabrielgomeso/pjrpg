@@ -16,24 +16,26 @@ function selectItem(selectedItem: object) {
 </script>
 
 <template>
-  <div class="step-container">
+  <div class="step-layout">
     <h2 class="step-title">Select first weapon</h2>
-    <div class="container">
-      <div v-for="item in itemsList" :key="item.name" class="wrapper">
-        <div class="item-card">
-          <div class="item-card__image">
-            <img :src="item.image" :alt="item.name" />
+    <div class="step-content">
+      <div class="container">
+        <div v-for="item in itemsList" :key="item.name" class="wrapper">
+          <div class="item-card">
+            <div class="item-card__image">
+              <img :src="item.image" :alt="item.name" />
+            </div>
+            <div class="item-card__level">item</div>
+            <div class="item-card__unit-name">{{ item.name }}</div>
+            <div class="item-card__unit-description">
+              {{ item.description }}
+              <p>Damage dice: {{ item.damageDice }}</p>
+              <p>Weapon reach: {{ item.reach }}</p>
+            </div>
+            <button class="form-button full-width" @click="selectItem(item)">
+              Select
+            </button>
           </div>
-          <div class="item-card__level">item</div>
-          <div class="item-card__unit-name">{{ item.name }}</div>
-          <div class="item-card__unit-description">
-            {{ item.description }}
-            <p>Damage dice: {{ item.damageDice }}</p>
-            <p>Weapon reach: {{ item.reach }}</p>
-          </div>
-          <button class="form-button full-width" @click="selectItem(item)">
-            Select
-          </button>
         </div>
       </div>
     </div>
