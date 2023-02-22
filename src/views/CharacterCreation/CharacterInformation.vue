@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
-const { character_data } = storeToRefs(useCharacterStore());
+const { character_data, characterEmail } = storeToRefs(useCharacterStore());
 import { buttonSounds } from "@/assets/ts/utils";
 import router from "@/router";
 
@@ -33,6 +33,17 @@ function nextStep() {
         type="number"
         name="character-age"
         placeholder="Insert the characters age"
+      />
+    </label>
+
+    <label class="form-label" for="character-email">
+      E-mail:
+      <input
+        class="form-input full-width"
+        v-model="characterEmail"
+        type="email"
+        name="character-email"
+        placeholder="Insert your e-mail"
       />
     </label>
 
