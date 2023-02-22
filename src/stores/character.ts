@@ -11,7 +11,10 @@ export const useCharacterStore = defineStore("character", () => {
     age: "",
     race: "",
     group: "",
+    level: 1,
   });
+
+  const character_info: Ref<any> = ref({});
 
   const attributes: Ref<IAttributes> = ref({
     strenght: 1,
@@ -35,6 +38,8 @@ export const useCharacterStore = defineStore("character", () => {
   };
 
   const inventory: Ref<any> = ref([]);
+
+  const characterEmail: Ref<string> = ref("");
 
   const character = {
     character_data: character_data.value,
@@ -62,11 +67,10 @@ export const useCharacterStore = defineStore("character", () => {
   }
 
   async function createCharacter() {
-    console.log(character);
     try {
       const { data, error } = await supabase
         .from("characters")
-        .insert({ character_info: character })
+        .insert({ character_info: character, email: characterEmail.value })
         .single();
 
       if (error) {
@@ -84,14 +88,37 @@ export const useCharacterStore = defineStore("character", () => {
     }
   }
 
+  async function getCharacter(email: string) {
+    console.log(email);
+    try {
+      const { data: character, error } = await supabase
+        .from("characters")
+        .select("character_info")
+        .eq("email", email);
+      if (error) {
+        alert(error.message);
+        console.error("There was an error inserting", error);
+        return null;
+      }
+      return character;
+    } catch (err) {
+      alert("Error while fething data");
+      console.error("Unknown problem getting from the db", err);
+      return null;
+    }
+  }
+
   return {
     attributes,
     character_data,
     status,
     inventory,
+    characterEmail,
+    character_info,
     increase,
     decrease,
     createCharacter,
     hasAvailablePoints,
+    getCharacter,
   };
 });
