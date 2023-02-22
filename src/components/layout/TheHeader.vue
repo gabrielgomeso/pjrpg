@@ -111,6 +111,7 @@ const openMenu = ref(false);
 }
 
 @media (min-width: 768px) {
+  .navigation-open-button,
   .navigation-close-button {
     display: none;
   }
