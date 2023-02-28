@@ -1,49 +1,37 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { RouterView } from "vue-router";
 import { TheHeader, TheFooter } from "@/components/layout";
-const hide = ref(false);
-
-function hideFooter() {
-  hide.value = true;
-}
-
-function showFooter() {
-  hide.value = false;
-}
 </script>
 
 <template>
   <main class="main-container">
     <TheHeader />
-    <section class="main-container--router-view">
+    <section>
       <RouterView v-slot="{ Component }" mode="out-in">
-        <transition
-          name="slide"
-          @before-enter="hideFooter"
-          @after-leave="showFooter"
-        >
+        <transition name="slide">
           <component :is="Component" />
         </transition>
       </RouterView>
     </section>
-    <TheFooter :class="{ hidden: hide }" />
+    <TheFooter />
   </main>
 </template>
 
 <style>
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 .main-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.main-container--router-view {
-  flex: 1;
-  position: relative;
   min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
 }
 
-.slide-enter-active,
+/* .slide-enter-active,
 .slide-leave-active {
   display: block;
   position: absolute;
@@ -59,9 +47,5 @@ function showFooter() {
   opacity: 0;
   top: 0;
   transform: translateX(30%);
-}
-
-.hidden {
-  display: none;
-}
+} */
 </style>
