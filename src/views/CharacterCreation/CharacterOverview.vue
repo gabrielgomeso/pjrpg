@@ -27,110 +27,112 @@ const groupOrAffiliation = computed(() => {
 </script>
 
 <template>
-  <div class="step-container">
+  <div class="step-layout">
     <h2 class="step-title">Character Overview</h2>
-    <div class="character-overview">
-      <section class="character-info-section">
-        <h3 class="character-info-section__title">Character Information</h3>
-        <div class="character-info-section__box">
-          <span>
-            Name: <span>{{ character_data.name }}</span>
-          </span>
-          <span>
-            Age:
-            <span>{{ character_data.age }} </span>
-          </span>
-          <span>
-            Race:
-            <span>{{ character_data.race }}</span>
-          </span>
-          <span>
-            {{ groupOrAffiliation }}:
-            <span>{{ character_data.group }}</span>
-          </span>
-        </div>
-      </section>
+    <div class="step-content">
+      <div class="character-overview">
+        <section class="character-info-section">
+          <h3 class="character-info-section__title">Character Information</h3>
+          <div class="character-info-section__box">
+            <span>
+              Name: <span>{{ character_data.name }}</span>
+            </span>
+            <span>
+              Age:
+              <span>{{ character_data.age }} </span>
+            </span>
+            <span>
+              Race:
+              <span>{{ character_data.race }}</span>
+            </span>
+            <span>
+              {{ groupOrAffiliation }}:
+              <span>{{ character_data.group }}</span>
+            </span>
+          </div>
+        </section>
 
-      <section class="character-attributes-section">
-        <h3 class="character-attributes-section__title">Attributes</h3>
-        <div class="character-attributes-section__box">
-          <span>
-            Strenght: <span>{{ attributes.strenght }}</span>
-          </span>
-          <span>
-            Agility:
-            <span>{{ attributes.agility }} </span>
-          </span>
-          <span>
-            Constitution:
-            <span>{{ attributes.constitution }}</span>
-          </span>
-          <span>
-            Intelligence:
-            <span>{{ attributes.intelligence }}</span>
-          </span>
-          <span>
-            Wisdom:
-            <span>{{ attributes.wisdom }}</span>
-          </span>
-          <span>
-            Charisma:
-            <span>{{ attributes.charisma }}</span>
-          </span>
-        </div>
-      </section>
+        <section class="character-attributes-section">
+          <h3 class="character-attributes-section__title">Attributes</h3>
+          <div class="character-attributes-section__box">
+            <span>
+              Strenght: <span>{{ attributes.strenght }}</span>
+            </span>
+            <span>
+              Agility:
+              <span>{{ attributes.agility }} </span>
+            </span>
+            <span>
+              Constitution:
+              <span>{{ attributes.constitution }}</span>
+            </span>
+            <span>
+              Intelligence:
+              <span>{{ attributes.intelligence }}</span>
+            </span>
+            <span>
+              Wisdom:
+              <span>{{ attributes.wisdom }}</span>
+            </span>
+            <span>
+              Charisma:
+              <span>{{ attributes.charisma }}</span>
+            </span>
+          </div>
+        </section>
 
-      <section class="character-status-section">
-        <h3 class="character-status-section__title">Status</h3>
-        <div class="character-status-section__box">
-          <span>
-            Health
-            <span class="character-status-section__box--status-highlight">{{
-              status.healthPoints
-            }}</span>
-          </span>
-          <span>
-            Magic
-            <span class="character-status-section__box--status-highlight">{{
-              status.magicPoints
-            }}</span>
-          </span>
-          <span>
-            Energy
-            <span class="character-status-section__box--status-highlight">{{
-              status.energyPoints
-            }}</span>
-          </span>
-          <span>
-            Heroic
-            <span class="character-status-section__box--status-highlight">{{
-              status.heroicPoints
-            }}</span>
-          </span>
-        </div>
-      </section>
+        <section class="character-status-section">
+          <h3 class="character-status-section__title">Status</h3>
+          <div class="character-status-section__box">
+            <span>
+              Health
+              <span class="character-status-section__box--status-highlight">{{
+                status.healthPoints
+              }}</span>
+            </span>
+            <span>
+              Magic
+              <span class="character-status-section__box--status-highlight">{{
+                status.magicPoints
+              }}</span>
+            </span>
+            <span>
+              Energy
+              <span class="character-status-section__box--status-highlight">{{
+                status.energyPoints
+              }}</span>
+            </span>
+            <span>
+              Heroic
+              <span class="character-status-section__box--status-highlight">{{
+                status.heroicPoints
+              }}</span>
+            </span>
+          </div>
+        </section>
 
-      <section class="character-habilities-section">
-        <h3 class="character-habilities-section__title">Habilities</h3>
-        <div class="character-habilities-section__box">Teste</div>
-      </section>
+        <section class="character-habilities-section">
+          <h3 class="character-habilities-section__title">Habilities</h3>
+          <div class="character-habilities-section__box">Teste</div>
+        </section>
 
-      <section class="character-feats-section">
-        <h3 class="character-feats-section__title">Feats</h3>
-        <div class="character-feats-section__box">Teste</div>
-      </section>
+        <section class="character-feats-section">
+          <h3 class="character-feats-section__title">Feats</h3>
+          <div class="character-feats-section__box">Teste</div>
+        </section>
 
-      <section class="character-inventory-section">
-        <h3 class="character-inventory-section__title">Inventory</h3>
-        <div class="character-inventory-section__box">
-          <p v-for="item in inventory" :key="item.slug">
-            {{ item.name }} - {{ item.damageDice }} - {{ item.reach }} -
-            {{ item.description }}
-          </p>
-        </div>
-      </section>
+        <section class="character-inventory-section">
+          <h3 class="character-inventory-section__title">Inventory</h3>
+          <div class="character-inventory-section__box">
+            <p v-for="item in inventory" :key="item.slug">
+              {{ item.name }} - {{ item.damageDice }} - {{ item.reach }} -
+              {{ item.description }}
+            </p>
+          </div>
+        </section>
+      </div>
+      <button class="form-button" @click="sendForm()">Create Character</button>
     </div>
-    <button class="form-button" @click="sendForm()">Create Character</button>
   </div>
 </template>
 
