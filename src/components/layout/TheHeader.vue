@@ -58,7 +58,6 @@ const openMenu = ref(false);
   background-color: var(--vt-c-black-mute);
   border-bottom: 1px solid var(--color-border);
   height: 100vh;
-  width: 100vw;
   z-index: 1000;
 }
 
