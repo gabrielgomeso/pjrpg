@@ -37,6 +37,13 @@ const openMenu = ref(false);
       <RouterLink
         @click="openMenu = false"
         class="navigation-link"
+        to="/roll_dice"
+      >
+        Roll Dice
+      </RouterLink>
+      <RouterLink
+        @click="openMenu = false"
+        class="navigation-link"
         to="/character"
       >
         Find Character
