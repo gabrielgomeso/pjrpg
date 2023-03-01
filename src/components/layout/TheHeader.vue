@@ -61,9 +61,9 @@ const openMenu = ref(false);
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* height: auto; */
   background-color: var(--vt-c-black-mute);
   border-bottom: 1px solid var(--color-border);
+  width: 100vw;
   height: 100vh;
   z-index: 1000;
 }
@@ -132,6 +132,7 @@ const openMenu = ref(false);
     /* height: var(--navigation-size); */
     background-color: var(--vt-c-black-mute);
     height: auto;
+    width: 100%;
   }
 
   .navigation-logo {
