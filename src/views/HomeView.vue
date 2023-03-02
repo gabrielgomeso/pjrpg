@@ -7,6 +7,6 @@
 .home-main {
   display: grid;
   place-items: center;
-  height: var(--full-height);
+  height: 100%;
 }
 </style>
