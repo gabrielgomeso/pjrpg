@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const props = defineProps<{
-  diceSides: Number;
+  dieSides: Number;
 }>();
 </script>
 
 <template>
-  <button type="button">Roll D{{ props.diceSides }}</button>
+  <button type="button">Roll D{{ props.dieSides }}</button>
 </template>
 
 <style></style>
