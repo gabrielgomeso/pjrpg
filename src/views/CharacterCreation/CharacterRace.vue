@@ -10,21 +10,21 @@ const races = {
   demigod: {
     slug: "demigod",
     name: "Demigod",
-    image: "https://i.imgur.com/Jv3trNv.png",
+    image: "src/assets/images/demigods.png",
     description:
       "Filhos de deuses e de humanos, possuem habilidades especiais e são capazes de realizar feitos incríveis.",
   },
   spirit: {
     slug: "spirit",
     name: "Nature Spirit",
-    image: "https://i.imgur.com/bn1orwm.png",
+    image: "src/assets/images/nature-spirits.png",
     description:
       "Seres místicos conectados à natureza, possuem habilidades especiais relacionadas aos elementos da natureza.",
   },
   monster: {
     slug: "monster",
     name: "Monster",
-    image: "https://i.imgur.com/TtNIu4L.png",
+    image: "src/assets/images/monsters.png",
     description:
       "Seres mitológicos com poderes especiais ou habilidades naturais, como força, velocidade e resistência incomuns.",
   },
@@ -95,7 +95,7 @@ function selectRace(selectedRace: string) {
   margin-bottom: 35px;
   border-top-left-radius: var(--border-radius-size);
   border-top-right-radius: var(--border-radius-size);
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
+  background: url("src/assets/images/card-background.jpg");
 }
 
 .race-card__image img {
