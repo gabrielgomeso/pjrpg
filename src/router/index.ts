@@ -83,6 +83,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import("../views/AboutView.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    component: HomeView,
+  },
 ];
 
 const router = createRouter({
