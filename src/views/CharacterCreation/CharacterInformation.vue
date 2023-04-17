@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
-const { character_data, characterEmail } = storeToRefs(useCharacterStore());
-import { buttonSounds } from "@/assets/ts/utils";
 import router from "@/router";
+import { buttonSounds } from "@/assets/ts/utils";
+
+const { character_data, characterEmail } = storeToRefs(useCharacterStore());
 
 function nextStep() {
   buttonSounds.buttonClickSound.play();
