@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { ref } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 
+const { loggedUser } = storeToRefs(useAuthStore());
 const openMenu = ref(false);
 </script>
 <template>
@@ -31,6 +34,7 @@ const openMenu = ref(false);
         @click="openMenu = false"
         class="navigation-link"
         to="/character_creation"
+        v-if="loggedUser"
       >
         Character Creation
       </RouterLink>
@@ -45,8 +49,17 @@ const openMenu = ref(false);
         @click="openMenu = false"
         class="navigation-link"
         to="/character"
+        v-if="loggedUser"
       >
         Find Character
+      </RouterLink>
+      <RouterLink
+        @click="openMenu = false"
+        class="navigation-link"
+        to="/my-profile"
+        v-if="loggedUser"
+      >
+        My Profile
       </RouterLink>
       <RouterLink @click="openMenu = false" class="navigation-link" to="/about"
         >About</RouterLink
