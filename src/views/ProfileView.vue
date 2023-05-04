@@ -15,7 +15,6 @@ async function findCharacter() {
     if (!character) {
       return;
     }
-    console.log(character);
     characters.value = character;
   } catch (err) {
     isLoading.value = false;
