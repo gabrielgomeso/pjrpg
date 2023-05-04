@@ -5,7 +5,7 @@ import { ref } from "vue";
 export const useAuthStore = defineStore("auth", () => {
   const loggedUser: any = ref(undefined);
 
-  const isAuthenticated = Boolean(loggedUser.value);
+  const isAuthenticated = () => Boolean(loggedUser.value);
 
   async function register(email: string, password: string) {
     try {
@@ -31,7 +31,7 @@ export const useAuthStore = defineStore("auth", () => {
         password: password,
       });
 
-      if (data) {
+      if (data.user != null) {
         loggedUser.value = data;
       }
 
