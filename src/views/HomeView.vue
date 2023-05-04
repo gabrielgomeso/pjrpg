@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 
@@ -10,7 +10,7 @@ const email = ref("");
 const email_confirmation = ref("");
 const password = ref("");
 
-onMounted(() => {
+onBeforeMount(() => {
   if (loggedUser.value == undefined) {
     getUser();
   }
