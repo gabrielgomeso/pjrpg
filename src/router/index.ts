@@ -11,6 +11,21 @@ import {
   CharacterOverview,
   CharacterInformation,
 } from "@/views/CharacterCreation";
+import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+
+const authGuard = (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const { isAuthenticated } = useAuthStore();
+  if (!isAuthenticated) {
+    next({ name: "home" });
+  } else {
+    next();
+  }
+};
 
 const routes = [
   {
@@ -22,6 +37,7 @@ const routes = [
     path: "/character_creation",
     name: "character_creation",
     redirect: { name: "character_race" },
+    beforeEnter: authGuard,
     children: [
       {
         path: "/character_race",
@@ -66,11 +82,6 @@ const routes = [
     ],
   },
   {
-    path: "/character",
-    name: "character",
-    component: () => import("../views/GetCharacter.vue"),
-  },
-  {
     path: "/roll_dice",
     name: "dice",
     component: () => import("../views/RollDice.vue"),
@@ -78,6 +89,7 @@ const routes = [
   {
     path: "/my-profile",
     name: "profile",
+    beforeEnter: authGuard,
     component: () => import("../views/ProfileView.vue"),
   },
   {
