@@ -33,25 +33,9 @@ const openMenu = ref(false);
       <RouterLink
         @click="openMenu = false"
         class="navigation-link"
-        to="/character_creation"
-        v-if="loggedUser"
-      >
-        Character Creation
-      </RouterLink>
-      <RouterLink
-        @click="openMenu = false"
-        class="navigation-link"
         to="/roll_dice"
       >
         Roll Dice
-      </RouterLink>
-      <RouterLink
-        @click="openMenu = false"
-        class="navigation-link"
-        to="/character"
-        v-if="loggedUser"
-      >
-        Find Character
       </RouterLink>
       <RouterLink
         @click="openMenu = false"
