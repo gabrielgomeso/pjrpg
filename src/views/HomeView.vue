@@ -20,53 +20,56 @@ onBeforeMount(() => {
 <template>
   <main class="home-main">
     <div>Welcome, creature.</div>
-    <div v-if="loggedUser == undefined" class="register-container">
-      <h2>Register</h2>
-      <label for="email">
-        E-mail:
-        <input v-model="email" type="email" name="email" id="email" />
-      </label>
-      <label for="email_confirmation">
-        E-mail confirmation:
-        <input
-          v-model="email_confirmation"
-          type="email"
-          name="email_confirmation"
-          id="email_confirmation"
-        />
-      </label>
-      <label for="password">
-        Password:
-        <input
-          v-model="password"
-          type="password"
-          name="password"
-          id="password"
-        />
-      </label>
+    <div v-if="loggedUser == undefined" class="auth-container">
+      <div>
+        <h2>Login</h2>
+        <label for="email">
+          E-mail:
+          <input v-model="email" type="email" name="email" id="email" />
+        </label>
+        <label for="password">
+          Password:
+          <input
+            v-model="password"
+            type="password"
+            name="password"
+            id="password"
+          />
+        </label>
 
-      <button type="button" @click="register(email, password)">Register</button>
+        <button type="button" @click="login(email, password)">Login</button>
+      </div>
+      <div>
+        <h2>Register</h2>
+        <label for="email">
+          E-mail:
+          <input v-model="email" type="email" name="email" id="email" />
+        </label>
+        <label for="email_confirmation">
+          E-mail confirmation:
+          <input
+            v-model="email_confirmation"
+            type="email"
+            name="email_confirmation"
+            id="email_confirmation"
+          />
+        </label>
+        <label for="password">
+          Password:
+          <input
+            v-model="password"
+            type="password"
+            name="password"
+            id="password"
+          />
+        </label>
+
+        <button type="button" @click="register(email, password)">
+          Register
+        </button>
+      </div>
     </div>
-    <div v-if="loggedUser == undefined" class="register-container">
-      <h2>Login</h2>
-      <label for="email">
-        E-mail:
-        <input v-model="email" type="email" name="email" id="email" />
-      </label>
-      <label for="password">
-        Password:
-        <input
-          v-model="password"
-          type="password"
-          name="password"
-          id="password"
-        />
-      </label>
-
-      <button type="button" @click="login(email, password)">Login</button>
-    </div>
-
-    <div v-if="loggedUser != undefined" class="register-container">
+    <div v-if="loggedUser != undefined">
       <button type="button" @click="logout()">logout</button>
     </div>
   </main>
