@@ -5,7 +5,6 @@ import { TheHeader, TheFooter } from "@/components/layout";
 
 <template>
   <main class="main-container">
-    <TheHeader />
     <section>
       <RouterView v-slot="{ Component }" mode="out-in">
         <transition name="slide">
@@ -13,7 +12,8 @@ import { TheHeader, TheFooter } from "@/components/layout";
         </transition>
       </RouterView>
     </section>
-    <TheFooter />
+    <TheHeader />
+    <!-- <TheFooter /> -->
   </main>
 </template>
 
@@ -25,9 +25,8 @@ body {
 }
 
 .main-container {
-  min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   grid-template-columns: 100%;
 }
 
