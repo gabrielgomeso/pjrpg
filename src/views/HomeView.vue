@@ -30,6 +30,13 @@ onBeforeMount(() => {
         <button class="main-page__first-fold--about-button">Saber mais</button>
       </div>
     </div>
+    <div class="main-page__second-fold">
+      <h3>Aventure-se pelo mundo mitológico</h3>
+      <h4>
+        Semideus, espírito da natureza, monstro... Escolha sua herança e
+        conquiste a glória eterna.
+      </h4>
+    </div>
   </main>
   <!-- <main class="home-main">
     <div v-if="loggedUser == undefined" class="auth-container">
@@ -97,7 +104,19 @@ onBeforeMount(() => {
   padding: 0 1rem;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background: url("../assets/images/first-fold.jpg") no-repeat center / cover;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+    url("../assets/images/first-fold.jpg") no-repeat center / cover;
+}
+
+.main-page__second-fold {
+  align-items: center;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  padding: 0 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 
 .main-page__first-fold--title {
