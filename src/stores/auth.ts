@@ -3,9 +3,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useAuthStore = defineStore("auth", () => {
-  const loggedUser: any = ref(undefined);
+  const loggedUser: any = ref(null);
 
-  const isAuthenticated = () => Boolean(loggedUser.value);
+  const isAuthenticated = loggedUser.value != null ? true : false;
 
   async function register(email: string, password: string) {
     try {
@@ -37,18 +37,17 @@ export const useAuthStore = defineStore("auth", () => {
 
       if (error) throw error;
     } catch (err) {
-      console.error("Unknown error while loging in", err);
+      throw new Error("Login Failed. Error - " + err);
     }
   }
 
   async function logout() {
     try {
       const { error } = await supabase.auth.signOut();
-      console.log("logged out!");
       loggedUser.value = null;
       if (error) throw error;
     } catch (err) {
-      console.error("Unknown error while logging out", err);
+      throw new Error("Logout Failed. Error - " + err);
     }
   }
 
@@ -59,8 +58,8 @@ export const useAuthStore = defineStore("auth", () => {
       } = await supabase.auth.getUser();
 
       loggedUser.value = user;
-      console.log("logged user:", user);
     } catch (err) {
+      loggedUser.value = null;
       console.error("Unknown error while getting user", err);
     }
   }
