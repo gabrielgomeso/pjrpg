@@ -4,6 +4,7 @@ import { TheHeader, TheFooter } from "@/components/layout";
 </script>
 
 <template>
+  <TheHeader />
   <main class="main-container">
     <section>
       <RouterView v-slot="{ Component }" mode="out-in">
@@ -12,8 +13,6 @@ import { TheHeader, TheFooter } from "@/components/layout";
         </transition>
       </RouterView>
     </section>
-    <TheHeader />
-    <!-- <TheFooter /> -->
   </main>
 </template>
 
@@ -29,22 +28,4 @@ body {
   grid-template-rows: 1fr auto;
   grid-template-columns: 100%;
 }
-
-/* .slide-enter-active,
-.slide-leave-active {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: opacity 1s, transform 1s;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  opacity: 0;
-  top: 0;
-  transform: translateX(30%);
-} */
 </style>
