@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { scrollToTop } from "@/assets/ts/utils";
 import HomeView from "../views/HomeView.vue";
-import AuthView from "../views/AuthView.vue";
 import {
   AttributeSelection,
   CharacterRace,
@@ -20,9 +19,8 @@ const authGuard = (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const { isAuthenticated } = useAuthStore();
-  if (isAuthenticated) {
-    console.log(isAuthenticated);
+  const { isLoggedIn } = useAuthStore();
+  if (isLoggedIn) {
     next("/auth/login");
   } else {
     next();
@@ -34,11 +32,6 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
-  },
-  {
-    path: "/auth/:param(login|register)",
-    name: "auth",
-    component: AuthView,
   },
   {
     path: "/character_creation",
