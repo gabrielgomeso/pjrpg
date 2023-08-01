@@ -31,7 +31,7 @@ async function logout() {
       <RouterLink class="navigation-link" to="/roll_dice">
         Roll Dice
       </RouterLink>
-      <RouterLink class="navigation-link" to="/my-profile">
+      <RouterLink v-show="isLoggedIn" class="navigation-link" to="/my-profile">
         My Profile
       </RouterLink>
       <RouterLink class="navigation-link" to="/about">About</RouterLink>

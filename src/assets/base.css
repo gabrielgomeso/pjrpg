@@ -22,7 +22,7 @@
 :root {
   --section-gap: 160px;
 
-  --navigation-size: 48px;
+  --navigation-size: 100px;
   --full-height: calc(100vh - var(--navigation-size));
 
   --color-background: var(--vt-c-black);
