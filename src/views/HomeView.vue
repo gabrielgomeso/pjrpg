@@ -58,6 +58,11 @@ onMounted(() => {
   margin-block-end: 1rem;
 }
 
+.home-view__auth {
+  display: flex;
+  justify-content: center;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -70,6 +75,12 @@ onMounted(() => {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .home-view {
+    height: calc(100vh - 100px);
   }
 }
 </style>
