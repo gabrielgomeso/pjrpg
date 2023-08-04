@@ -11,6 +11,7 @@ import {
   CharacterOverview,
   CharacterInformation,
 } from "@/views/CharacterCreation";
+import { NewCharacter } from "@/views/Characters";
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
@@ -32,6 +33,17 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/characters",
+    name: "characters",
+    children: [
+      {
+        path: "new",
+        name: "new_character",
+        component: NewCharacter,
+      },
+    ],
   },
   {
     path: "/character_creation",

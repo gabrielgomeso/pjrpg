@@ -28,6 +28,9 @@ async function logout() {
         />
       </figure>
       <RouterLink class="navigation-link" to="/">Home</RouterLink>
+      <RouterLink class="navigation-link" to="/characters/new">
+        New Character
+      </RouterLink>
       <RouterLink class="navigation-link" to="/roll_dice">
         Roll Dice
       </RouterLink>
