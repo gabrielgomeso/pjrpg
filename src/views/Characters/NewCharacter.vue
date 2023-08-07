@@ -1,7 +1,31 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 
-const selectedRace = ref("demigod");
+const character = ref({
+  name: "",
+  appeareance: "",
+  age: null,
+  race: "demigod",
+  group: "",
+  questions: {
+    hobby: "",
+    secret: "",
+    fear: "",
+    family: "",
+    dream: "",
+  },
+  attributes: {
+    força: 1,
+    agilidade: 1,
+    sabedoria: 1,
+    inteligência: 1,
+    constituição: 1,
+    carisma: 1,
+  },
+  items: [],
+  advantages: [],
+  disadvantages: [],
+});
 
 const attributes = ref({
   força: 1,
@@ -13,7 +37,7 @@ const attributes = ref({
 });
 
 const groupList = computed(() => {
-  if (selectedRace.value == "demigod") {
+  if (character.value.race == "demigod") {
     return [
       "Filhe de Zeus",
       "Filhe de Hera",
@@ -29,7 +53,7 @@ const groupList = computed(() => {
       "Filhe de Dionysus",
       "Filhe de Hades",
     ];
-  } else if (selectedRace.value == "nature-spirit") {
+  } else if (character.value.race == "nature-spirit") {
     return [
       "Sátiro",
       "Ninfa",
@@ -171,8 +195,6 @@ const itemsList = [
     price: 1,
   },
 ];
-
-const selectedItems = ref([]);
 
 const advantages = {
   talentos: [
@@ -532,19 +554,253 @@ const advantages = {
   ],
 };
 
+const disadvantages = {
+  fisicas: [
+    {
+      name: "Falta de Membro",
+      cost: 4,
+      description:
+        "Personagens com esta desvantagem não possuem membros devido a defeitos de nascença ou acidentes. Eles enfrentam dificuldades de mobilidade e tarefas cotidianas, muitas vezes requerendo assistência ou ferramentas adaptativas.",
+    },
+    {
+      name: "Mudez",
+      cost: 2,
+      description:
+        "Personagens mudos são incapazes de falar, tornando a comunicação um desafio. Eles dependem de pistas não verbais e comunicação escrita para interagir com outros.",
+    },
+    {
+      name: "Surdez",
+      cost: 4,
+      description:
+        "Personagens surdos têm audição limitada ou nula, afetando a percepção do mundo. Eles usam a linguagem de sinais ou outras pistas visuais para se comunicar e navegar em seu ambiente.",
+    },
+    {
+      name: "Cegueira",
+      cost: 6,
+      description:
+        "Personagens cegos não conseguem enxergar, dependendo de outros sentidos e de ferramentas como bengalas ou animais-guia para se orientar. Suas interações e compreensão do ambiente são baseadas principalmente em som, toque e intuição.",
+    },
+    {
+      name: "Vício (Álcool, cigarro, medicamentos)",
+      cost: 3,
+      description:
+        "Personagens com vícios como álcool, tabaco ou dependência de medicamentos enfrentam dificuldades com sua dependência. Isso pode levar a problemas de saúde, comportamento errático e tomada de decisões ruins, afetando seus relacionamentos e bem-estar geral.",
+    },
+  ],
+  psicologicas: [
+    {
+      name: "Esquizofrenia",
+      cost: 2,
+      description:
+        "Personagens com esquizofrenia sofrem de distorções na percepção da realidade, incluindo alucinações e delírios. Isso afeta sua capacidade de distinguir o que é real e pode influenciar suas interações e decisões.",
+    },
+    {
+      name: "Amnésia",
+      cost: 1,
+      description:
+        "Personagens com amnésia têm dificuldade em lembrar eventos passados, o que pode levar a lacunas em suas memórias e confusão sobre sua própria identidade e experiências.",
+    },
+    {
+      name: "Fobia",
+      cost: 2,
+      description:
+        "Personagens com fobias têm medos intensos e irracionais de situações, objetos ou lugares específicos. Esses medos podem causar ansiedade extrema e limitar suas opções e ações.",
+    },
+    {
+      name: "Tique",
+      cost: 2,
+      description:
+        "Personagens com tiques têm movimentos ou vocalizações involuntárias e repetitivas. Isso pode afetar seu comportamento social e a maneira como são percebidos pelos outros.",
+    },
+    {
+      name: "Estresse Pós-Traumático",
+      cost: 3,
+      description:
+        "Personagens com estresse pós-traumático sofrem após experiências traumáticas, revivendo memórias dolorosas e enfrentando sintomas como ansiedade e evitação. Isso pode impactar sua saúde mental e interações.",
+    },
+  ],
+  doencas: [
+    {
+      name: "Diabético",
+      cost: 2,
+      description:
+        "Personagens diabéticos possuem problemas de regulação do açúcar no sangue, o que pode afetar sua energia e saúde ao longo do tempo.",
+    },
+    {
+      name: "Asmático",
+      cost: 2,
+      description:
+        "Personagens asmáticos têm dificuldade em respirar e podem ser afetados negativamente em situações que exigem esforço físico ou exposição a alérgenos.",
+    },
+    {
+      name: "Anêmico",
+      cost: 2,
+      description:
+        "Personagens anêmicos têm uma contagem baixa de glóbulos vermelhos, o que pode levar à fadiga, tontura e falta de resistência física.",
+    },
+    {
+      name: "Vitiligo",
+      cost: 2,
+      description:
+        "Personagens com vitiligo têm perda de coloração da pele. Devido ao preconceito no mundo, eles enfrentam desafios sociais e precisam ter o dobro de sucesso em testes de Carisma.",
+    },
+  ],
+  mitologicas: [
+    {
+      name: "Indefinido",
+      cost: 15,
+      description:
+        "Você não possui herança divina, seu pai/mãe olimpiano nunca o reclamou. Você não possui poderes.",
+    },
+    {
+      name: "Maldição (Variável)",
+      cost: "Variável",
+      description:
+        "Alguma parte do seu corpo é animalesca, você não pode comer nem beber mas ainda sente fome, você tem que fazer alguma tarefa específica em determinada quantidade de tempo, você não pode ir até certo lugar ou não pode falar certa informação… Algum deus ficou muito bravo contigo e te impôs uma maldição (talvez fazer uma tabela e a pessoa rola)",
+    },
+    {
+      name: "Perseguição Monstruosa",
+      cost: 2,
+      description: "Um monstro mitológico específico te persegue eternamente.",
+    },
+    {
+      name: "Perseguição Divina",
+      cost: 4,
+      description:
+        "Um deus específico te persegue eternamente. Fazer tabela de deuses e de possíveis motivos.",
+    },
+  ],
+  dificuldades: [
+    {
+      name: "Fraco",
+      cost: 3,
+      description:
+        "Você é naturalmente fraco. Sempre que for realizar um teste de Força, um sucesso será ignorado. Você carrega menos itens e não pode usar armas e armaduras pesadas.",
+    },
+    {
+      name: "Lento",
+      cost: 3,
+      description:
+        "Você é naturalmente lento. Sempre que for realizar um teste de Agilidade, um sucesso será ignorado. Você anda -2 quadrados por turno.",
+    },
+    {
+      name: "Estúpido",
+      cost: 3,
+      description:
+        "Te falta massa cerebral. Sempre que for realizar um teste de Inteligência, um sucesso será ignorado.",
+    },
+    {
+      name: "Imprudente",
+      cost: 3,
+      description:
+        "Você é naturalmente insensato, ignorante. Sempre que for realizar um teste de Sabedoria, um sucesso será ignorado.",
+    },
+    {
+      name: "Debilitado",
+      cost: 3,
+      description:
+        "Sua saúde é parca. Sempre que for realizar um teste de Constituição, um sucesso será ignorado.",
+    },
+    {
+      name: "Feio",
+      cost: 3,
+      description:
+        "Você é naturalmente feio. Ninguém vai com a sua cara. Te falta a beleza divina. Sempre que for realizar um teste de Carisma, um sucesso será ignorado. Você recupera pontos heroicos com mais dificuldade (se o narrador devolver 2 pontos heroicos para cada jogador, você só recebe 1).",
+    },
+    {
+      name: "Desonra",
+      cost: 3,
+      description:
+        "Seu progenitor divino te odeia. Você gasta o dobro de pontos heroicos por uso. Ou seja, quando precisar rerrolar algo, aumentar um bônus, etc, vai gastar 2 pontos ao invés de 1, já que a 'ajuda divina' está contra você.\n\nSuperável: Faça algo em nome do seu progenitor. Derrote um monstro épico, dê-lhe um item especial, faça alguma tarefa importante em seu nome.",
+    },
+    {
+      name: "Dificuldade em Aprender",
+      cost: 2,
+      description:
+        "Você precisa do dobro de sucessos para aprender algo novo.\n\nSuperável: Adquira 2 novos Conhecimentos.",
+    },
+  ],
+  combate: [
+    {
+      name: "Inabilidade Armamentista",
+      cost: 4,
+      description:
+        "Seja por medo, algum trauma do passado ou simples inabilidade, o seu personagem não sabe usar armas. -3 ao rolar qualquer tipo de ataque armado.\nSuperável: Treinar Hábil com Arma",
+    },
+    {
+      name: "Inabilidade Mágica",
+      cost: 2,
+      description:
+        "Seja por medo, algum trauma do passado ou simples inabilidade, o seu personagem não sabe usar as magias de seu progenitor divino.\nSuperável:",
+    },
+    {
+      name: "Inexperiência",
+      cost: 1,
+      description: "Fica com medo em combates e não ataca no primeiro turno.",
+    },
+    {
+      name: "Visão Imprecisa",
+      cost: 2,
+      description:
+        "Sua visão é imprecisa, dificultando ataques à distância. -2 ao rolar ataques com armas de longo alcance.",
+    },
+    {
+      name: "Mãos Trêmulas",
+      cost: 2,
+      description:
+        "Suas mãos tremem em momentos de estresse, prejudicando sua mira. -2 ao rolar ataques à distância ou ataques precisos.",
+    },
+    {
+      name: "Compulsão de Combate",
+      cost: 3,
+      description:
+        "Você não consegue recuar de um combate e sempre deve enfrentar inimigos, mesmo em situações desvantajosas.",
+    },
+    {
+      name: "Fobia de Feridas",
+      cost: 2,
+      description:
+        "Você tem aversão a ferimentos e sangue, tornando-se menos eficaz em combate após sofrer dano. -2 em ataques e defesa após ser ferido.",
+    },
+    {
+      name: "Reação Excessiva",
+      cost: 2,
+      description:
+        "Em situações de combate, sua reação é excessiva e muitas vezes descontrolada, prejudicando a estratégia do grupo.",
+    },
+  ],
+};
+
 const initialPoints = 16;
 
 const remainingPoints = computed(() => {
-  const usedPoints = Object.values(attributes.value).reduce(
+  const usedPoints = Object.values(character.value.attributes).reduce(
     (total, value) => total + value,
     0
   );
   return initialPoints - usedPoints;
 });
 
-const selectedAdvantages = ref([]);
+const advantagePoints = computed(() => {
+  return character.value.advantages.reduce(
+    (total, advantage) => total + advantage.cost,
+    0
+  );
+});
+
+const disavantagePoints = computed(() => {
+  return character.value.disadvantages.reduce(
+    (total, disadvantage) => total + disadvantage.cost,
+    0
+  );
+});
+
+const differenceAdvantagePoints = computed(() => {
+  return advantagePoints.value - disavantagePoints.value;
+});
 
 const advantageKeys = computed(() => Object.keys(advantages));
+const disadvantageKeys = computed(() => Object.keys(disadvantages));
 </script>
 
 <template>
@@ -558,7 +814,7 @@ const advantageKeys = computed(() => Object.keys(advantages));
       <h2>Informações do personagem</h2>
       <label for="character-name">
         Nome do personagem
-        <input name="character-name" type="text" />
+        <input name="character-name" type="text" v-model="character.name" />
       </label>
 
       <label for="character-name">
@@ -566,12 +822,18 @@ const advantageKeys = computed(() => Object.keys(advantages));
         <span class="new-character__form-label-info">
           (mínimo 10 anos, máximo 99 anos)
         </span>
-        <input name="character-age" type="number" min="10" max="99" />
+        <input
+          name="character-age"
+          type="number"
+          min="10"
+          max="99"
+          v-model="character.age"
+        />
       </label>
 
       <label for="character-race">
         Raça do personagem
-        <select v-model="selectedRace" name="character-race">
+        <select v-model="character.race" name="character-race">
           <option value="demigod" selected>Semideus</option>
           <option value="nature-spirit">Espírito da Natureza</option>
           <option value="monster">Monstro</option>
@@ -580,11 +842,11 @@ const advantageKeys = computed(() => Object.keys(advantages));
 
       <label for="character-group">
         Grupo do personagem
-        <select name="character-group">
+        <select name="character-group" v-model="character.group">
           <option
             v-for="(group, index) in groupList"
             :key="index"
-            value="demigod"
+            :value="group"
             selected
           >
             {{ group }}
@@ -592,18 +854,84 @@ const advantageKeys = computed(() => Object.keys(advantages));
         </select>
       </label>
 
+      <label for="character-appearance">
+        Aparência do personagem
+        <span class="new-character__form-label-info">
+          (imagem preferencialmente 200x400, máx 2MB)
+        </span>
+        <input name="character-appearance" type="file" accept="image/*" />
+      </label>
+
+      <h2>Perguntas sobre o personagem</h2>
+      <label for="character-question-hobby">
+        Qual é um interesse ou hobby que o seu personagem tem? Onde e por que
+        ele começou a praticá-lo?
+
+        <textarea
+          v-model="character.questions.hobby"
+          name="character-question-hobby"
+          cols="15"
+          rows="5"
+        ></textarea>
+      </label>
+
+      <label for="character-question-secret">
+        Nomeie um segredo que o seu personagem esconde dos outros. Por que ele
+        mantém esse segredo?
+
+        <textarea
+          v-model="character.questions.secret"
+          name="character-question-secret"
+          cols="15"
+          rows="5"
+        ></textarea>
+      </label>
+
+      <label for="character-question-fear">
+        Nomeie um medo ou fobia que o seu personagem tem. Como isso afeta ele?
+
+        <textarea
+          v-model="character.questions.fear"
+          name="character-question-fear"
+          cols="15"
+          rows="5"
+        ></textarea>
+      </label>
+
+      <label for="character-question-family">
+        Nomeie duas pessoas próximas do seu personagem. Por que ele se importa
+        com elas? O que ele faria para protegê-las?
+
+        <textarea
+          v-model="character.questions.family"
+          name="character-question-family"
+          cols="15"
+          rows="5"
+        ></textarea>
+      </label>
+
+      <label for="character-question-dream">
+        Qual o maior sonho do seu personagem? O que ele faria para realizá-lo?
+
+        <textarea
+          v-model="character.questions.dream"
+          name="character-question-dream"
+          cols="15"
+          rows="5"
+        ></textarea>
+      </label>
       <hr />
 
       <h2>Seleção de atributos</h2>
       <p>Você possui {{ remainingPoints }} ponto para gastar</p>
       <label
-        v-for="(attribute, index) in Object.keys(attributes)"
+        v-for="(attribute, index) in Object.keys(character.attributes)"
         :for="`character-${attribute}-attribute`"
         :key="index"
       >
         {{ attribute }}
         <input
-          v-model="attributes[attribute]"
+          v-model="character.attributes[attribute]"
           name="`character-${attribute}-attribute`"
           type="number"
           min="1"
@@ -621,41 +949,46 @@ const advantageKeys = computed(() => Object.keys(advantages));
           conseguirá novos ao longo de sua jornada.
         </legend>
 
-        <div class="new-character__form-items-list">
-          <label
-            v-for="(item, index) in itemsList"
-            :for="`character-item-${index}`"
-            :key="index"
-            class="new-character__form-items-list-item"
-          >
-            <p class="new-character__form-items-list-item--title">
-              {{ item.name }}
-            </p>
-            <p v-show="item.description">{{ item.description }}</p>
-            <p v-show="item.damage">Dano: {{ item.damage }}</p>
-            <p v-show="item.resistence">Resistência: {{ item.resistence }}</p>
-            <p v-show="item.effect">Efeito: {{ item.effect }}</p>
-            <input
-              type="checkbox"
-              :name="item.name"
-              v-model="selectedItems"
-              :disabled="
-                selectedItems.length === 3 && !selectedItems.includes(item)
-              "
-              :value="item"
-            />
-          </label>
-        </div>
+        <details>
+          <summary>Lista de items</summary>
+
+          <div class="new-character__form-items-list">
+            <label
+              v-for="(item, index) in itemsList"
+              :for="`character-item-${index}`"
+              :key="index"
+              class="new-character__form-items-list-item"
+            >
+              <p class="new-character__form-items-list-item--title">
+                {{ item.name }}
+              </p>
+              <p v-show="item.description">{{ item.description }}</p>
+              <p v-show="item.damage">Dano: {{ item.damage }}</p>
+              <p v-show="item.resistence">Resistência: {{ item.resistence }}</p>
+              <p v-show="item.effect">Efeito: {{ item.effect }}</p>
+              <input
+                type="checkbox"
+                :name="item.name"
+                v-model="character.items"
+                :disabled="
+                  character.items.length === 3 && !character.items.includes(item)
+                "
+                :value="item"
+              />
+            </label>
+          </div>
+        </details>
       </fieldset>
 
       <hr />
 
       <h2>Seleção das vantagens e desvantagens</h2>
 
+      <h3>Vantagens</h3>
       <fieldset>
         <legend>
-          Você tem direito a 3 itens iniciais. Não precisa se preocupar,
-          conseguirá novos ao longo de sua jornada.
+          Você selecionou {{ advantagePoints }} pontos de vantagem. Selecione o
+          equivalente em desvantagens.
         </legend>
 
         <details v-for="(advantage, index) in advantageKeys" :key="index">
@@ -671,7 +1004,38 @@ const advantageKeys = computed(() => Object.keys(advantages));
                 type="checkbox"
                 class="checkbox-input"
                 :name="item.name"
-                v-model="selectedAdvantages"
+                v-model="character.advantages"
+                :value="item"
+              />
+
+              {{ item.name }} ({{ item.cost }})
+            </label>
+          </div>
+        </details>
+      </fieldset>
+
+      <h3>Desvantagens</h3>
+      <fieldset>
+        <legend>
+          Você selecionou {{ disavantagePoints }} pontos de desvantagens.
+          Selecione mais {{ differenceAdvantagePoints }} pontos em desvantagens
+          para .
+        </legend>
+
+        <details v-for="(disadvantage, index) in disadvantageKeys" :key="index">
+          <summary>{{ disadvantage }}</summary>
+          <div class="new-character__form-items-list">
+            <label
+              v-for="(item, index) in disadvantages[disadvantage]"
+              :for="`character-disadvantage-${index}`"
+              :key="index"
+              class="checkbox-wrapper"
+            >
+              <input
+                type="checkbox"
+                class="checkbox-input"
+                :name="item.name"
+                v-model="character.disadvantages"
                 :value="item"
               />
 
@@ -681,8 +1045,6 @@ const advantageKeys = computed(() => Object.keys(advantages));
         </details>
       </fieldset>
     </form>
-
-    {{ selectedAdvantages }}
   </section>
 </template>
 
