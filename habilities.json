@@ -1,44 +1,601 @@
 {
-  "habilities": [
-    { 
-      "group": "minotaur", 
-      "name": "Tamanho Maior",
-      "description": "Como a criatura ancestral, os minotauros podem atingir grandes proporções. O tamanho inicial da criatura é de 1,90. Essa habilidade pode ser um problema ou uma solução.",
-      "1": "O minotauro atinge 2,30m.",
-      "2": "O minotauro atinge 3m.",
-      "3": "O minotauro atinge 4m."
+  "Afrodite": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Apollo": [
+    {
+      "name": "Habilidade com Arco",
+      "description": "O arco é um dos maiores símbolos de Apollo. Seus filhos naturalmente já possuem certa acuidade com a arma.",
+      "levels": {
+        "1": "+1 de bônus de ataque com a arma, pode virar um 3 em 1 acerto.",
+        "2": "+2 de bônus de ataque com a arma, pode virar dois 3 em 1 acerto.",
+        "3": "+3 de bônus de ataque com a arma, todos os 3 viram acertos."
+      }
     },
-    { 
-      "group": "minotaur", 
-      "name": "Carregada",
-      "description": "O minotauro dispara em direção aos seus inimigos, causando dano e empurrando-os. Ele precisa de um turno para preparar o avanço. A distância do empurrão é igual ao valor de força mais o nível da habilidade. O custo da carregada é de 10 de Energia. O oponente pode fazer uma resistência de força para não ser empurrado.",
-      "1": "2d10 de dano",
-      "2": "3d10 de dano",
-      "3": "4d10 de dano"
+    {
+      "name": "Tiro Poderoso",
+      "description": "Assim como Apollo abençoou Paris e seu arco ao assassinar Aquiles, seus filhos também possuem a capacidade de disparar um tiro poderoso. Custo: 5 de Energia e 1 foco.",
+      "levels": {
+        "1": "+1d10 de dano;",
+        "2": "+2d10 de dano;",
+        "3": "+3d10 de dano;"
+      }
     },
-    { 
-      "group": "minotaur", 
-      "name": "Comandar",
-      "description": "O minotauro pode usar de sua lendária presença para comandar outros monstros. Eles devem fazer um teste de sabedoria para evitar o comando. O custo é de 10 de Magia por monstro e 5 de Magia por turno para manter os monstros sob controle.",
-      "1": "Pode comandar até 1 monstros.",
-      "2": "Pode comandar até 2 monstros.",
-      "3": "Pode comandar até 4 monstros."
+    {
+      "name": "Facho de Luz",
+      "description": "O semideus consegue absorver e utilizar a energia solar para criar fachos de luz e cegar seus oponentes. Custo: 5 de Magia e 1 foco.",
+      "levels": {
+        "1": "Cegam por 1 turno. 3 quadrados de distância",
+        "2": "Cegam por 2 turnos. 6 quadrados de distância",
+        "3": "Cegam por 4 turnos. 9 quadrados de distância."
+      }
     },
-    { 
-      "group": "minotaur", 
-      "name": "Manipulação da Névoa",
-      "description": "Monstros no geral podem manipular a névoa para se disfarçarem entre os humanos. Essa habilidade se amplia, dando a possibilidade de que criem pequenas ilusões. Custa 10 de Magia por quadrado que o objeto ocupa.",
-      "1": "Você pode manipular a névoa para alterar sua aparência.",
-      "2": "Você pode manipular a névoa para alterar a aparência de algum objeto de tamanho médio, como um carro.",
-      "3": "Você pode manipular a névoa para alterar a aparência de um objeto grande, como um prédio."
+    {
+      "name": "Esferas de Fogo",
+      "description": "O semideus consegue absorver e utilizar a energia solar para criar esferas de fogo poderosas e queimar seus inimigos. Custo: 8 de Magia e 1 foco.",
+      "levels": {
+        "1": "2d8 de dano; 3 quadrados de distância.",
+        "2": "3d8 de dano; 6 quadrados de distância.",
+        "3": "4d8 de dano; 9 quadrados de distância."
+      }
     },
-    { 
-      "group": "minotaur", 
-      "name": "Rugido Tenebroso",
-      "description": "O som assustador que o minotauro faz assusta a qualquer um. Custa 10 de Magia. Os inimigos precisam fazer um teste de resistência de sabedoria para não sofrerem o rugido.",
-      "1": "O rugido assusta por 1 turno e o inimigo tenta fugir.",
-      "2": "O rugido assusta por 2 turnos e o inimigo tenta fugir.",
-      "3": "O rugido deixa o inimigo catatônico por 2 turnos."
+    {
+      "name": "Toque da Danação",
+      "description": "Também sendo o deus da doença, Apollo pode fazer o oposto à cura. Ele pode encantar flechas, lâminas e alimentos com a peste, fazendo com que aqueles que forem atingidos ou ingerirem tais elementos contaminados sofram consideravelmente, ou até pereçam. Custo: 5 de Magia.",
+      "levels": {
+        "1": "Tontura por 2 turnos, -5 de Vida por turno como envenenamento.",
+        "2": "Tontura por 4 turnos, -10 de Vida por turno como envenenamento.",
+        "3": "Tontura por 6 turnos, -15 de Vida por turno como envenenamento."
+      }
+    },
+    {
+      "name": "Música Divina",
+      "description": "A música é tão natural aos filhos de Apollo quanto respirar. Ele pode cantar canções e tocar melodias poderosas a ponto de pessoas perderem o controle de si mesmas. Para que a música faça efeito, o personagem deve tocar/cantar por pelo menos 2 turnos sem ser interrompido. O adversário deve fazer um teste de Sabedoria para resistir ao efeito da música. A área de alcance é 15 quadrados. Custo: 15 de Energia e 15 de Magia.",
+      "levels": {
+        "1": "Canção do Medo: a criatura afetada foge do combate ou da situação.",
+        "2": "Canção do Heroísmo: os aliados afetados ganham +2 de bônus em todos os testes por 5 turnos.",
+        "3": "Canção de Comando: uma criatura pode ser comandada a fazer uma ação simples."
+      }
+    },
+    {
+      "name": "Curandeirismo",
+      "description": "Sendo filho do deus da cura e medicina, o semideus pode usar o próprio metabolismo para acelerar o processo de cicatrização de feridas, alívio de dores e estancamento de hemorragias, podendo usar sua energia para causar efeitos recuperativos em um alvo à sua escolha. Custo 15 de Magia e foco.",
+      "levels": {
+        "1": "10 de Vida; restaura ferimentos leves, diminui medianos.",
+        "2": "20 de Vida; restaura ferimentos medianos, diminui graves.",
+        "3": "30 de Vida; restaura ferimentos graves, diminui evita a morte (personagem fica estabilizado)."
+      }
+    },
+    {
+      "name": "Bênção do Sol",
+      "description": "Sendo filho do deus da do sol, você possui vantagens quando está sendo banhado pelo grande astro.",
+      "levels": {
+        "1": "Pode se mover o dobro de quadrados e recebe +1 em defesas.",
+        "2": "Recebe uma regeneração lenta de energia e magia, 3 pontos por turno.",
+        "3": "Recebe uma regeneração lenta de vida, 3 pontos por turno."
+      }
+    }
+  ],
+  "Ares": [
+    {
+      "name": "Habilidade com Lança",
+      "description": "A lança é um dos maiores símbolos de Ares. Seus filhos naturalmente já possuem certa acuidade com a arma.",
+      "levels": {
+        "1": "+1 de bônus de ataque com a arma, pode virar um 3 em 1 acerto.",
+        "2": "+2 de bônus de ataque com a arma, pode virar dois 3 em 1 acerto.",
+        "3": "+3 de bônus de ataque com a arma, todos os 3 viram acertos."
+      }
+    },
+    {
+      "name": "Imbuir Ódio",
+      "description": "O deus da guerra é também um grande provocador. Sua presença já causa ódio em seus oponentes e seus filhos possuem uma fração desse poder. Podendo controlar emoções e causar o caos. Teste em Sabedoria para evitar o efeito. Custo de 10 de Magia para cada alvo.",
+      "levels": {
+        "1": "Um alvo em 5 quadrados de distância irá atacar a criatura mais próxima a ele.",
+        "2": "Até três alvos em 8 quadrados de distância irão entrar em combate.",
+        "3": "Até cinco alvos em 10 quadrados de distância irão fazer uma pequena guerra entre si."
+      }
+    },
+    {
+      "name": "Combate Raivoso",
+      "description": "Semelhante aos guerreiros berserkers, o filho de Ares entra em uma fúria quase palpável. Completamente focado no combate, ele busca destruir tudo e todos à sua frente. 10 de Energia por turno.",
+      "levels": {
+        "1": "+1 em jogadas de combate, +1d6 de dano.",
+        "2": "+2 em jogadas de combate, +1d8 de dano.",
+        "3": "+3 em jogadas de combate, +1d12 de dano."
+      }
+    },
+    {
+      "name": "Resistência absoluta",
+      "description": "Acostumados ao combate, os filhos de Ares podem resistir ao dano que recebem para continuar lutando.",
+      "levels": {
+        "1": "Gasta 5 de energia para resistir 1 de dano (limite 10 por turno)",
+        "2": "Gasta 3 de energia para resistir 1 de dano (limite 15 por turno)",
+        "3": "Gasta 1 de energia para resistir 1 de dano (limite 20 por turno)"
+      }
+    },
+    {
+      "name": "Grito de Guerra",
+      "description": "Comandantes naturais, as proles de Ares podem auxiliar seus companheiros no combate, incentivando-os a vencer. Custo de 10 de Magia. Funciona apenas para aliados e não para o próprio personagem.",
+      "levels": {
+        "1": "Alcance de 3 quadrados, +1 em jogadas de combate.",
+        "2": "Alcance de 5 quadrados, +2 em jogadas de combate.",
+        "3": "Alcance de 8 quadrados, +3 em jogadas de combate."
+      }
+    },
+    {
+      "name": "Conjurar Arma",
+      "description": "O deus da guerra é o senhor de todas as armas, capaz de ter a sua disposição qualquer artefato capaz de ferir. Requer foco.",
+      "levels": {
+        "1": "Conjura uma arma pequena-média (de adaga até uma espada curta, dardo). 10 de Magia.",
+        "2": "Conjura uma arma média-grande (lança, espada longa, arco) ou duas pequenas-médias. 20 de Magia.",
+        "3": "Conjura uma arma imensa (espada bastarda, martelo/machado de guerra, escudo retangular). 30 de Magia."
+      }
+    },
+    {
+      "name": "Convocar Soldado",
+      "description": "O deus da guerra é o senhor de todos os exércitos. Os soldados do passado fazem parte de seu imenso comando e seu pai pode lhe emprestar alguns subalternos. Eles duram até serem destruídos. Custo de 15 de Magia por soldado.",
+      "levels": {
+        "1": "Pode invocar 1 soldado esquelético.",
+        "2": "Pode invocar até 2 soldados esqueléticos.",
+        "3": "Pode invocar até 4 soldados esqueléticos."
+      }
+    },
+    {
+      "name": "Bom de Guerra",
+      "description": "Você nasceu para o combate, então possui vantagens que os demais não teriam.",
+      "levels": {
+        "1": "+1 de bônus quando lutando com mais de um inimigo adjacente.",
+        "2": "Os inimigos não recebem bônus para te atacar flanqueado ou de costas.",
+        "3": "Você não recebe penalidade por uso de armadura."
+      }
+    }
+  ],
+  "Athena": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Demeter": [
+    {
+      "name": "Habilidade com Foice",
+      "description": "A foice é um dos maiores símbolos de Deméter. Seus filhos naturalmente já possuem certa acuidade com a arma.",
+      "levels": {
+        "1": "+1 de bônus de ataque com a arma, pode virar um 3 em 1 acerto.",
+        "2": "+2 de bônus de ataque com a arma, pode virar dois 3 em 1 acerto.",
+        "3": "+3 de bônus de ataque com a arma, todos os 3 viram acertos."
+      }
+    },
+    {
+      "name": "Chamar animal",
+      "description": "Os filhos de Deméter possuem a capacidade de tocar a natureza de uma forma diferente, podendo ecoar um chamado que é escutado pelo animal mais próximo, que vem ao seu encontro para ajudar em qualquer situação. Custo 10 de Magia e 1 foco.",
+      "levels": {
+        "1": "Pode chamar até 1 animal.",
+        "2": "Pode chamar até 2 animais.",
+        "3": "Pode chamar até 3 animais."
+      }
+    },
+    {
+      "name": "Fertilidade universal",
+      "description": "A deusa das plantas dá a suas proles a habilidade de fertilizar o terreno que quiser, fazendo com que vinhas saiam do chão e prendam seus oponentes. Requer foco. 10 de Magia por alvo. Teste de Força para resistir à prisão.",
+      "levels": {
+        "1": "Pode prender até 3 inimigos em 5 quadrados de distância por no máximo 2 turnos. 3d10.",
+        "2": "Pode prender até 4 inimigos em 10 quadrados de distância por no máximo 3 turnos. 4d10 de dano.",
+        "3": "Pode prender até 6 inimigos em 15 quadrados de distância por no máximo 4 turnos. 5d10 de dano."
+      }
+    },
+    {
+      "name": "Criar Natureza",
+      "levels": {
+        "1": "O filho de Deméter pode causar flores e plantas a florescer.",
+        "2": "O filho de Deméter pode causar árvores a crescer e produzir frutos.",
+        "3": "O filho de Deméter pode causar florestas inteiras a brotarem do chão."
+      }
+    },
+    {
+      "name": "Controlar o Clima",
+      "levels": {
+        "1": "O filho de Deméter pode causar chuva ou neve.",
+        "2": "O filho de Deméter pode causar nuvens a formarem e criarem uma tempestade de trovões.",
+        "3": "O filho de Deméter pode causar um furacão ou tornado a manifestar."
+      }
+    },
+    {
+      "name": "Summonar Animais",
+      "levels": {
+        "1": "O filho de Deméter pode sumonar animais pequenos como ratos e coelhos.",
+        "2": "O filho de Deméter pode sumonar animais de tamanho médio como veados e raposas.",
+        "3": "O filho de Deméter pode sumonar animais grandes como ursos e lobos."
+      }
+    },
+    {
+      "name": "Controlar as Estações",
+      "levels": {
+        "1": "O filho de Deméter pode causar uma leve mudança no clima, como fazer mais quente ou mais frio.",
+        "2": "O filho de Deméter pode causar uma estação a transicionar de uma para a outra.",
+        "3": "O filho de Deméter pode causar um ano inteiro de estações a passar de uma vez."
+      }
+    },
+    {
+      "name": "Cultivar Plantas",
+      "levels": {
+        "1": "O filho de Deméter pode causar pequenos terrenos de plantas a crescerem.",
+        "2": "O filho de Deméter pode causar grandes campos de plantas a crescerem.",
+        "3": "O filho de Deméter pode causar fazendas inteiras a surgirem do chão."
+      }
+    },
+    {
+      "name": "Criar ninfas",
+      "levels": {
+        "1": "O filho de Deméter toca em uma árvore e cria uma ninfa.",
+        "2": "O filho de Deméter pode criar 2 ninfas.",
+        "3": "O filho de Deméter pode criar 3 ninfas."
+      }
+    },
+    {
+      "name": "Controlar a terra",
+      "levels": {
+        "1": "O filho de Deméter pode manipular a terra em pequenas quantidades.",
+        "2": "O filho de Deméter pode manipular a terra em médias quantidades.",
+        "3": "O filho de Deméter pode manipular a terra em grandes quantidades."
+      }
+    },
+    {
+      "name": "Controlar as plantas",
+      "levels": {
+        "1": "O filho de Deméter pode manipular as plantas para curar ferimentos.",
+        "2": "O filho de Deméter pode manipular as plantas para curar doenças.",
+        "3": "O filho de Deméter pode manipular as plantas para criar itens mágicos."
+      }
+    },
+    {
+      "name": "Criar animais",
+      "levels": {
+        "1": "O filho de Deméter toca na terra e cria um animal.",
+        "2": "O filho de Deméter pode criar dois animais.",
+        "3": "O filho de Deméter pode criar três animais."
+      }
+    }
+  ],
+  "Dionísio": [
+    {
+      "name": "Habilidade com Bastão",
+      "description": "O bastão é um dos maiores símbolos de Dionísio. Seus filhos naturalmente já possuem certa acuidade com a arma.",
+      "levels": {
+        "1": "+1 de bônus de ataque com a arma, pode virar um 3 em 1 acerto.",
+        "2": "+2 de bônus de ataque com a arma, pode virar dois 3 em 1 acerto.",
+        "3": "+3 de bônus de ataque com a arma, todos os 3 viram acertos."
+      }
+    },
+    {
+      "name": "Montanhas da Loucura",
+      "description": "Seu progenitor é o deus da loucura e você é um de seus veículos. Teste em Sabedoria para evitar o efeito. Custo de 5 de Magia para cada alvo.",
+      "levels": {
+        "1": "Um alvo em 5 quadrados de distância irá sofrer o efeito da loucura. Dado da loucura: jogar 1d6. Cada resultado causa um efeito.",
+        "2": "Até três alvos em 8 quadrados de distância irão sofrer o efeito da loucura. Dado da loucura: jogar 1d6. Cada resultado causa um efeito.",
+        "3": "Até cinco alvos em 10 quadrados de distância irão sofrer o efeito da loucura. Dado da loucura: jogar 1d6. Cada resultado causa um efeito."
+      }
+    },
+    {
+      "name": "Constrição",
+      "description": "Sendo deus do vinho, Dionísio constantemente criava e prendia seus inimigos em videiras. Requer foco. 5 de Magia por alvo. Teste de Força para resistir à prisão.",
+      "levels": {
+        "1": "Pode prender até 2 inimigos em 5 quadrados de distância por no máximo 2 turnos. 2d10 de dano.",
+        "2": "Pode prender até 4 inimigos em 10 quadrados de distância por no máximo 3 turnos. 3d10 de dano.",
+        "3": "Pode prender até 6 inimigos em 15 quadrados de distância por no máximo 4 turnos. 4d10 de dano."
+      }
+    },
+    {
+      "name": "Mestre da mente",
+      "description": "Da mesma forma que os filhos do deus da loucura podem infligir dano à mente dos outros, eles podem bloquear a sua própria e de seus aliados para invasões alheias.",
+      "levels": {
+        "1": "Você possui um bônus de +3 em jogadas contra ataques mentais e pode rerrolar uma jogada.",
+        "2": "Você e mais dois aliados em até 5 quadrados de distância possuem um bônus de +3 contra ataques mentais, mas apenas você pode rerrolar a jogada.",
+        "3": "Você e mais quatro aliados em até 8 quadrados de distância possuem um bônus de +5 contra ataques mentais e todos podem rerrolar a jogada."
+      }
+    },
+    {
+      "name": "Invocar Sátiro",
+      "description": "Dionísio possuía um culto e era completamente ligado aos sátiros. Por ser filho dele, essas criaturas também te auxiliam quando necessário. 15 de Magia por sátiro.",
+      "levels": {
+        "1": "Pode invocar até 1 sátiro.",
+        "2": "Pode invocar até 2 sátiros.",
+        "3": "Pode invocar até 3 sátiros."
+      }
+    },
+    {
+      "name": "O Deus Selvagem",
+      "description": "Dionísio era também o deus da selvageria, o oposto à civilização. Seus filhos podem se transformar em algumas criaturas graças à isso. 15 de Magia por transformação.",
+      "levels": {
+        "1": "Pode se transformar em um pássaro.",
+        "2": "Pode se transformar em um leopardo, animal símbolo do deus.",
+        "3": "Pode se transformar em uma criatura mitológica de tamanho médio, desde que já tenha visto (Dracaena, Minotauro, Sátiro, Harpia, etc)."
+      }
+    }
+  ],
+  "Hades": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Hefesto": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Hermes": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Poseidon": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Zeus": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Thanatos": [
+    {
+      "name": "Habilidade com Foice",
+      "description": "A foice é o símbolo de Thanatos. Seus filhos naturalmente já possuem certa acuidade com a arma.",
+      "levels": {
+        "1": "+1 de bônus de ataque com a arma, pode virar um 4 em 1 acerto.",
+        "2": "+2 de bônus de ataque com a arma, pode virar dois 4 em 1 acerto.",
+        "3": "+3 de bônus de ataque com a arma, todos os 4 viram acertos."
+      }
+    },
+    {
+      "name": "Roubo de vida",
+      "description": "Sendo filhos da morte, os herdeiros de Thanatos podem manipular a energia vital de seus alvos, roubando-a para si. Custo: 5 de Magia para recuperar 5 de Vida ou 5 de Energia. Se o alvo passar em um teste de Constituição, ele terá apenas metade do valor drenado.",
+      "levels": {
+        "1": "Limite de 10 pontos recuperados por turno.",
+        "2": "Limite de 20 pontos recuperados por turno.",
+        "3": "Limite de 30 pontos recuperados por turno."
+      }
+    },
+    {
+      "name": "Morte em todo lugar",
+      "description": "A morte definitivamente está em todo lugar. Quando alguém morre próximo ao filho de Thanatos, ele pode se locomover instantaneamente até o local da morte, como um transporte entre planos. Custo: 2 de Magia para cada quadrado percorrido.",
+      "levels": {
+        "1": "Limite de 6 quadrados de distância.",
+        "2": "Limite de 10 quadrados de distância.",
+        "3": "Limite de 20 quadrados de distância."
+      }
+    },
+    {
+      "name": "Adiamento",
+      "description": "Você pode adiar a morte de um alvo, seja aliado (para estabilizá-lo e salvar sua vida) ou inimigo (para retirar alguma informação, por exemplo). Custo: 20 de Magia por turno e por alvo que mantém vivo.",
+      "levels": {
+        "1": "Limite de 1 alvo e 2 turnos.",
+        "2": "Limite de 2 alvos e 3 turnos.",
+        "3": "Limite de 3 alvos e 4 turnos."
+      }
+    },
+    {
+      "name": "Chamar espíritos",
+      "description": "O filho de Thanatos pode convocar os espíritos dos mortos para perguntar coisas ou mandar mensagens, porém, nem todos os mortos gostam de ser perturbados. Custo: 10 de Magia por turno que mantém o espírito presente. Deve rolar 1d100 para ver quem irá ser invocado.",
+      "levels": {
+        "1": "Limite de 2 turnos.",
+        "2": "Limite de 3 turnos.",
+        "3": "Limite de 4 turnos."
+      }
+    },
+    {
+      "name": "Imbuir Maldição",
+      "description": "O herdeiro da morte pode manipular uma energia nefasta e imbuí-la em seus punhos, armas ou itens, para utilizar contra seus inimigos. Custo: 10 de Magia.",
+      "levels": {
+        "1": "Bônus de +1d6 de dano, a maldição some do item em 2 turnos.",
+        "2": "Bônus de +1d8 de dano, a maldição some do item em 3 turnos.",
+        "3": "Bônus de +1d12 de dano, a maldição some do item em 4 turnos."
+      }
+    },
+    {
+      "name": "Medo da Morte",
+      "description": "Você fede a morte. Por conta disso, os inimigos que se aproximam demais devem fazer um teste de Sabedoria para resistir à vontade de fugir de você, uma vez que você representa a morte deles. Mortos-vivos e criaturas épicas (Hydra, Medusa, monstros únicos) não são afetadas.",
+      "levels": {
+        "1": "Inimigos devem ter pelo menos 1 sucesso para não fugir.",
+        "2": "Inimigos devem ter pelo menos 2 sucessos para não fugir.",
+        "3": "Inimigos devem ter pelo menos 3 sucessos para não fugir."
+      }
+    },
+    {
+      "name": "Corvos, larvas e gatos pretos",
+      "description": "Você pode se comunicar com as criaturas que têm algum vínculo associado à morte, como corvos, larvas, gatos, urubus. Pode enviar mensagens através deles, fazê-los lutar por você, etc. Custo: 10 de Magia para chamar alguma criatura aleatória.",
+      "levels": {
+        "1": "Pode apenas se comunicar, requerendo um teste para tentar comandar o animal.",
+        "2": "Pode comandar o animal com certa facilidade.",
+        "3": "O animal te obedece sem necessidade de testes."
+      }
+    }
+  ],
+  "Minotauro": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Ciclope": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Harpia": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Sereia": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Górgona": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Centauro": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Ninfa": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Dríade": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Naiade": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Nereida": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Oreade": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Tritão": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
+    }
+  ],
+  "Sátiro": [
+    {
+      "name": "Este grupo ainda n~ao possui poderes criados.",
+      "description": "Porém, se você quiser fazer parte dele, entre em contato comigo que irei criar as habilidades!",
+      "levels": {
+        "1": "",
+        "2": "",
+        "3": ""
+      }
     }
   ]
 }

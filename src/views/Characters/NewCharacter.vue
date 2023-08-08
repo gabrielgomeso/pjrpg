@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
+import * as habilities from "../../../habilities.json";
+import { useCharacterStore } from "@/stores/character";
+
+const characterStore = useCharacterStore();
 
 const character = ref({
   name: "",
@@ -25,6 +29,7 @@ const character = ref({
   items: [],
   advantages: [],
   disadvantages: [],
+  initialPowers: [],
 });
 
 const attributes = ref({
@@ -39,19 +44,20 @@ const attributes = ref({
 const groupList = computed(() => {
   if (character.value.race == "demigod") {
     return [
-      "Filhe de Zeus",
-      "Filhe de Hera",
-      "Filhe de Poseidon",
-      "Filhe de Demeter",
-      "Filhe de Ares",
-      "Filhe de Athena",
-      "Filhe de Apollo",
-      "Filhe de Artemis",
-      "Filhe de Hefesto",
-      "Filhe de Aphrodite",
-      "Filhe de Hermes",
-      "Filhe de Dionysus",
-      "Filhe de Hades",
+      "Zeus",
+      "Hera",
+      "Poseidon",
+      "Demeter",
+      "Ares",
+      "Athena",
+      "Apollo",
+      "Artemis",
+      "Hefesto",
+      "Afrodite",
+      "Hermes",
+      "Dionísio",
+      "Hades",
+      "Thanatos",
     ];
   } else if (character.value.race == "nature-spirit") {
     return [
@@ -801,6 +807,15 @@ const differenceAdvantagePoints = computed(() => {
 
 const advantageKeys = computed(() => Object.keys(advantages));
 const disadvantageKeys = computed(() => Object.keys(disadvantages));
+
+async function handleSubmit() {
+  try {
+    await characterStore.createCharacter(character.value);
+    alert("Personagem criado com sucesso!");
+  } catch (error) {
+    alert("Erro ao criar personagem!");
+  }
+}
 </script>
 
 <template>
@@ -810,7 +825,7 @@ const disadvantageKeys = computed(() => Object.keys(disadvantages));
 
     <hr />
 
-    <form class="new-character__form">
+    <form class="new-character__form" @submit.prevent="handleSubmit()">
       <h2>Informações do personagem</h2>
       <label for="character-name">
         Nome do personagem
@@ -935,7 +950,6 @@ const disadvantageKeys = computed(() => Object.keys(disadvantages));
           name="`character-${attribute}-attribute`"
           type="number"
           min="1"
-          :max="remainingPoints + attributes[attribute]"
         />
       </label>
 
@@ -971,7 +985,8 @@ const disadvantageKeys = computed(() => Object.keys(disadvantages));
                 :name="item.name"
                 v-model="character.items"
                 :disabled="
-                  character.items.length === 3 && !character.items.includes(item)
+                  character.items.length === 3 &&
+                  !character.items.includes(item)
                 "
                 :value="item"
               />
@@ -1044,6 +1059,45 @@ const disadvantageKeys = computed(() => Object.keys(disadvantages));
           </div>
         </details>
       </fieldset>
+
+      <hr />
+
+      <h2>Poderes iniciais ({{ character.group }})</h2>
+      <fieldset>
+        <legend>
+          Você pode selecionar até 2 poderes inicias referentes a sua origem
+          divina.
+        </legend>
+
+        <div class="new-character__form-items-list">
+          <label
+            v-for="(hability, index) in habilities[character.group]"
+            :for="`character-power-${index}`"
+            :key="index"
+            class="checkbox-wrapper"
+          >
+            <input
+              type="checkbox"
+              class="checkbox-input"
+              :name="hability.name"
+              v-model="character.initialPowers"
+              :value="hability"
+              :disabled="
+                character.initialPowers.length === 2 &&
+                !character.initialPowers.includes(hability)
+              "
+            />
+
+            <p class="new-character__form-items-list-item--title">
+              {{ hability.name }}
+            </p>
+            <p>{{ hability.description }}</p>
+            <p>Nível 1: {{ hability.levels["1"] }}</p>
+          </label>
+        </div>
+      </fieldset>
+
+      <button @click="handleSubmit()">Criar personagem</button>
     </form>
   </section>
 </template>
