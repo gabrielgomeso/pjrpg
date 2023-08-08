@@ -66,11 +66,11 @@ export const useCharacterStore = defineStore("character", () => {
     return attributes.value.available > 0;
   }
 
-  async function createCharacter() {
+  async function createCharacter(payload: any) {
     try {
       const { data, error } = await supabase
         .from("characters")
-        .insert({ character_info: character, email: characterEmail.value })
+        .insert({ character_info: payload })
         .single();
 
       if (error) {
