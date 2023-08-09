@@ -1,44 +1,127 @@
-{
-  "items": [
-    {
-      "slug": "spear",
-      "name": "Long Spear",
-      "damageDice": "1d8",
-      "description": "Long spear of wood with a celestial bronze tip",
-      "reach": "Two squares",
-      "image": "https://i.imgur.com/34ozzPT.png"
-    },
-    {
-      "slug": "short-sword",
-      "name": "Short Sword",
-      "damageDice": "1d10",
-      "description": "A short sword with a celestial bronze blade",
-      "reach": "One square",
-      "image": "https://i.imgur.com/cQ1iHHb.png"
-    },
-    {
-      "slug": "short-bow",
-      "name": "Short Bow",
-      "damageDice": "1d8",
-      "description": "A short bow with 20 arrows with celestial bronze tips",
-      "reach": "Ten squares",
-      "image": "https://i.imgur.com/TTNHPuA.png"
-    },
-    {
-      "slug": "wooden-staff",
-      "name": "Wooden Staff",
-      "damageDice": "1d6",
-      "description": "A simple wooden staff with a celestial bronze tip",
-      "reach": "Two squares",
-      "image": "https://i.imgur.com/2xvWCEf.png"
-    },
-    {
-      "slug": "scythe",
-      "name": "Scythe",
-      "damageDice": "1d10",
-      "description": "A scythe with a blade of celestial bronze",
-      "reach": "Two squares",
-      "image": "https://i.imgur.com/2LeoOS5.png"
-    }
-  ]
-}
+[ 
+  {
+    "id": 1,
+    "name": "Espada de bronze celestial",
+    "description":
+      "Uma espada de bronze celestial. É uma arma leve e fácil de manejar, mas não é muito resistente.",
+    "type": "weapon",
+    "damage": "1d8",
+    "damageType": "slashing",
+    "weight": 1,
+    "price": 20,
+    "resistence": 10,
+    "reach": 1
+  },
+  {
+    "id": 2,
+    "name": "Escudo redondo de madeira",
+    "description":
+      "Um escudo redondo de madeira e tiras de metal. É um escudo leve e fácil de manejar, mas não é muito resistente.",
+    "type": "armor",
+    "weight": 1,
+    "price": 4,
+    "resistence": 5,
+    "movimentRestriction": 2
+  },
+  {
+    "id": 3,
+    "name": "Cantil de néctar",
+    "description":
+      "Um cantil de néctar, feito de couro de vaca. É um cantil leve e fácil de manejar, mas não é muito resistente. Contém uma pequena quantia de néctar, que pode ser usado para recuperar energia ou magia.",
+    "type": "item",
+    "effect": "Recupera 1d8 de pontos de magia ou energia.",
+    "weight": 1,
+    "price": 15
+  },
+  {
+    "id": 4,
+    "name": "Fragmentos de ambrosia",
+    "description":
+      "Um pacote de papel pardo com pedaços de ambrosia. Contém uma pequena quantia de ambrosia, que pode ser usado para curar ferimentos leves.",
+    "type": "item",
+    "effect": "Cura 1d8 de pontos de vida. Elimina ferimentos leves.",
+    "weight": 1,
+    "price": 15
+  },
+  {
+    "id": 5,
+    "name": "Arco curto de madeira",
+    "description":
+      "Um arco curto de madeira. É uma arma leve que necessita certo treinamento, não possui tanto poder de força ou alcance. Acompanha aljava com 20 flechas.",
+    "type": "weapon",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": 1,
+    "price": 25,
+    "resistence": 5,
+    "reach": 10
+  },
+  {
+    "id": 7,
+    "name": "Lança de bronze celestial",
+    "description":
+      "Uma lança de bronze celestial. É uma arma longa e que necessita habilidade para manejar.",
+    "type": "weapon",
+    "damage": "1d8",
+    "damageType": "piercing",
+    "weight": 1,
+    "price": 25,
+    "resistence": 5,
+    "reach": 2
+  },
+  {
+    "id": 8,
+    "name": "Adaga de bronze celestial",
+    "description":
+      "Uma adaga de bronze celestial. É uma arma pequena, fácil de manejar e esconder.",
+    "type": "weapon",
+    "damage": "1d4",
+    "damageType": "piercing",
+    "weight": 1,
+    "price": 25,
+    "resistence": 5,
+    "reach": 1
+  },
+  {
+    "id": 9,
+    "name": "Machado de bronze celestial",
+    "description":
+      "Um machado de bronze celestial. É uma arma um pouco mais pesada e serve como ferramenta, mas não é muito resistente.",
+    "type": "weapon",
+    "damage": "1d6",
+    "damageType": "slashing",
+    "weight": 1,
+    "price": 25,
+    "resistence": 5,
+    "reach": 1
+  },
+  {
+    "id": 10,
+    "name": "Armadura acolchoada",
+    "description":
+      "Uma armadura acolchoada. É uma armadura leve de várias camadas de couro e tecido, mas não é muito resistente.",
+    "type": "armor",
+    "weight": 1,
+    "price": 5,
+    "resistence": 5,
+    "movimentRestriction": 1
+  },
+  {
+    "id": 11,
+    "name": "Corda de escalada",
+    "description":
+      "Uma corda de escalada. É uma corda de 15 metros de comprimento, feita de cânhamo trançado.",
+    "type": "item",
+    "weight": 1,
+    "price": 1
+  },
+  {
+    "id": 12,
+    "name": "Instrumento Musical",
+    "description":
+      "Um instrumento musical. É um instrumento de cordas, sopro ou percussão, feito de madeira, metal ou osso.",
+    "type": "item",
+    "weight": 1,
+    "price": 1
+  }
+]
