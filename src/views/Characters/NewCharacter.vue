@@ -117,132 +117,143 @@ async function handleSubmit() {
 
     <form class="new-character__form" @submit.prevent="handleSubmit()">
       <h2>Informações do personagem</h2>
-      <label for="character-name">
-        Nome do personagem
-        <input name="character-name" type="text" v-model="character.name" />
-      </label>
+      <div class="new-character__form-information-grid">
+        <label for="character-name">
+          Nome do personagem
+          <input name="character-name" type="text" v-model="character.name" />
+        </label>
 
-      <label for="character-name">
-        Idade do personagem
-        <span class="new-character__form-label-info">
-          (mínimo 10 anos, máximo 99 anos)
-        </span>
-        <input
-          name="character-age"
-          type="number"
-          min="10"
-          max="99"
-          v-model="character.age"
-        />
-      </label>
+        <label for="character-name">
+          <p>
+            Idade do personagem
+            <span class="new-character__form-label-info">
+              (mínimo 10 anos, máximo 99 anos)
+            </span>
+          </p>
+          <input
+            name="character-age"
+            type="number"
+            min="10"
+            max="99"
+            v-model="character.age"
+          />
+        </label>
 
-      <label for="character-race">
-        Raça do personagem
-        <select v-model="character.race" name="character-race">
-          <option value="demigod" selected>Semideus</option>
-          <option value="nature-spirit">Espírito da Natureza</option>
-          <option value="monster">Monstro</option>
-        </select>
-      </label>
+        <label for="character-race">
+          Raça do personagem
+          <select v-model="character.race" name="character-race">
+            <option value="demigod" selected>Semideus</option>
+            <option value="nature-spirit">Espírito da Natureza</option>
+            <option value="monster">Monstro</option>
+          </select>
+        </label>
 
-      <label for="character-group">
-        Grupo do personagem
-        <select name="character-group" v-model="character.group">
-          <option
-            v-for="(group, index) in groupList"
-            :key="index"
-            :value="group"
-            selected
-          >
-            {{ group }}
-          </option>
-        </select>
-      </label>
+        <label for="character-group">
+          Grupo do personagem
+          <select name="character-group" v-model="character.group">
+            <option
+              v-for="(group, index) in groupList"
+              :key="index"
+              :value="group"
+              selected
+            >
+              {{ group }}
+            </option>
+          </select>
+        </label>
 
-      <label for="character-appearance">
-        Aparência do personagem
-        <span class="new-character__form-label-info">
-          (imagem preferencialmente 200x400, máx 2MB)
-        </span>
-        <input name="character-appearance" type="file" accept="image/*" />
-      </label>
+        <label for="character-appearance">
+          Aparência do personagem
+          <span class="new-character__form-label-info">
+            (imagem preferencialmente 200x400, máx 2MB)
+          </span>
+          <input name="character-appearance" type="file" accept="image/*" />
+        </label>
+      </div>
+
+      <hr />
 
       <h2>Perguntas sobre o personagem</h2>
-      <label for="character-question-hobby">
-        Qual é um interesse ou hobby que o seu personagem tem? Onde e por que
-        ele começou a praticá-lo?
 
-        <textarea
-          v-model="character.questions.hobby"
-          name="character-question-hobby"
-          cols="15"
-          rows="5"
-        ></textarea>
-      </label>
+      <div class="new-character__form-information-grid">
+        <label for="character-question-hobby">
+          Qual é um interesse ou hobby que o seu personagem tem? Onde e por que
+          ele começou a praticá-lo?
 
-      <label for="character-question-secret">
-        Nomeie um segredo que o seu personagem esconde dos outros. Por que ele
-        mantém esse segredo?
+          <textarea
+            v-model="character.questions.hobby"
+            name="character-question-hobby"
+            cols="15"
+            rows="5"
+          ></textarea>
+        </label>
 
-        <textarea
-          v-model="character.questions.secret"
-          name="character-question-secret"
-          cols="15"
-          rows="5"
-        ></textarea>
-      </label>
+        <label for="character-question-secret">
+          Nomeie um segredo que o seu personagem esconde dos outros. Por que ele
+          mantém esse segredo?
 
-      <label for="character-question-fear">
-        Nomeie um medo ou fobia que o seu personagem tem. Como isso afeta ele?
+          <textarea
+            v-model="character.questions.secret"
+            name="character-question-secret"
+            cols="15"
+            rows="5"
+          ></textarea>
+        </label>
 
-        <textarea
-          v-model="character.questions.fear"
-          name="character-question-fear"
-          cols="15"
-          rows="5"
-        ></textarea>
-      </label>
+        <label for="character-question-fear">
+          Nomeie um medo ou fobia que o seu personagem tem. Como isso afeta ele?
 
-      <label for="character-question-family">
-        Nomeie duas pessoas próximas do seu personagem. Por que ele se importa
-        com elas? O que ele faria para protegê-las?
+          <textarea
+            v-model="character.questions.fear"
+            name="character-question-fear"
+            cols="15"
+            rows="5"
+          ></textarea>
+        </label>
 
-        <textarea
-          v-model="character.questions.family"
-          name="character-question-family"
-          cols="15"
-          rows="5"
-        ></textarea>
-      </label>
+        <label for="character-question-family">
+          Nomeie duas pessoas próximas do seu personagem. Por que ele se importa
+          com elas? O que ele faria para protegê-las?
 
-      <label for="character-question-dream">
-        Qual o maior sonho do seu personagem? O que ele faria para realizá-lo?
+          <textarea
+            v-model="character.questions.family"
+            name="character-question-family"
+            cols="15"
+            rows="5"
+          ></textarea>
+        </label>
 
-        <textarea
-          v-model="character.questions.dream"
-          name="character-question-dream"
-          cols="15"
-          rows="5"
-        ></textarea>
-      </label>
+        <label for="character-question-dream">
+          Qual o maior sonho do seu personagem? O que ele faria para realizá-lo?
+
+          <textarea
+            v-model="character.questions.dream"
+            name="character-question-dream"
+            cols="15"
+            rows="5"
+          ></textarea>
+        </label>
+      </div>
       <hr />
 
       <h2>Seleção de atributos</h2>
       <p>Você possui {{ remainingPoints }} ponto para gastar</p>
-      <label
-        v-for="(attribute, index) in Object.keys(character.attributes)"
-        :for="`character-${attribute}-attribute`"
-        :key="index"
-      >
-        {{ attribute }}
-        <input
-          v-model="character.attributes[attribute]"
-          name="`character-${attribute}-attribute`"
-          type="number"
-          min="1"
-        />
-      </label>
 
+      <div class="new-character__form-information-grid">
+        <label
+          v-for="(attribute, index) in Object.keys(character.attributes)"
+          :for="`character-${attribute}-attribute`"
+          :key="index"
+        >
+          {{ attribute }}
+          <input
+            v-model="character.attributes[attribute]"
+            name="`character-${attribute}-attribute`"
+            type="number"
+            min="1"
+          />
+        </label>
+      </div>
       <hr />
 
       <h2>Seleção dos primeiros itens</h2>
@@ -392,18 +403,31 @@ async function handleSubmit() {
   </section>
 </template>
 
-<style lang="scss">
+<style>
 .section-container {
   max-width: 1024px;
   border: 1px solid rgb(80, 80, 80);
   margin: 0 auto;
   padding: 1rem;
+  container-type: inline-size;
 }
 
 .new-character__form,
 .new-character__form label {
   display: flex;
   flex-direction: column;
+}
+
+.new-character__form-information-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@container (width > 768px) {
+  .new-character__form-information-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .new-character__form {
