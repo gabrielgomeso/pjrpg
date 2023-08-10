@@ -106,6 +106,18 @@ async function handleSubmit() {
     alert("Erro ao criar personagem!");
   }
 }
+
+function changeAttributeValue(action: string, attribute: string) {
+  if (action == "increase") {
+    if (remainingPoints.value > 0) {
+      character.value.attributes[attribute] += 1;
+    }
+  } else {
+    if (character.value.attributes[attribute] > 1) {
+      character.value.attributes[attribute] -= 1;
+    }
+  }
+}
 </script>
 
 <template>
@@ -122,6 +134,7 @@ async function handleSubmit() {
           Nome do personagem
           <input
             class="new-character__form-input"
+            placeholder="Percy Jackson da Silva"
             name="character-name"
             type="text"
             v-model="character.name"
@@ -136,6 +149,7 @@ async function handleSubmit() {
             </span>
           </p>
           <input
+            placeholder="12"
             class="new-character__form-input"
             name="character-age"
             type="number"
@@ -201,6 +215,7 @@ async function handleSubmit() {
 
           <textarea
             class="new-character__form-input"
+            placeholder="Marcenaria, começou a praticar quando tinha 10 anos e seu pai o ensinou."
             v-model="character.questions.hobby"
             name="character-question-hobby"
             cols="15"
@@ -213,7 +228,8 @@ async function handleSubmit() {
           mantém esse segredo?
 
           <textarea
-          class="new-character__form-input"
+            class="new-character__form-input"
+            placeholder="Foi expulso de uma escola por ter sido pego roubando. Não sabem, mas ele gosta muito de roubar."
             v-model="character.questions.secret"
             name="character-question-secret"
             cols="15"
@@ -225,7 +241,8 @@ async function handleSubmit() {
           Seu personagem possui um medo ou fobia? Como isso afeta ele?
 
           <textarea
-          class="new-character__form-input"
+            class="new-character__form-input"
+            placeholder="Extremo medo de aranhas. Ele não consegue nem olhar para uma. Fica catatonico."
             v-model="character.questions.fear"
             name="character-question-fear"
             cols="15"
@@ -238,7 +255,8 @@ async function handleSubmit() {
           proteger essa pessoa?
 
           <textarea
-          class="new-character__form-input"
+            class="new-character__form-input"
+            placeholder="Seu pai, que o criou sozinho. Ele faria qualquer coisa para protegê-lo."
             v-model="character.questions.family"
             name="character-question-family"
             cols="15"
@@ -250,7 +268,8 @@ async function handleSubmit() {
           Qual o maior sonho do seu personagem? O que ele faria para realizá-lo?
 
           <textarea
-          class="new-character__form-input"
+            class="new-character__form-input"
+            placeholder="Ser um grande herói e ser reconhecido por isso. Ele faria qualquer coisa para realizar esse sonho."
             v-model="character.questions.dream"
             name="character-question-dream"
             cols="15"
@@ -270,13 +289,29 @@ async function handleSubmit() {
           :key="index"
         >
           {{ attribute.toUpperCase() }}
-          <input
-          class="new-character__form-input"
-            v-model="character.attributes[attribute]"
-            name="`character-${attribute}-attribute`"
-            type="number"
-            min="1"
-          />
+          <div class="new-character__form-attribute-group">
+            <button
+              @click="changeAttributeValue('increase', attribute)"
+              class="new-character__form-attribute-button"
+              type="button"
+            >
+              +
+            </button>
+            <input
+              class="new-character__form-input new-character__form-attribute-input"
+              v-model="character.attributes[attribute]"
+              name="`character-${attribute}-attribute`"
+              type="number"
+              min="1"
+            />
+            <button
+              @click="changeAttributeValue('decrease', attribute)"
+              class="new-character__form-attribute-button"
+              type="button"
+            >
+              -
+            </button>
+          </div>
         </label>
       </div>
       <hr class="section-divider" />
@@ -431,7 +466,7 @@ async function handleSubmit() {
         </div>
       </fieldset>
 
-      <button @click="handleSubmit()">Criar personagem</button>
+      <button @click="handleSubmit()" type="submit">Criar personagem</button>
     </form>
   </section>
 </template>
@@ -499,9 +534,28 @@ async function handleSubmit() {
   border: 2px solid black;
 }
 
-/* .new-character__form-input:focus {
-  outline: 4px solid green;
-} */
+.new-character__form-attribute-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-character__form-attribute-input {
+  text-align: center;
+}
+
+.new-character__form-attribute-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  margin: 0 12px;
+  border: 2px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 24px;
+}
 
 .new-character__form-label-info {
   font-size: 12px;
@@ -514,15 +568,36 @@ async function handleSubmit() {
   gap: 16px;
 }
 
+.new-character__form-items-list-item input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.new-character__form-items-list-item + input:checked label {
+  background-color: red;
+}
+
 .new-character__form-items-list-item {
-  display: block;
-  max-width: 260px;
-  padding: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  background: #fff;
+  box-shadow: 0px 5px 20px 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
 }
 
 .new-character__form-items-list-item--title {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 15px;
+  color: #555;
+  padding: 5px 0px;
+  transition: all 200ms ease-in-out;
 }
 </style>
