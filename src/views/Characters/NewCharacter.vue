@@ -10,9 +10,9 @@ const characterStore = useCharacterStore();
 const character = ref({
   name: "",
   appeareance: "",
-  age: null,
+  age: 10,
   race: "demigod",
-  group: "",
+  group: "Afrodite",
   questions: {
     hobby: "",
     secret: "",
@@ -110,17 +110,22 @@ async function handleSubmit() {
 
 <template>
   <section class="section-container">
-    <h1>Novo personagem</h1>
-    <p>Crie um novo personagem e faça parte do mundo de Percy Jackson!</p>
-
-    <hr />
+    <header class="section-container__header">
+      <h1>Novo personagem</h1>
+      <p>Crie um novo personagem e faça parte do mundo de Percy Jackson!</p>
+    </header>
 
     <form class="new-character__form" @submit.prevent="handleSubmit()">
       <h2>Informações do personagem</h2>
       <div class="new-character__form-information-grid">
         <label for="character-name">
           Nome do personagem
-          <input name="character-name" type="text" v-model="character.name" />
+          <input
+            class="new-character__form-input"
+            name="character-name"
+            type="text"
+            v-model="character.name"
+          />
         </label>
 
         <label for="character-name">
@@ -131,6 +136,7 @@ async function handleSubmit() {
             </span>
           </p>
           <input
+            class="new-character__form-input"
             name="character-age"
             type="number"
             min="10"
@@ -141,7 +147,11 @@ async function handleSubmit() {
 
         <label for="character-race">
           Raça do personagem
-          <select v-model="character.race" name="character-race">
+          <select
+            class="new-character__form-input"
+            v-model="character.race"
+            name="character-race"
+          >
             <option value="demigod" selected>Semideus</option>
             <option value="nature-spirit">Espírito da Natureza</option>
             <option value="monster">Monstro</option>
@@ -150,12 +160,16 @@ async function handleSubmit() {
 
         <label for="character-group">
           Grupo do personagem
-          <select name="character-group" v-model="character.group">
+          <select
+            class="new-character__form-input"
+            name="character-group"
+            v-model="character.group"
+          >
             <option
               v-for="(group, index) in groupList"
               :key="index"
               :value="group"
-              selected
+              :selected="index == 0"
             >
               {{ group }}
             </option>
@@ -167,20 +181,26 @@ async function handleSubmit() {
           <span class="new-character__form-label-info">
             (imagem preferencialmente 200x400, máx 2MB)
           </span>
-          <input name="character-appearance" type="file" accept="image/*" />
+          <input
+            class="new-character__form-input"
+            name="character-appearance"
+            type="file"
+            accept="image/*"
+          />
         </label>
       </div>
 
-      <hr />
+      <hr class="section-divider" />
 
       <h2>Perguntas sobre o personagem</h2>
 
       <div class="new-character__form-information-grid">
         <label for="character-question-hobby">
-          Qual é um interesse ou hobby que o seu personagem tem? Onde e por que
-          ele começou a praticá-lo?
+          Seu personagem tem algum interesse ou hobby? Onde e por que começou a
+          praticá-lo?
 
           <textarea
+            class="new-character__form-input"
             v-model="character.questions.hobby"
             name="character-question-hobby"
             cols="15"
@@ -189,10 +209,11 @@ async function handleSubmit() {
         </label>
 
         <label for="character-question-secret">
-          Nomeie um segredo que o seu personagem esconde dos outros. Por que ele
+          Fale um segredo que o seu personagem esconde dos outros. Por que ele
           mantém esse segredo?
 
           <textarea
+          class="new-character__form-input"
             v-model="character.questions.secret"
             name="character-question-secret"
             cols="15"
@@ -201,9 +222,10 @@ async function handleSubmit() {
         </label>
 
         <label for="character-question-fear">
-          Nomeie um medo ou fobia que o seu personagem tem. Como isso afeta ele?
+          Seu personagem possui um medo ou fobia? Como isso afeta ele?
 
           <textarea
+          class="new-character__form-input"
             v-model="character.questions.fear"
             name="character-question-fear"
             cols="15"
@@ -212,10 +234,11 @@ async function handleSubmit() {
         </label>
 
         <label for="character-question-family">
-          Nomeie duas pessoas próximas do seu personagem. Por que ele se importa
-          com elas? O que ele faria para protegê-las?
+          Fale de alguém que seu personagem se importa. O que ele faria para
+          proteger essa pessoa?
 
           <textarea
+          class="new-character__form-input"
             v-model="character.questions.family"
             name="character-question-family"
             cols="15"
@@ -227,6 +250,7 @@ async function handleSubmit() {
           Qual o maior sonho do seu personagem? O que ele faria para realizá-lo?
 
           <textarea
+          class="new-character__form-input"
             v-model="character.questions.dream"
             name="character-question-dream"
             cols="15"
@@ -234,7 +258,7 @@ async function handleSubmit() {
           ></textarea>
         </label>
       </div>
-      <hr />
+      <hr class="section-divider" />
 
       <h2>Seleção de atributos</h2>
       <p>Você possui {{ remainingPoints }} ponto para gastar</p>
@@ -245,8 +269,9 @@ async function handleSubmit() {
           :for="`character-${attribute}-attribute`"
           :key="index"
         >
-          {{ attribute }}
+          {{ attribute.toUpperCase() }}
           <input
+          class="new-character__form-input"
             v-model="character.attributes[attribute]"
             name="`character-${attribute}-attribute`"
             type="number"
@@ -254,17 +279,17 @@ async function handleSubmit() {
           />
         </label>
       </div>
-      <hr />
+      <hr class="section-divider" />
 
       <h2>Seleção dos primeiros itens</h2>
 
       <fieldset>
-        <legend>
+        <legend class="form__fieldset-legend">
           Você tem direito a 3 itens iniciais. Não precisa se preocupar,
           conseguirá novos ao longo de sua jornada.
         </legend>
 
-        <details>
+        <details class="form__details">
           <summary>Lista de items</summary>
 
           <div class="new-character__form-items-list">
@@ -275,7 +300,7 @@ async function handleSubmit() {
               class="new-character__form-items-list-item"
             >
               <p class="new-character__form-items-list-item--title">
-                {{ item.name }}
+                {{ item.name.toUpperCase() }}
               </p>
               <p v-show="item.description">{{ item.description }}</p>
               <p v-show="item.damage">Dano: {{ item.damage }}</p>
@@ -296,19 +321,23 @@ async function handleSubmit() {
         </details>
       </fieldset>
 
-      <hr />
+      <hr class="section-divider" />
 
       <h2>Seleção das vantagens e desvantagens</h2>
 
       <h3>Vantagens</h3>
       <fieldset>
-        <legend>
+        <legend class="form__fieldset-legend">
           Você selecionou {{ advantagePoints }} pontos de vantagem. Selecione o
           equivalente em desvantagens.
         </legend>
 
-        <details v-for="(advantage, index) in advantageKeys" :key="index">
-          <summary>{{ advantage }}</summary>
+        <details
+          class="form__details"
+          v-for="(advantage, index) in advantageKeys"
+          :key="index"
+        >
+          <summary>{{ advantage.toUpperCase() }}</summary>
           <div class="new-character__form-items-list">
             <label
               v-for="(item, index) in feats.advantages[advantage]"
@@ -332,14 +361,18 @@ async function handleSubmit() {
 
       <h3>Desvantagens</h3>
       <fieldset>
-        <legend>
+        <legend class="form__fieldset-legend">
           Você selecionou {{ disavantagePoints }} pontos de desvantagens.
           Selecione mais {{ differenceAdvantagePoints }} pontos em desvantagens
           para .
         </legend>
 
-        <details v-for="(disadvantage, index) in disadvantageKeys" :key="index">
-          <summary>{{ disadvantage }}</summary>
+        <details
+          class="form__details"
+          v-for="(disadvantage, index) in disadvantageKeys"
+          :key="index"
+        >
+          <summary>{{ disadvantage.toUpperCase() }}</summary>
           <div class="new-character__form-items-list">
             <label
               v-for="(item, index) in feats.disadvantages[disadvantage]"
@@ -361,11 +394,11 @@ async function handleSubmit() {
         </details>
       </fieldset>
 
-      <hr />
+      <hr class="section-divider" />
 
       <h2>Poderes iniciais ({{ character.group }})</h2>
       <fieldset>
-        <legend>
+        <legend class="form__fieldset-legend">
           Você pode selecionar até 2 poderes inicias referentes a sua origem
           divina.
         </legend>
@@ -407,15 +440,30 @@ async function handleSubmit() {
 .section-container {
   max-width: 1024px;
   border: 1px solid rgb(80, 80, 80);
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 1rem;
   container-type: inline-size;
+  background-color: whitesmoke;
 }
 
-.new-character__form,
-.new-character__form label {
-  display: flex;
-  flex-direction: column;
+.section-container__header {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgb(80, 80, 80);
+}
+
+.section-divider {
+  margin: 1rem 0;
+  border: none;
+  border-bottom: 1px solid rgb(80, 80, 80);
+}
+
+.form__fieldset-legend {
+  padding: 0.5rem;
+}
+
+.form__details {
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 .new-character__form-information-grid {
@@ -434,9 +482,26 @@ async function handleSubmit() {
   gap: 16px;
 }
 
+.new-character__form,
 .new-character__form label {
-  font-size: 16px;
+  display: flex;
+  flex-direction: column;
 }
+
+.new-character__form label {
+  font-size: 18px;
+}
+
+.new-character__form-input {
+  padding: 4px;
+  font-size: 18px;
+  line-height: 1.5;
+  border: 2px solid black;
+}
+
+/* .new-character__form-input:focus {
+  outline: 4px solid green;
+} */
 
 .new-character__form-label-info {
   font-size: 12px;
