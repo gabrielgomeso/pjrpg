@@ -118,6 +118,23 @@ function changeAttributeValue(action: string, attribute: string) {
     }
   }
 }
+
+function shouldDisableCheckbox(item) {
+  const selectedCount = character.value.items.length;
+  const maxSelections = 3;
+
+  // If the item is selected, it should remain enabled
+  if (character.value.items.includes(item)) {
+    return false;
+  }
+
+  // If maximum selections are reached, disable unchecked items
+  if (selectedCount == maxSelections) {
+    return true;
+  }
+
+  return false;
+}
 </script>
 
 <template>
@@ -334,23 +351,25 @@ function changeAttributeValue(action: string, attribute: string) {
               :key="index"
               class="new-character__form-items-list-item"
             >
-              <p class="new-character__form-items-list-item--title">
-                {{ item.name.toUpperCase() }}
-              </p>
-              <p v-show="item.description">{{ item.description }}</p>
-              <p v-show="item.damage">Dano: {{ item.damage }}</p>
-              <p v-show="item.resistence">Resistência: {{ item.resistence }}</p>
-              <p v-show="item.effect">Efeito: {{ item.effect }}</p>
               <input
                 type="checkbox"
                 :name="item.name"
                 v-model="character.items"
-                :disabled="
-                  character.items.length === 3 &&
-                  !character.items.includes(item)
-                "
+                class="new-character__form-checkbox"
+                :disabled="shouldDisableCheckbox(item)"
                 :value="item"
               />
+              <div class="new-character__form-checkbox-tile">
+                <p class="new-character__form-items-list-item--title">
+                  {{ item.name.toUpperCase() }}
+                </p>
+                <p v-show="item.description">{{ item.description }}</p>
+                <p v-show="item.damage">Dano: {{ item.damage }}</p>
+                <p v-show="item.resistence">
+                  Resistência: {{ item.resistence }}
+                </p>
+                <p v-show="item.effect">Efeito: {{ item.effect }}</p>
+              </div>
             </label>
           </div>
         </details>
@@ -568,15 +587,20 @@ function changeAttributeValue(action: string, attribute: string) {
   gap: 16px;
 }
 
-.new-character__form-items-list-item input {
+.new-character__form-checkbox {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0;
+  z-index: 999;
 }
 
-.new-character__form-items-list-item + input:checked label {
-  background-color: red;
+.new-character__form-checkbox:checked + .new-character__form-checkbox-tile {
+  background-color: gray;
+}
+
+.new-character__form-checkbox:disabled + .new-character__form-checkbox-tile {
+  background-color: rgb(49, 48, 48);
 }
 
 .new-character__form-items-list-item {
