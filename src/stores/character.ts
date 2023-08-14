@@ -1,70 +1,51 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import type { IAttributes, ICharacterData } from "../data/models";
-import type { Ref } from "vue";
+// import type { IAttributes, ICharacterData } from "../data/models";
+// import type { Ref } from "vue";
 import { supabase } from "@/lib/supabase";
 import { STATUS_MULTIPLIER, HEROIC_MULTIPLIER } from "@/assets/ts/constants";
 
 export const useCharacterStore = defineStore("character", () => {
-  const character_data: Ref<ICharacterData> = ref({
+  const character = ref({
     name: "",
-    age: "",
-    race: "",
-    group: "",
-    level: 1,
-  });
-
-  const character_info: Ref<any> = ref({});
-
-  const attributes: Ref<IAttributes> = ref({
-    strenght: 1,
-    agility: 1,
-    wisdom: 1,
-    intelligence: 1,
-    constitution: 1,
-    charisma: 1,
-    available: 15,
+    appeareance: "",
+    age: 10,
+    race: "demigod",
+    group: "Afrodite",
+    questions: {
+      hobby: "",
+      secret: "",
+      fear: "",
+      family: "",
+      dream: "",
+    },
+    attributes: {
+      força: 1,
+      agilidade: 1,
+      sabedoria: 1,
+      inteligência: 1,
+      constituição: 1,
+      carisma: 1,
+    },
+    items: [],
+    advantages: [],
+    disadvantages: [],
+    initialPowers: [],
+    status: {},
   });
 
   const status = {
-    healthPoints: attributes.value.constitution * STATUS_MULTIPLIER,
+    healthPoints: character.value.attributes.constituição * STATUS_MULTIPLIER,
     energyPoints:
-      (attributes.value.agility + attributes.value.strenght) *
+      (character.value.attributes.agilidade +
+        character.value.attributes.força) *
       STATUS_MULTIPLIER,
     magicPoints:
-      (attributes.value.intelligence + attributes.value.wisdom) *
+      (character.value.attributes.inteligência +
+        character.value.attributes.sabedoria) *
       STATUS_MULTIPLIER,
-    heroicPoints: attributes.value.charisma * HEROIC_MULTIPLIER,
+    heroicPoints: character.value.attributes.carisma * HEROIC_MULTIPLIER,
   };
-
-  const inventory: Ref<any> = ref([]);
-
-  const characterEmail: Ref<string> = ref("");
-
-  const character = {
-    character_data: character_data.value,
-    attributes: attributes.value,
-    status: status,
-    inventory: inventory.value,
-  };
-
-  function increase(attribute: string) {
-    if (hasAvailablePoints()) {
-      attributes.value[attribute] += 1;
-      attributes.value.available -= 1;
-    }
-  }
-
-  function decrease(attribute: string) {
-    if (attributes.value[attribute] > 1) {
-      attributes.value[attribute] -= 1;
-      attributes.value.available += 1;
-    }
-  }
-
-  function hasAvailablePoints() {
-    return attributes.value.available > 0;
-  }
 
   async function createCharacter(payload: any) {
     try {
@@ -109,16 +90,9 @@ export const useCharacterStore = defineStore("character", () => {
   }
 
   return {
-    attributes,
-    character_data,
     status,
-    inventory,
-    characterEmail,
-    character_info,
-    increase,
-    decrease,
     createCharacter,
-    hasAvailablePoints,
     getCharacter,
+    character,
   };
 });
