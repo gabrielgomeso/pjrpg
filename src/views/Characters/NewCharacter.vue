@@ -147,7 +147,7 @@ function shouldDisableCheckbox(item) {
     <form class="new-character__form" @submit.prevent="handleSubmit()">
       <h2>Informações do personagem</h2>
       <div class="new-character__form-information-grid">
-        <label for="character-name">
+        <label class="new-character__form-label" for="character-name">
           Nome do personagem
           <input
             class="new-character__form-input"
@@ -158,7 +158,7 @@ function shouldDisableCheckbox(item) {
           />
         </label>
 
-        <label for="character-name">
+        <label class="new-character__form-label" for="character-name">
           <p>
             Idade do personagem
             <span class="new-character__form-label-info">
@@ -176,7 +176,7 @@ function shouldDisableCheckbox(item) {
           />
         </label>
 
-        <label for="character-race">
+        <label class="new-character__form-label" for="character-race">
           Raça do personagem
           <select
             class="new-character__form-input"
@@ -189,7 +189,7 @@ function shouldDisableCheckbox(item) {
           </select>
         </label>
 
-        <label for="character-group">
+        <label class="new-character__form-label" for="character-group">
           Grupo do personagem
           <select
             class="new-character__form-input"
@@ -207,7 +207,7 @@ function shouldDisableCheckbox(item) {
           </select>
         </label>
 
-        <label for="character-appearance">
+        <label class="new-character__form-label" for="character-appearance">
           Aparência do personagem
           <span class="new-character__form-label-info">
             (imagem preferencialmente 200x400, máx 2MB)
@@ -226,7 +226,7 @@ function shouldDisableCheckbox(item) {
       <h2>Perguntas sobre o personagem</h2>
 
       <div class="new-character__form-information-grid">
-        <label for="character-question-hobby">
+        <label class="new-character__form-label" for="character-question-hobby">
           Seu personagem tem algum interesse ou hobby? Onde e por que começou a
           praticá-lo?
 
@@ -240,7 +240,7 @@ function shouldDisableCheckbox(item) {
           ></textarea>
         </label>
 
-        <label for="character-question-secret">
+        <label class="new-character__form-label" for="character-question-secret">
           Fale um segredo que o seu personagem esconde dos outros. Por que ele
           mantém esse segredo?
 
@@ -254,7 +254,7 @@ function shouldDisableCheckbox(item) {
           ></textarea>
         </label>
 
-        <label for="character-question-fear">
+        <label class="new-character__form-label" for="character-question-fear">
           Seu personagem possui um medo ou fobia? Como isso afeta ele?
 
           <textarea
@@ -267,7 +267,7 @@ function shouldDisableCheckbox(item) {
           ></textarea>
         </label>
 
-        <label for="character-question-family">
+        <label class="new-character__form-label" for="character-question-family">
           Fale de alguém que seu personagem se importa. O que ele faria para
           proteger essa pessoa?
 
@@ -281,7 +281,7 @@ function shouldDisableCheckbox(item) {
           ></textarea>
         </label>
 
-        <label for="character-question-dream">
+        <label class="new-character__form-label" for="character-question-dream">
           Qual o maior sonho do seu personagem? O que ele faria para realizá-lo?
 
           <textarea
@@ -301,6 +301,7 @@ function shouldDisableCheckbox(item) {
 
       <div class="new-character__form-information-grid">
         <label
+        class="new-character__form-label"
           v-for="(attribute, index) in Object.keys(character.attributes)"
           :for="`character-${attribute}-attribute`"
           :key="index"
@@ -342,7 +343,7 @@ function shouldDisableCheckbox(item) {
         </legend>
 
         <details class="form__details">
-          <summary>Lista de items</summary>
+          <summary class="form__summary">Lista de items</summary>
 
           <div class="new-character__form-items-list">
             <label
@@ -397,17 +398,20 @@ function shouldDisableCheckbox(item) {
               v-for="(item, index) in feats.advantages[advantage]"
               :for="`character-advantage-${index}`"
               :key="index"
-              class="checkbox-wrapper"
+              class="new-character__form-items-list-item"
             >
               <input
                 type="checkbox"
-                class="checkbox-input"
+                class="new-character__form-checkbox"
                 :name="item.name"
                 v-model="character.advantages"
                 :value="item"
               />
 
-              {{ item.name }} ({{ item.cost }})
+              <div class="new-character__form-checkbox-tile">
+                {{ item.name }} ({{ item.cost }})
+                <p>{{ item.description }}</p>
+              </div>
             </label>
           </div>
         </details>
@@ -418,7 +422,7 @@ function shouldDisableCheckbox(item) {
         <legend class="form__fieldset-legend">
           Você selecionou {{ disavantagePoints }} pontos de desvantagens.
           Selecione mais {{ differenceAdvantagePoints }} pontos em desvantagens
-          para .
+          para equilibrar seu personagem.
         </legend>
 
         <details
@@ -432,17 +436,19 @@ function shouldDisableCheckbox(item) {
               v-for="(item, index) in feats.disadvantages[disadvantage]"
               :for="`character-disadvantage-${index}`"
               :key="index"
-              class="checkbox-wrapper"
+              class="new-character__form-items-list-item"
             >
               <input
                 type="checkbox"
-                class="checkbox-input"
+                class="new-character__form-checkbox"
                 :name="item.name"
                 v-model="character.disadvantages"
                 :value="item"
               />
-
-              {{ item.name }} ({{ item.cost }})
+              <div class="new-character__form-checkbox-tile">
+                {{ item.name }} ({{ item.cost }})
+                <p>{{ item.description }}</p>
+              </div>
             </label>
           </div>
         </details>
@@ -451,7 +457,7 @@ function shouldDisableCheckbox(item) {
       <hr class="section-divider" />
 
       <h2>Poderes iniciais ({{ character.group }})</h2>
-      <fieldset>
+      <fieldset class="form__details">
         <legend class="form__fieldset-legend">
           Você pode selecionar até 2 poderes inicias referentes a sua origem
           divina.
@@ -459,33 +465,34 @@ function shouldDisableCheckbox(item) {
 
         <div class="new-character__form-items-list">
           <label
-            v-for="(hability, index) in habilities[character.group]"
+            v-for="(ability, index) in habilities[character.group]"
             :for="`character-power-${index}`"
             :key="index"
-            class="checkbox-wrapper"
+            class="new-character__form-items-list-item"
           >
             <input
               type="checkbox"
-              class="checkbox-input"
-              :name="hability.name"
+              class="new-character__form-checkbox"
+              :name="ability.name"
               v-model="character.initialPowers"
-              :value="hability"
+              :value="ability"
               :disabled="
                 character.initialPowers.length === 2 &&
-                !character.initialPowers.includes(hability)
+                !character.initialPowers.includes(ability)
               "
             />
-
-            <p class="new-character__form-items-list-item--title">
-              {{ hability.name }}
-            </p>
-            <p>{{ hability.description }}</p>
-            <p>Nível 1: {{ hability.levels["1"] }}</p>
+            <div class="new-character__form-checkbox-tile">
+              <p class="new-character__form-items-list-item--title">
+                {{ ability.name }}
+              </p>
+              <p>{{ ability.description }}</p>
+              <p>Nível 1: {{ ability.levels["1"] }}</p>
+            </div>
           </label>
         </div>
       </fieldset>
 
-      <button @click="handleSubmit()" type="submit">Criar personagem</button>
+      <button class="new-character__form-attribute-button" type="submit">Concluir</button>
     </form>
   </section>
 </template>
@@ -494,10 +501,16 @@ function shouldDisableCheckbox(item) {
 .section-container {
   max-width: 1024px;
   border: 1px solid rgb(80, 80, 80);
-  margin: 1rem auto;
+  margin: 1rem 1rem;
   padding: 1rem;
   container-type: inline-size;
   background-color: whitesmoke;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    margin: 1rem auto;
+  }
 }
 
 .section-container__header {
@@ -513,10 +526,14 @@ function shouldDisableCheckbox(item) {
 
 .form__fieldset-legend {
   padding: 0.5rem;
+  font-size: 16px;
 }
 
 .form__details {
   padding: 0.5rem;
+}
+
+.form__summary {
   cursor: pointer;
 }
 
@@ -537,7 +554,7 @@ function shouldDisableCheckbox(item) {
 }
 
 .new-character__form,
-.new-character__form label {
+.new-character__form-label {
   display: flex;
   flex-direction: column;
 }
@@ -588,11 +605,8 @@ function shouldDisableCheckbox(item) {
 }
 
 .new-character__form-checkbox {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 999;
+  width: 50px;
+  cursor: pointer;
 }
 
 .new-character__form-checkbox:checked + .new-character__form-checkbox-tile {
@@ -604,18 +618,20 @@ function shouldDisableCheckbox(item) {
 }
 
 .new-character__form-items-list-item {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 14fr;
   width: 100%;
+}
+
+.new-character__form-checkbox-tile {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
-  cursor: pointer;
   border: 2px solid #ddd;
   background: #fff;
   box-shadow: 0px 5px 20px 2px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: all 200ms ease-in-out;
-  border-radius: 5px;
+  padding: 1rem;
 }
 
 .new-character__form-items-list-item--title {
