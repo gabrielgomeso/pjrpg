@@ -568,6 +568,7 @@ function shouldDisableCheckbox(item) {
   font-size: 18px;
   line-height: 1.5;
   border: 2px solid black;
+  width: 100%;
 }
 
 .new-character__form-attribute-group {
