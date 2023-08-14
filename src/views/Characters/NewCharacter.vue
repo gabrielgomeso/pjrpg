@@ -1,38 +1,13 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
 import * as habilities from "../../../habilities.json";
 import * as itemsList from "../../../items.json";
 import * as feats from "../../../feats.json";
 import { useCharacterStore } from "@/stores/character";
 
 const characterStore = useCharacterStore();
-
-const character = ref({
-  name: "",
-  appeareance: "",
-  age: 10,
-  race: "demigod",
-  group: "Afrodite",
-  questions: {
-    hobby: "",
-    secret: "",
-    fear: "",
-    family: "",
-    dream: "",
-  },
-  attributes: {
-    força: 1,
-    agilidade: 1,
-    sabedoria: 1,
-    inteligência: 1,
-    constituição: 1,
-    carisma: 1,
-  },
-  items: [],
-  advantages: [],
-  disadvantages: [],
-  initialPowers: [],
-});
+const { character } = storeToRefs(characterStore);
 
 const groupList = computed(() => {
   if (character.value.race == "demigod") {
@@ -397,6 +372,7 @@ function shouldDisableCheckbox(item) {
           class="form__details"
           v-for="(advantage, index) in advantageKeys"
           :key="index"
+          :close="character.items.length === 3"
         >
           <summary>{{ advantage.toUpperCase() }}</summary>
           <div class="new-character__form-items-list">
