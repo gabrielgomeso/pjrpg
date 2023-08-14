@@ -240,7 +240,10 @@ function shouldDisableCheckbox(item) {
           ></textarea>
         </label>
 
-        <label class="new-character__form-label" for="character-question-secret">
+        <label
+          class="new-character__form-label"
+          for="character-question-secret"
+        >
           Fale um segredo que o seu personagem esconde dos outros. Por que ele
           mantém esse segredo?
 
@@ -267,7 +270,10 @@ function shouldDisableCheckbox(item) {
           ></textarea>
         </label>
 
-        <label class="new-character__form-label" for="character-question-family">
+        <label
+          class="new-character__form-label"
+          for="character-question-family"
+        >
           Fale de alguém que seu personagem se importa. O que ele faria para
           proteger essa pessoa?
 
@@ -301,7 +307,7 @@ function shouldDisableCheckbox(item) {
 
       <div class="new-character__form-information-grid">
         <label
-        class="new-character__form-label"
+          class="new-character__form-label"
           v-for="(attribute, index) in Object.keys(character.attributes)"
           :for="`character-${attribute}-attribute`"
           :key="index"
@@ -492,7 +498,9 @@ function shouldDisableCheckbox(item) {
         </div>
       </fieldset>
 
-      <button class="new-character__form-attribute-button" type="submit">Concluir</button>
+      <button class="new-character__form-attribute-button" type="submit">
+        Concluir
+      </button>
     </form>
   </section>
 </template>
