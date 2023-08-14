@@ -25,7 +25,13 @@ body {
 
 .main-container {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto 50px;
   grid-template-columns: 100%;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    grid-template-rows: 1fr auto;
+  }
 }
 </style>
