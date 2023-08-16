@@ -1,14 +1,16 @@
 # Percy Jackson RPG Tools (WIP)
 
-This is a VueJS 3 application to help me with my Percy Jackson role playing game sessions. If you don't know [who is Percy Jackson](https://en.wikipedia.org/wiki/Percy_Jackson_%26_the_Olympians), you should totally check it out. If you don't know [what is role playing game (RPG)](https://en.wikipedia.org/wiki/Role-playing_game), learn and be welcomed in this infinity-possibilities game style.
+This is a VueJS 3 application to help me with my Percy Jackson role-playing game sessions. If you don't know [who is Percy Jackson](https://en.wikipedia.org/wiki/Percy_Jackson_%26_the_Olympians), you should totally check it out. If you don't know [what is role playing game (RPG)](https://en.wikipedia.org/wiki/Role-playing_game), learn and be welcomed in this infinity-possibilities game style.
 With this app, the people who play the game with me can:
+- Create an account;
 - Create their characters;
-- Check their characters sheet;
-- Roll dice;
-- Buy their characters new items.
+- Check their characters sheet (TO-DO);
+- Roll dice (TO-DO);
+- Buy their characters new items (TO-DO);
+- Claim daily rewards (TO-DO);
+- Put their characters to work in temporary activities like in old browser games (TO-DO).
 
 This project still is a work-in-progress so most of the features above aren't polished or even finished.
-
 
 ## How to run the project
 
