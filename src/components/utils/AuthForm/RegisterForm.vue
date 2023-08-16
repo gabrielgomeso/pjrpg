@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { supabase } from "@/lib/supabase";
-import { useAuthStore } from "@/stores/auth";
-
-const { setUser } = useAuthStore();
 
 const email = ref("");
 const email_confirmation = ref("");
@@ -16,7 +13,6 @@ async function signUp() {
   });
 
   if (data) {
-    setUser(data);
     alert("Confirm your e-mail!");
   } else if (error) {
     alert("There was something wrong, the sign up failed");

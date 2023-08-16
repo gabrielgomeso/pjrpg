@@ -8,16 +8,20 @@ const email = ref("");
 const password = ref("");
 
 async function signIn() {
-  let { data, error } = await supabase.auth.signInWithPassword({
-    email: email.value,
-    password: password.value,
-  });
+  try {
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    });
 
-  if (data) {
-    setUser(data);
-    alert("Login successful");
-  } else if (error) {
-    alert("Login failed");
+    if (data.session) {
+      setUser(data);
+      alert("Login successful");
+    } else if (error) {
+      alert(error);
+    }
+  } catch (error) {
+    alert(error);
   }
 }
 </script>
