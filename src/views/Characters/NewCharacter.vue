@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import * as habilities from "../../../habilities.json";
 import * as itemsList from "../../../items.json";
 import * as feats from "../../../feats.json";
 import { useCharacterStore } from "@/stores/character";
+import { supabase } from "@/lib/supabase";
 
 const characterStore = useCharacterStore();
 const { character } = storeToRefs(characterStore);
@@ -70,12 +71,32 @@ const differenceAdvantagePoints = computed(() => {
   return advantagePoints.value - disavantagePoints.value;
 });
 
+const file = ref(null);
+
+const handleFileInputChange = async (event: any) => {
+  file.value = event.target.files[0];
+  if (!file.value) return;
+};
+
+async function uploadFile(file: any) {
+  try {
+    const { data } = await supabase.storage
+      .from("character-images")
+      .upload(`avatar_${Date.now()}.png`, file);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const advantageKeys = computed(() => Object.keys(feats.advantages));
 const disadvantageKeys = computed(() => Object.keys(feats.disadvantages));
 
 async function handleSubmit() {
   try {
     await characterStore.createCharacter(character.value);
+    await uploadFile(file.value);
+
     alert("Personagem criado com sucesso!");
   } catch (error) {
     alert("Erro ao criar personagem!");
@@ -192,6 +213,7 @@ function shouldDisableCheckbox(item) {
             name="character-appearance"
             type="file"
             accept="image/*"
+            @change="handleFileInputChange"
           />
         </label>
       </div>
