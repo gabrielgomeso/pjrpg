@@ -6,7 +6,9 @@ import * as itemsList from "../../../items.json";
 import * as feats from "../../../feats.json";
 import { useCharacterStore } from "@/stores/character";
 import { supabase } from "@/lib/supabase";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const characterStore = useCharacterStore();
 const { character } = storeToRefs(characterStore);
 
@@ -73,8 +75,10 @@ const differenceAdvantagePoints = computed(() => {
 
 const file = ref(null);
 
-const handleFileInputChange = async (event: any) => {
+const handleFileInputChange = (event: any) => {
   file.value = event.target.files[0];
+  console.log(URL.createObjectURL(file.value));
+  if (file.value) character.value.appeareance = URL.createObjectURL(file.value);
   if (!file.value) return;
 };
 
@@ -92,15 +96,8 @@ async function uploadFile(file: any) {
 const advantageKeys = computed(() => Object.keys(feats.advantages));
 const disadvantageKeys = computed(() => Object.keys(feats.disadvantages));
 
-async function handleSubmit() {
-  try {
-    await characterStore.createCharacter(character.value);
-    await uploadFile(file.value);
-
-    alert("Personagem criado com sucesso!");
-  } catch (error) {
-    alert("Erro ao criar personagem!");
-  }
+function handleSubmit() {
+  router.push({ name: "preview_character" });
 }
 
 function changeAttributeValue(action: string, attribute: string) {
@@ -140,7 +137,7 @@ function shouldDisableCheckbox(item) {
       <p>Crie um novo personagem e faça parte do mundo de Percy Jackson!</p>
     </header>
 
-    <form class="new-character__form" @submit.prevent="handleSubmit()">
+    <form class="new-character__form" @submit.prevent>
       <h2>Informações do personagem</h2>
       <div class="new-character__form-information-grid">
         <label class="new-character__form-label" for="character-name">
@@ -496,7 +493,11 @@ function shouldDisableCheckbox(item) {
         </div>
       </fieldset>
 
-      <button class="new-character__form-attribute-button" type="submit">
+      <button
+        @click="handleSubmit()"
+        class="new-character__form-attribute-button"
+        type="submit"
+      >
         Concluir
       </button>
     </form>
