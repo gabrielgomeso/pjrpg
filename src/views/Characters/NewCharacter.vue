@@ -7,10 +7,12 @@ import * as feats from "../../../feats.json";
 import { useCharacterStore } from "@/stores/character";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "vue-router";
+import { useFilters } from "@/composables/useFilters";
 
+const { statusFilter } = useFilters();
 const router = useRouter();
 const characterStore = useCharacterStore();
-const { character } = storeToRefs(characterStore);
+const { character, status } = storeToRefs(characterStore);
 
 const groupList = computed(() => {
   if (character.value.race == "demigod") {
@@ -26,7 +28,7 @@ const groupList = computed(() => {
       "Hefesto",
       "Afrodite",
       "Hermes",
-      "Dionísio",
+      "Dionisio",
       "Hades",
       "Thanatos",
     ];
@@ -166,6 +168,17 @@ function shouldDisableCheckbox(item) {
             min="10"
             max="99"
             v-model="character.age"
+          />
+        </label>
+
+        <label class="new-character__form-label" for="character-name">
+          <p>Nacionalidade do personagem</p>
+          <input
+            placeholder="Caraguatatuba, Brasil"
+            class="new-character__form-input"
+            name="character-origin"
+            type="text"
+            v-model="character.origin"
           />
         </label>
 
@@ -331,6 +344,21 @@ function shouldDisableCheckbox(item) {
             </button>
           </div>
         </label>
+
+        <div>
+          <h2>
+            Status
+            <span class="new-character__form-label-info">
+              (gerados automaticamente pelos atributos)
+            </span>
+          </h2>
+
+          <div>
+            <p v-for="(item, key) in status" :key="key">
+              {{ statusFilter(key) }}: {{ item }}
+            </p>
+          </div>
+        </div>
       </div>
       <hr class="section-divider" />
 
