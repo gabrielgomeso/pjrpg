@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 // import type { IAttributes, ICharacterData } from "../data/models";
 // import type { Ref } from "vue";
@@ -12,6 +12,7 @@ export const useCharacterStore = defineStore("character", () => {
     age: 10,
     race: "demigod",
     group: "Afrodite",
+    origin: "",
     questions: {
       hobby: "",
       secret: "",
@@ -32,20 +33,23 @@ export const useCharacterStore = defineStore("character", () => {
     disadvantages: [],
     initialPowers: [],
     status: {},
+    level: 1,
   });
 
-  const status = {
-    healthPoints: character.value.attributes.constituição * STATUS_MULTIPLIER,
-    energyPoints:
-      (character.value.attributes.agilidade +
-        character.value.attributes.força) *
-      STATUS_MULTIPLIER,
-    magicPoints:
-      (character.value.attributes.inteligência +
-        character.value.attributes.sabedoria) *
-      STATUS_MULTIPLIER,
-    heroicPoints: character.value.attributes.carisma * HEROIC_MULTIPLIER,
-  };
+  const status = computed(() => {
+    return {
+      healthPoints: character.value.attributes.constituição * STATUS_MULTIPLIER,
+      energyPoints:
+        (character.value.attributes.agilidade +
+          character.value.attributes.força) *
+        STATUS_MULTIPLIER,
+      magicPoints:
+        (character.value.attributes.inteligência +
+          character.value.attributes.sabedoria) *
+        STATUS_MULTIPLIER,
+      heroicPoints: character.value.attributes.carisma * HEROIC_MULTIPLIER,
+    };
+  });
 
   async function createCharacter(payload: any) {
     try {
@@ -90,9 +94,9 @@ export const useCharacterStore = defineStore("character", () => {
   }
 
   return {
-    status,
     createCharacter,
     getCharacter,
     character,
+    status,
   };
 });
