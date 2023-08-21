@@ -57,7 +57,7 @@ const isDemigod = (race: string) => race === "demigod";
     </header>
 
     <div class="preview-character__character-info">
-      <figure class="preview-character__character-info-block">
+      <figure class="preview-character__character-info-block image">
         <img
           v-if="character.appeareance"
           class="preview-character__image"
@@ -68,7 +68,7 @@ const isDemigod = (race: string) => race === "demigod";
         />
       </figure>
 
-      <div class="preview-character__character-info-block">
+      <div class="preview-character__character-info-block info">
         <div
           style="
             display: flex;
@@ -99,7 +99,7 @@ const isDemigod = (race: string) => race === "demigod";
           style="
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-rows: auto;
             gap: 12px;
             margin-top: 14px;
           "
@@ -131,7 +131,7 @@ const isDemigod = (race: string) => race === "demigod";
         </div>
       </div>
 
-      <div class="preview-character__character-info-block">
+      <div class="preview-character__character-info-block attributes">
         <h2>Atributos</h2>
         <span
           v-for="(attribute, key) in character.attributes"
@@ -142,7 +142,7 @@ const isDemigod = (race: string) => race === "demigod";
         </span>
       </div>
 
-      <div class="preview-character__character-info-block">
+      <div class="preview-character__character-info-block others">
         <h2>Status</h2>
         <div class="preview-character__status">
           <span v-for="(points, key) in status" :key="points">
@@ -154,49 +154,53 @@ const isDemigod = (race: string) => race === "demigod";
             </span>
           </span>
         </div>
+
+        <hr class="section-divider" />
+
+        <details>
+          <summary class="preview-character__summary">
+            Vantagens e Desvantagens
+          </summary>
+
+          <h2>Vantagens</h2>
+          <span v-for="(advantage, index) in character.advantages" :key="index">
+            <p>{{ advantage.name }} ({{ advantage.cost }})</p>
+            <p>{{ advantage.description }}</p>
+          </span>
+          <h2>Desvantagens</h2>
+          <span
+            v-for="(disadvantage, index) in character.disadvantages"
+            :key="index"
+          >
+            <p>{{ disadvantage.name }} ({{ disadvantage.cost }})</p>
+            <p>{{ disadvantage.description }}</p>
+          </span>
+        </details>
+
+        <hr class="section-divider" />
+
+        <details>
+          <summary class="preview-character__summary">Poderes divinos</summary>
+          <span
+            v-for="(initialPower, index) in character.initialPowers"
+            :key="index"
+          >
+            <p>{{ initialPower.name }}</p>
+            <p>{{ initialPower.description }}</p>
+          </span>
+        </details>
+
+        <hr class="section-divider" />
+
+        <details>
+          <summary class="preview-character__summary">Inventário</summary>
+          <span v-for="(item, index) in character.items" :key="index">
+            <p>{{ item.name }}</p>
+            <p>{{ item.description }}</p>
+          </span>
+        </details>
       </div>
     </div>
-
-    <details>
-      <summary>Vantagens e Desvantagens</summary>
-
-      <h2>Vantagens</h2>
-      <span v-for="(advantage, index) in character.advantages" :key="index">
-        <p>{{ advantage.name }} ({{ advantage.cost }})</p>
-        <p>{{ advantage.description }}</p>
-      </span>
-      <h2>Desvantagens</h2>
-      <span
-        v-for="(disadvantage, index) in character.disadvantages"
-        :key="index"
-      >
-        <p>{{ disadvantage.name }} ({{ disadvantage.cost }})</p>
-        <p>{{ disadvantage.description }}</p>
-      </span>
-    </details>
-
-    <hr />
-
-    <details>
-      <summary>Poderes divinos</summary>
-      <span
-        v-for="(initialPower, index) in character.initialPowers"
-        :key="index"
-      >
-        <p>{{ initialPower.name }}</p>
-        <p>{{ initialPower.description }}</p>
-      </span>
-    </details>
-
-    <hr />
-
-    <details>
-      <summary>Inventário</summary>
-      <span v-for="(item, index) in character.items" :key="index">
-        <p>{{ item.name }}</p>
-        <p>{{ item.description }}</p>
-      </span>
-    </details>
 
     <div class="preview-character__buttons">
       <button
@@ -228,12 +232,6 @@ const isDemigod = (race: string) => race === "demigod";
   background-color: whitesmoke;
 }
 
-@media (min-width: 768px) {
-  .section-container {
-    margin: 1rem auto;
-  }
-}
-
 .section-container__header {
   margin-bottom: 1rem;
   border-bottom: 1px solid rgb(80, 80, 80);
@@ -246,9 +244,9 @@ const isDemigod = (race: string) => race === "demigod";
 }
 
 .preview-character__character-info {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   border: 1px solid black;
 }
 
@@ -286,5 +284,42 @@ const isDemigod = (race: string) => race === "demigod";
   background-color: lightgray;
   padding: 8px;
   font-size: 1.5em;
+}
+
+.preview-character__summary {
+  font-size: 0.75rem;
+}
+
+.attributes {
+  grid-area: attribute;
+}
+
+.image {
+  grid-area: image;
+}
+
+.others {
+  grid-area: others;
+}
+
+.info {
+  grid-area: info;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    margin: 1rem auto;
+  }
+
+  .preview-character__character-info {
+    display: grid;
+    grid-template-areas:
+      "image info"
+      "attribute info"
+      "attribute others";
+    grid-template-columns: 1fr 5fr;
+    justify-content: space-evenly;
+    border: 1px solid black;
+  }
 }
 </style>
