@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
@@ -44,6 +44,12 @@ function returnToNewCharacter() {
 }
 
 const isDemigod = (race: string) => race === "demigod";
+
+const characterImage = computed(() => {
+  return character.value.appeareance != ""
+    ? character.appeareance.image
+    : "https://i.imgur.com/ctOlkzy.png";
+});
 </script>
 
 <template>
@@ -59,9 +65,8 @@ const isDemigod = (race: string) => race === "demigod";
     <div class="preview-character__character-info">
       <figure class="preview-character__character-info-block image">
         <img
-          v-if="character.appeareance"
           class="preview-character__image"
-          :src="character.appeareance"
+          :src="characterImage"
           alt="Imagem do seu personagem"
           width="200"
           height="400"
@@ -246,13 +251,12 @@ const isDemigod = (race: string) => race === "demigod";
 .preview-character__character-info {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  border: 1px solid black;
+  gap: 0.5rem;
 }
 
 .preview-character__character-info-block {
   width: 100%;
-  padding: 1rem;
+  padding: 0.75rem;
   border: 1px solid black;
 }
 
@@ -319,7 +323,6 @@ const isDemigod = (race: string) => race === "demigod";
       "attribute others";
     grid-template-columns: 1fr 5fr;
     justify-content: space-evenly;
-    border: 1px solid black;
   }
 }
 </style>
