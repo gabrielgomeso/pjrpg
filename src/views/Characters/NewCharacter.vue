@@ -214,10 +214,12 @@ function shouldDisableCheckbox(item) {
         </label>
 
         <label class="new-character__form-label" for="character-appearance">
-          Aparência do personagem
-          <span class="new-character__form-label-info">
-            (imagem preferencialmente 200x400, máx 2MB)
-          </span>
+          <p>
+            Aparência do personagem
+            <span class="new-character__form-label-info">
+              (imagem 200x400, máx 2MB)
+            </span>
+          </p>
           <input
             class="new-character__form-input"
             name="character-appearance"

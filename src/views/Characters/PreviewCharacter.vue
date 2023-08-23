@@ -11,7 +11,7 @@ function capitalize(word: string) {
 }
 
 const router = useRouter();
-const { raceFilter, statusFilter } = useFilters();
+const { statusFilter } = useFilters();
 const characterStore = useCharacterStore();
 const { character, status } = storeToRefs(characterStore);
 
