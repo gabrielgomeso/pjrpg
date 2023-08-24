@@ -22,9 +22,9 @@ const authGuard = (
 ) => {
   const { isLoggedIn } = useAuthStore();
   if (isLoggedIn) {
-    next("/auth/login");
-  } else {
     next();
+  } else {
+    next("/");
   }
 };
 
@@ -106,6 +106,7 @@ const routes = [
   {
     path: "/my-profile",
     name: "profile",
+    beforeEnter: authGuard,
     component: () => import("../views/ProfileView.vue"),
   },
   {
