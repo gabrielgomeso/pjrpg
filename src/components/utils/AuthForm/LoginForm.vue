@@ -15,7 +15,7 @@ async function signIn() {
     });
 
     if (data.session) {
-      setUser(data);
+      setUser(data.user);
       alert("Login successful");
     } else if (error) {
       alert(error);
