@@ -5,6 +5,9 @@ import { storeToRefs } from "pinia";
 import { useCharacterStore } from "@/stores/character";
 import { useFilters } from "@/composables/useFilters";
 import { supabase } from "@/lib/supabase";
+import { useAuthStore } from "@/stores/auth";
+
+const { user } = useAuthStore();
 
 function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.substring(1);
@@ -21,7 +24,7 @@ async function uploadFile(file: any) {
   try {
     const { data } = await supabase.storage
       .from("character-images")
-      .upload(`avatar_${Date.now()}.png`, file);
+      .upload(`${user.id}/avatar_${Date.now()}.png`, file);
     return data;
   } catch (error) {
     console.log(error);
@@ -29,11 +32,13 @@ async function uploadFile(file: any) {
 }
 
 async function handleSubmit() {
+  if (!user) return;
   try {
-    await characterStore.createCharacter(character.value);
+    await characterStore.createCharacter(character.value, user.id);
     await uploadFile(file.value);
 
     alert("Personagem criado com sucesso!");
+    router.push("/my-profile");
   } catch (error) {
     alert("Erro ao criar personagem!");
   }
@@ -47,7 +52,7 @@ const isDemigod = (race: string) => race === "demigod";
 
 const characterImage = computed(() => {
   return character.value.appeareance != ""
-    ? character.appeareance.image
+    ? character.value.appeareance
     : "https://i.imgur.com/ctOlkzy.png";
 });
 </script>
