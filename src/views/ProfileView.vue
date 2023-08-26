@@ -13,7 +13,7 @@ async function getCharacters() {
     console.log(user);
     const { data: character, error } = await supabase
       .from("characters")
-      .select("character_info")
+      .select("id, character_info")
       .eq("user_id", user.id);
     if (error) {
       alert(error.message);
@@ -49,7 +49,9 @@ onMounted(async () => {
         :key="index"
         class="profile-view__create-character-button"
       >
-        {{ character.character_info.name }}
+        <RouterLink :to="`/characters/${character.id}`">
+          {{ character.character_info.name }}
+        </RouterLink>
       </div>
 
       <RouterLink
