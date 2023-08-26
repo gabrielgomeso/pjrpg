@@ -11,7 +11,11 @@ import {
   CharacterOverview,
   CharacterInformation,
 } from "@/views/CharacterCreation";
-import { NewCharacter, PreviewCharacter } from "@/views/Characters";
+import {
+  NewCharacter,
+  PreviewCharacter,
+  CharacterSheet,
+} from "@/views/Characters";
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
@@ -47,6 +51,11 @@ const routes = [
         path: "preview",
         name: "preview_character",
         component: PreviewCharacter,
+      },
+      {
+        path: ":id",
+        name: "character",
+        component: CharacterSheet,
       },
     ],
   },
