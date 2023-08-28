@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useFilters } from "@/composables/useFilters";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth";
@@ -11,6 +11,7 @@ function capitalize(word: string) {
 }
 
 const route = useRoute();
+const router = useRouter();
 const { statusFilter } = useFilters();
 const character = ref<any>([]);
 const characterImage = ref<any>({ publicUrl: "" });
@@ -44,6 +45,20 @@ async function getCharacter() {
     alert("Error while fething data");
     console.error("Unknown problem getting from the db", err);
     return null;
+  }
+}
+
+async function deleteCharacter() {
+  try {
+    const { error } = await supabase
+      .from("characters")
+      .delete()
+      .eq("id", route.params.id);
+
+    router.push("/my-profile");
+    if (error) throw new Error(error.message);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -206,6 +221,8 @@ onMounted(async () => {
           </span>
         </details>
       </div>
+
+      <button @click="deleteCharacter()">Excluir personagem</button>
     </div>
   </section>
 </template>
