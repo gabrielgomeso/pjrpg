@@ -21,10 +21,16 @@ const { character, status } = storeToRefs(characterStore);
 const file = ref(null);
 
 async function uploadFile(file: any) {
+  const characterName = character.value.name
+    .replace(" ", "")
+    .toLowerCase()
+    .split("")
+    .join("");
+  console.log(characterName);
   try {
     const { data } = await supabase.storage
       .from("character-images")
-      .upload(`${user.id}/avatar_${Date.now()}.png`, file);
+      .upload(`${user.id}/avatar_${characterName}.jpg`, file);
     return data;
   } catch (error) {
     console.log(error);
