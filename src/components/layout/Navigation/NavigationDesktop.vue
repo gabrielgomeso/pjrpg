@@ -8,11 +8,11 @@ const { isLoggedIn } = storeToRefs(useAuthStore());
 const { setUser } = useAuthStore();
 
 async function logout() {
-  let { error } = await supabase.auth.signOut();
-  setUser(null);
-
-  if (error) {
-    console.log(error);
+  try {
+    await supabase.auth.signOut();
+    setUser(null);
+  } catch (error) {
+    console.log(error, "error");
   }
 }
 </script>
