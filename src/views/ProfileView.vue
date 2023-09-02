@@ -25,7 +25,7 @@ async function getCharacters() {
     fetchedCharacters.value = character;
     return character;
   } catch (err) {
-    alert("Error while fething data");
+    alert("Error while fething profile characters data");
     console.error("Unknown problem getting from the db", err);
     return null;
   }
