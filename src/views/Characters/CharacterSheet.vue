@@ -21,16 +21,16 @@ async function getCharacter() {
   try {
     const { data: character_data, error } = await supabase
       .from("characters")
-      .select("character_info")
+      .select("character_info, user_id")
       .eq("id", route.params.id);
 
     character.value = character_data[0].character_info;
-    console.log(character.value);
+    const userId = character_data[0].user_id;
 
     const { data } = await supabase.storage
       .from("character-images")
       .getPublicUrl(
-        `${user.id}/avatar_${character.value.name.split("").join("")}.png`
+        `${userId}/avatar_${character.value.name.split("").join("")}.png`
       );
 
     characterImage.value = data;
@@ -42,7 +42,7 @@ async function getCharacter() {
 
     return character_data;
   } catch (err) {
-    alert("Error while fething data");
+    alert("Error while fething the character sheet data");
     console.error("Unknown problem getting from the db", err);
     return null;
   }
