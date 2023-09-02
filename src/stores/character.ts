@@ -51,11 +51,11 @@ export const useCharacterStore = defineStore("character", () => {
     };
   });
 
-  async function createCharacter(payload: any) {
+  async function createCharacter(payload: any, user_id: string) {
     try {
       const { data, error } = await supabase
         .from("characters")
-        .insert({ character_info: payload })
+        .insert({ character_info: payload, user_id })
         .single();
 
       if (error) {
@@ -87,7 +87,7 @@ export const useCharacterStore = defineStore("character", () => {
       }
       return character;
     } catch (err) {
-      alert("Error while fething data");
+      alert("Error while fething character data");
       console.error("Unknown problem getting from the db", err);
       return null;
     }
