@@ -19,16 +19,23 @@ import {
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
-const authGuard = (
+const authGuard = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const { isLoggedIn } = useAuthStore();
-  if (isLoggedIn) {
-    next();
-  } else {
-    next("/");
+  const { getSession, isLoggedIn } = useAuthStore();
+
+  try {
+    await getSession();
+
+    if (isLoggedIn) {
+      next();
+    } else {
+      next("/");
+    }
+  } catch (error) {
+    throw new Error(`There was an error while getting the session: ${error}`);
   }
 };
 
