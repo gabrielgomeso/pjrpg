@@ -16,11 +16,20 @@ export const useAuthStore = defineStore("user", () => {
     }
   }
 
+  async function logout() {
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.log("error while logging out", error);
+    }
+  }
+
   const isLoggedIn = computed(() => user.value !== null);
 
   function setUser(session: any) {
     user.value = session;
   }
 
-  return { user, isLoggedIn, setUser, getSession };
+  return { user, isLoggedIn, setUser, getSession, logout };
 });

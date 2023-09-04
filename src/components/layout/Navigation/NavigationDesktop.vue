@@ -2,17 +2,15 @@
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import { supabase } from "@/lib/supabase";
 
 const { isLoggedIn } = storeToRefs(useAuthStore());
-const { setUser } = useAuthStore();
+const { logout } = useAuthStore();
 
-async function logout() {
+async function handleLogout() {
   try {
-    await supabase.auth.signOut();
-    setUser(null);
+    await logout();
   } catch (error) {
-    console.log(error, "error");
+    console.log("Error while loggin out", error);
   }
 }
 </script>
@@ -31,7 +29,7 @@ async function logout() {
       Meu perfil
     </RouterLink>
     <RouterLink class="navigation-link" to="/about">Sobre</RouterLink>
-    <button v-if="isLoggedIn" @click="logout">Sair</button>
+    <button v-if="isLoggedIn" @click="handleLogout()">Sair</button>
   </nav>
 </template>
 
