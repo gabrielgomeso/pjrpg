@@ -14,6 +14,7 @@ import { TheHeader, TheFooter } from "@/components/layout";
       </RouterView>
     </section>
   </main>
+  <TheFooter />
 </template>
 
 <style>
