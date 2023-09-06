@@ -79,21 +79,9 @@ const file = ref(null);
 
 const handleFileInputChange = (event: any) => {
   file.value = event.target.files[0];
-  console.log(URL.createObjectURL(file.value));
-  if (file.value) character.value.appeareance = URL.createObjectURL(file.value);
+  if (file.value) character.value.appeareance = file.value;
   if (!file.value) return;
 };
-
-async function uploadFile(file: any) {
-  try {
-    const { data } = await supabase.storage
-      .from("character-images")
-      .upload(`avatar_${Date.now()}.png`, file);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 const advantageKeys = computed(() => Object.keys(feats.advantages));
 const disadvantageKeys = computed(() => Object.keys(feats.disadvantages));

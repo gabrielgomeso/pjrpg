@@ -18,9 +18,7 @@ const { statusFilter } = useFilters();
 const characterStore = useCharacterStore();
 const { character, status } = storeToRefs(characterStore);
 
-const file = ref(null);
-
-async function uploadFile(file: any) {
+async function uploadFile() {
   const characterName = character.value.name
     .replace(" ", "")
     .toLowerCase()
@@ -30,7 +28,10 @@ async function uploadFile(file: any) {
   try {
     const { data } = await supabase.storage
       .from("character-images")
-      .upload(`${user.id}/avatar_${characterName}.jpg`, file);
+      .upload(
+        `${user.id}/avatar_${characterName}.jpg`,
+        character.value.appeareance
+      );
     return data;
   } catch (error) {
     console.log(error);
@@ -41,7 +42,7 @@ async function handleSubmit() {
   if (!user) return;
   try {
     await characterStore.createCharacter(character.value, user.id);
-    await uploadFile(file.value);
+    await uploadFile();
 
     alert("Personagem criado com sucesso!");
     router.push("/my-profile");

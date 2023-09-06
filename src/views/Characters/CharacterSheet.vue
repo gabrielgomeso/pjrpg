@@ -27,10 +27,13 @@ async function getCharacter() {
     character.value = character_data[0].character_info;
     const userId = character_data[0].user_id;
 
-    const { data } = await supabase.storage
+    const { data } = supabase.storage
       .from("character-images")
       .getPublicUrl(
-        `${userId}/avatar_${character.value.name.split("").join("")}.png`
+        `${userId}/avatar_${character.value.name
+          .toLowerCase()
+          .split("")
+          .join("")}.jpg`
       );
 
     characterImage.value = data;
@@ -77,7 +80,6 @@ onMounted(async () => {
       </p>
     </header>
 
-    {{ characterImage.publicUrl }}
     <div class="preview-character__character-info">
       <figure class="preview-character__character-info-block image">
         <img
