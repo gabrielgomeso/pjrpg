@@ -12,7 +12,6 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  margin-top: 1rem;
   background-color: var(--vt-c-black-mute);
   min-height: 100px;
 }
