@@ -18,7 +18,6 @@ const authGuard = async (
 
   try {
     await getSession();
-
     if (isLoggedIn) {
       next();
     } else {
@@ -29,10 +28,21 @@ const authGuard = async (
   }
 };
 
+const checkSession = async () => {
+  const { getSession } = useAuthStore();
+
+  try {
+    await getSession();
+  } catch (error) {
+    throw new Error(`There was an error while getting the session: ${error}`);
+  }
+};
+
 const routes = [
   {
     path: "/",
     name: "home",
+    beforeEnter: checkSession,
     component: HomeView,
   },
   {
