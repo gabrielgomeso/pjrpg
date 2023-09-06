@@ -4,17 +4,17 @@ import { TheHeader, TheFooter } from "@/components/layout";
 </script>
 
 <template>
-  <TheHeader />
-  <main class="main-container">
-    <section>
+  <div class="main-container">
+    <TheHeader />
+    <main class="main-content">
       <RouterView v-slot="{ Component }" mode="out-in">
         <transition name="slide">
           <component :is="Component" />
         </transition>
       </RouterView>
-    </section>
-  </main>
-  <TheFooter />
+    </main>
+    <TheFooter />
+  </div>
 </template>
 
 <style>
@@ -25,14 +25,14 @@ body {
 }
 
 .main-container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-rows: 1fr auto 50px;
   grid-template-columns: 100%;
+  height: 100vh;
 }
 
-@media (min-width: 768px) {
-  .main-container {
-    grid-template-rows: 1fr auto;
-  }
+.main-content {
+  flex: 1;
 }
 </style>
