@@ -62,8 +62,6 @@ onMounted(async () => {
       </RouterLink>
     </div>
 
-    <button @click="getCharacters">clica</button>
-
     <!-- <p v-if="isLoading">Loading characters...</p>
     <ul v-else>
       <li v-for="(character, index) in characters" :key="index">
