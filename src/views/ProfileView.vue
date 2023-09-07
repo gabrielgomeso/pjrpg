@@ -58,7 +58,7 @@ onMounted(async () => {
         to="/characters/new"
         class="profile-view__create-character-button"
       >
-        Create new character
+        Criar novo personagem
       </RouterLink>
     </div>
 
