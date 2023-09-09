@@ -18,36 +18,50 @@ function clearDiceTray() {
 </script>
 
 <template>
-  <div class="step-layout">
-    <h1 class="step-title">Roll Dice</h1>
-    <div class="step-content">
-      <div class="roll-dice--dice-tray">
+  <section class="section-container">
+    <header class="section-container__header">
+      <h1>Rolagem de dados</h1>
+    </header>
+    <button
+      class="roll-dice__dice-tray__clear-button"
+      type="button"
+      @click="clearDiceTray()"
+    >
+      Limpar resultados
+    </button>
+    <div class="roll-dice__dice-board">
+      <div class="roll-dice__dice-tray">
+        <span v-if="rolledDice.length === 1">
+          Role os dados para ver os resultados!
+        </span>
         <DieResult
+          v-else
           v-for="(die, index) in rolledDice"
           :die-result="die.result"
           :dice-type="die.type"
           :key="index"
         />
-        <button
-          class="roll-dice--dice-tray__clear-button"
-          type="button"
-          @click="clearDiceTray()"
-        >
-          Clear
-        </button>
       </div>
-      <RollDiceButton
-        v-for="die in diceTypes"
-        :die-sides="die"
-        :key="die"
-        @click="rollDie(die)"
-      />
+
+      <div class="roll-dice__dice-list">
+        <RollDiceButton
+          v-for="die in diceTypes"
+          :die-sides="die"
+          :key="die"
+          @click="rollDie(die)"
+        />
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style>
-.roll-dice--dice-tray {
+.roll-dice__dice-board {
+  display: flex;
+  gap: 1rem;
+}
+
+.roll-dice__dice-tray {
   width: 500px;
   padding: 0.5rem;
   min-height: 400px;
@@ -60,9 +74,19 @@ function clearDiceTray() {
   gap: 10px;
   flex-flow: row wrap;
   align-content: flex-start;
+  overflow: auto;
 }
 
-.roll-dice--dice-tray__clear-button {
+.roll-dice__dice-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 100px;
+}
+
+.roll-dice__dice-tray__clear-button {
   position: absolute;
   bottom: 5px;
   right: 5px;
