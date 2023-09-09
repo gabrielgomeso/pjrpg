@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button type="button">Roll D{{ props.dieSides }}</button>
+  <button type="button">Rolar D{{ props.dieSides }}</button>
 </template>
 
 <style></style>
