@@ -29,13 +29,28 @@ async function handleLogout() {
       Meu perfil
     </RouterLink>
     <RouterLink class="navigation-link" to="/about">Sobre</RouterLink>
-    <button v-if="isLoggedIn" @click="handleLogout()">Sair</button>
+    <button
+      class="navigation-desktop__logout-button"
+      v-if="isLoggedIn"
+      @click="handleLogout()"
+    >
+      Sair
+    </button>
   </nav>
 </template>
 
 <style>
 .navigation-desktop {
   display: none;
+}
+
+.navigation-desktop__logout-button {
+  text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: 1px;
+  padding: 0.25rem;
 }
 
 @media (min-width: 768px) {
