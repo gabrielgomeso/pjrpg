@@ -12,7 +12,7 @@ function capitalize(word: string) {
 
 const route = useRoute();
 const router = useRouter();
-const { statusFilter } = useFilters();
+const { statusFilter, questionsFilter } = useFilters();
 const character = ref<any>([]);
 const characterImage = ref<any>({ publicUrl: "" });
 const isDemigod = (race: string) => race === "demigod";
@@ -117,41 +117,13 @@ onMounted(async () => {
           Origem:
           <span>{{ character.origin }}</span>
         </p>
-        <!-- 
-        <div
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto;
-            gap: 12px;
-            margin-top: 14px;
-          "
-        >
-          <div>
-            <h3>Hobbies</h3>
-            <p>{{ character.questions.hobby }}</p>
-          </div>
 
-          <div>
-            <h3>Maior segredo</h3>
-            <p>{{ character.questions.secret }}</p>
+        <div class="preview-character__character-questions">
+          <div v-for="(question, key) in character.questions" :key="key">
+            <h3>{{ questionsFilter(key.toString()) }}</h3>
+            <p>{{ question }}</p>
           </div>
-
-          <div>
-            <h3>Maior medo</h3>
-            <p>{{ character.questions.fear }}</p>
-          </div>
-
-          <div>
-            <h3>Pessoas próximas</h3>
-            <p>{{ character.questions.family }}</p>
-          </div>
-
-          <div>
-            <h3>Maior sonho</h3>
-            <p>{{ character.questions.dream }}</p>
-          </div>
-        </div> -->
+        </div>
       </div>
 
       <div class="preview-character__character-info-block attributes">
@@ -167,7 +139,7 @@ onMounted(async () => {
 
       <div class="preview-character__character-info-block others">
         <h2>Status</h2>
-        <div class="preview-character__status">
+        <!-- <div class="preview-character__status">
           <span v-for="(points, key) in status" :key="points">
             <div class="preview-character__status-value">
               {{ points }}
@@ -176,7 +148,7 @@ onMounted(async () => {
               {{ statusFilter(key) }}
             </span>
           </span>
-        </div>
+        </div> -->
 
         <hr class="section-divider" />
 
@@ -272,6 +244,14 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+}
+
+.preview-character__character-questions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .preview-character__status {
