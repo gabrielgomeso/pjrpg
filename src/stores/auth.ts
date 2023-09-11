@@ -27,7 +27,24 @@ export const useAuthStore = defineStore("user", () => {
 
       if (data.session) {
         setUser(data.user);
-        alert("Login successful");
+        alert("O login foi um sucesso!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function register(email: string, password: string) {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) throw new Error(error.message);
+
+      if (data) {
+        alert("Verifique seu email para confirmar o cadastro.");
       }
     } catch (error) {
       console.log(error);
@@ -49,5 +66,5 @@ export const useAuthStore = defineStore("user", () => {
     user.value = session;
   }
 
-  return { user, isLoggedIn, setUser, getSession, login, logout };
+  return { user, isLoggedIn, setUser, getSession, login, register, logout };
 });
