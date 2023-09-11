@@ -34,6 +34,7 @@ export const useCharacterStore = defineStore("character", () => {
     initialPowers: [],
     status: {},
     level: 1,
+    experiencePoints: 0,
   });
 
   const status = computed(() => {
