@@ -1,25 +1,14 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth";
 
-const { setUser } = useAuthStore();
+const { login } = useAuthStore();
 const email = ref("");
 const password = ref("");
 
 async function signIn() {
   try {
-    let { data, error } = await supabase.auth.signInWithPassword({
-      email: email.value,
-      password: password.value,
-    });
-
-    if (data.session) {
-      setUser(data.user);
-      alert("Login successful");
-    } else if (error) {
-      alert(error);
-    }
+    await login(email.value, password.value);
   } catch (error) {
     alert(error);
   }
