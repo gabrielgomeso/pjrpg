@@ -1,24 +1,21 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { supabase } from "@/lib/supabase";
+import { useAuthStore } from "@/stores/auth";
 
+const { register } = useAuthStore();
 const email = ref("");
 const email_confirmation = ref("");
 const password = ref("");
 
 async function signUp() {
-  let { data, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-  });
-
-  if (data) {
-    alert("Confirm your e-mail!");
-  } else if (error) {
-    alert("There was something wrong, the sign up failed");
+  try {
+    await register(email.value, password.value);
+  } catch (error) {
+    alert(error);
   }
 }
 </script>
+
 <template>
   <label class="form-label" for="email">
     E-mail:
