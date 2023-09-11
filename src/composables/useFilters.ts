@@ -29,8 +29,27 @@ export function useFilters() {
     }
   };
 
+  const questionsFilter = (question: string) => {
+    switch (question) {
+      case "hobby":
+        return "Hobbies";
+      case "secret":
+        return "Segredos";
+      case "fear":
+        return "Medos";
+      case "family":
+        return "Família e amigos";
+      case "dream":
+        return "Sonhos e objetivos";
+      default:
+        "";
+        break;
+    }
+  };
+
   return {
     raceFilter,
     statusFilter,
+    questionsFilter,
   };
 }
