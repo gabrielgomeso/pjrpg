@@ -16,6 +16,24 @@ export const useAuthStore = defineStore("user", () => {
     }
   }
 
+  async function login(email: string, password: string) {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw new Error(error.message);
+
+      if (data.session) {
+        setUser(data.user);
+        alert("Login successful");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function logout() {
     try {
       await supabase.auth.signOut();
@@ -31,5 +49,5 @@ export const useAuthStore = defineStore("user", () => {
     user.value = session;
   }
 
-  return { user, isLoggedIn, setUser, getSession, logout };
+  return { user, isLoggedIn, setUser, getSession, login, logout };
 });
