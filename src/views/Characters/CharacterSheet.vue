@@ -26,6 +26,7 @@ async function getCharacter() {
 
     character.value = character_data[0].character_info;
     const userId = character_data[0].user_id;
+    console.log(character.value);
 
     const { data } = supabase.storage
       .from("character-images")
@@ -106,6 +107,9 @@ onMounted(async () => {
               <span v-if="isDemigod(character.race)">Filho(a) de</span>
               {{ character.group }}
             </h2>
+            <h3>Nível {{ character.level }}</h3>
+            <p>Pontos de Experiência: {{ character.experiencePoints }}/100</p>
+            <progress max="100" :value="character.experiencePoints"></progress>
           </span>
         </div>
         <p>
