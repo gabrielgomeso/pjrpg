@@ -4,6 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useFilters } from "@/composables/useFilters";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth";
+import { CharacterAvatar } from "@/components/Characters/CharacterSheet";
 
 const { user } = useAuthStore();
 function capitalize(word: string) {
@@ -26,18 +27,11 @@ async function getCharacter() {
 
     character.value = character_data[0].character_info;
     const userId = character_data[0].user_id;
-    console.log(character.value);
 
-    const { data } = supabase.storage
-      .from("character-images")
-      .getPublicUrl(
-        `${userId}/avatar_${character.value.name
-          .toLowerCase()
-          .split("")
-          .join("")}.jpg`
-      );
+    characterImage.value = await getCharacterAvatar(userId);
 
-    characterImage.value = data;
+    console.log(characterImage.value);
+
     if (error) {
       alert(error.message);
       console.error("There was an error inserting", error);
@@ -50,6 +44,40 @@ async function getCharacter() {
     console.error("Unknown problem getting from the db", err);
     return null;
   }
+}
+
+async function getCharacterAvatar(userId: string) {
+  const { data } = await supabase.storage
+    .from("character-images")
+    .list(userId, {
+      limit: 100,
+      offset: 0,
+      sortBy: { column: "name", order: "asc" },
+    });
+
+  if (!data) return "https://i.imgur.com/ctOlkzy.png";
+  const characterImage = data.find((image: any) =>
+    image.name
+      .split(".")
+      .includes(
+        `avatar_${character.value.name.toLowerCase().replace(/\s/g, "")}`
+      )
+  );
+
+  const fullImageName = characterImage
+    ? await getAvatarUrl(userId, characterImage.name)
+    : "https://i.imgur.com/ctOlkzy.png";
+  console.log(fullImageName);
+
+  return fullImageName;
+}
+
+async function getAvatarUrl(userId: string, characterImageName: string) {
+  const { data } = supabase.storage
+    .from("character-images")
+    .getPublicUrl(`${userId}/${characterImageName}`);
+
+  return data.publicUrl;
 }
 
 async function deleteCharacter() {
@@ -74,23 +102,12 @@ onMounted(async () => {
 <template>
   <section class="section-container">
     <header class="section-container__header">
-      <h1>Resumo do novo personagem</h1>
-      <p>
-        Reveja todas as informações do seu novo personagem e prepare-se para a
-        aventura!
-      </p>
+      <h1>Ficha do personagem</h1>
+      <p>Todas as informações do personagem!</p>
     </header>
 
     <div class="preview-character__character-info">
-      <figure class="preview-character__character-info-block image">
-        <img
-          class="preview-character__image"
-          :src="characterImage.publicUrl"
-          alt="Imagem do seu personagem"
-          width="200"
-          height="400"
-        />
-      </figure>
+      <CharacterAvatar :character-avatar-url="characterImage" class="image" />
 
       <div class="preview-character__character-info-block info">
         <div
@@ -236,10 +253,6 @@ onMounted(async () => {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid black;
-}
-
-.preview-character__image {
-  object-fit: cover;
 }
 
 .preview-character__buttons {
