@@ -4,9 +4,12 @@ import { useRoute, useRouter } from "vue-router";
 import { useFilters } from "@/composables/useFilters";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth";
+import { useCharacterStore } from "@/stores/character";
 import { CharacterAvatar } from "@/components/Characters/CharacterSheet";
+import { storeToRefs } from "pinia";
 
 const { user } = useAuthStore();
+const { character, status } = storeToRefs(useCharacterStore());
 function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.substring(1);
 }
@@ -14,7 +17,6 @@ function capitalize(word: string) {
 const route = useRoute();
 const router = useRouter();
 const { statusFilter, questionsFilter } = useFilters();
-const character = ref<any>([]);
 const characterImage = ref<any>({ publicUrl: "" });
 const isDemigod = (race: string) => race === "demigod";
 
@@ -160,7 +162,7 @@ onMounted(async () => {
 
       <div class="preview-character__character-info-block others">
         <h2>Status</h2>
-        <!-- <div class="preview-character__status">
+        <div class="preview-character__status">
           <span v-for="(points, key) in status" :key="points">
             <div class="preview-character__status-value">
               {{ points }}
@@ -169,7 +171,7 @@ onMounted(async () => {
               {{ statusFilter(key) }}
             </span>
           </span>
-        </div> -->
+        </div>
 
         <hr class="section-divider" />
 
