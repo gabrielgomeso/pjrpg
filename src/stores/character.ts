@@ -74,24 +74,64 @@ export const useCharacterStore = defineStore("character", () => {
     }
   }
 
-  async function getCharacter(email: string) {
-    console.log(email);
+  async function getCharacter(characterId: string) {
     try {
-      const { data: character, error } = await supabase
+      const { data: character_data, error } = await supabase
         .from("characters")
-        .select("character_info")
-        .eq("email", email);
+        .select("character_info, user_id")
+        .eq("id", characterId);
+
+      character.value = character_data[0].character_info;
+      const userId = character_data[0].user_id;
+
+      character.value.appeareance = await getCharacterAvatar(userId);
+
       if (error) {
         alert(error.message);
         console.error("There was an error inserting", error);
         return null;
       }
-      return character;
+
+      return character_data;
     } catch (err) {
-      alert("Error while fething character data");
+      alert("Error while fething the character sheet data");
       console.error("Unknown problem getting from the db", err);
       return null;
     }
+  }
+
+  async function getCharacterAvatar(userId: string) {
+    const { data } = await supabase.storage
+      .from("character-images")
+      .list(userId, {
+        limit: 100,
+        offset: 0,
+        sortBy: { column: "name", order: "asc" },
+      });
+
+    if (!data) return "https://i.imgur.com/ctOlkzy.png";
+    const characterImage = data.find((image: any) =>
+      image.name
+        .split(".")
+        .includes(
+          `avatar_${character.value.name.toLowerCase().replace(/\s/g, "")}`
+        )
+    );
+
+    const fullImageName = characterImage
+      ? await getAvatarUrl(userId, characterImage.name)
+      : "https://i.imgur.com/ctOlkzy.png";
+    console.log(fullImageName);
+
+    return fullImageName;
+  }
+
+  async function getAvatarUrl(userId: string, characterImageName: string) {
+    const { data } = supabase.storage
+      .from("character-images")
+      .getPublicUrl(`${userId}/${characterImageName}`);
+
+    return data.publicUrl;
   }
 
   return {
