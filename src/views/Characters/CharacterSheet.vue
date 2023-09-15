@@ -9,6 +9,7 @@ import { CharacterAvatar } from "@/components/Characters/CharacterSheet";
 import { storeToRefs } from "pinia";
 
 const { user } = useAuthStore();
+const { getCharacter } = useCharacterStore();
 const { character, status } = storeToRefs(useCharacterStore());
 function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.substring(1);
@@ -19,68 +20,6 @@ const router = useRouter();
 const { statusFilter, questionsFilter } = useFilters();
 const characterImage = ref<any>({ publicUrl: "" });
 const isDemigod = (race: string) => race === "demigod";
-
-async function getCharacter() {
-  try {
-    const { data: character_data, error } = await supabase
-      .from("characters")
-      .select("character_info, user_id")
-      .eq("id", route.params.id);
-
-    character.value = character_data[0].character_info;
-    const userId = character_data[0].user_id;
-
-    characterImage.value = await getCharacterAvatar(userId);
-
-    console.log(characterImage.value);
-
-    if (error) {
-      alert(error.message);
-      console.error("There was an error inserting", error);
-      return null;
-    }
-
-    return character_data;
-  } catch (err) {
-    alert("Error while fething the character sheet data");
-    console.error("Unknown problem getting from the db", err);
-    return null;
-  }
-}
-
-async function getCharacterAvatar(userId: string) {
-  const { data } = await supabase.storage
-    .from("character-images")
-    .list(userId, {
-      limit: 100,
-      offset: 0,
-      sortBy: { column: "name", order: "asc" },
-    });
-
-  if (!data) return "https://i.imgur.com/ctOlkzy.png";
-  const characterImage = data.find((image: any) =>
-    image.name
-      .split(".")
-      .includes(
-        `avatar_${character.value.name.toLowerCase().replace(/\s/g, "")}`
-      )
-  );
-
-  const fullImageName = characterImage
-    ? await getAvatarUrl(userId, characterImage.name)
-    : "https://i.imgur.com/ctOlkzy.png";
-  console.log(fullImageName);
-
-  return fullImageName;
-}
-
-async function getAvatarUrl(userId: string, characterImageName: string) {
-  const { data } = supabase.storage
-    .from("character-images")
-    .getPublicUrl(`${userId}/${characterImageName}`);
-
-  return data.publicUrl;
-}
 
 async function deleteCharacter() {
   try {
@@ -97,7 +36,7 @@ async function deleteCharacter() {
 }
 
 onMounted(async () => {
-  await getCharacter();
+  await getCharacter(route.params.id as string);
 });
 </script>
 
@@ -109,7 +48,10 @@ onMounted(async () => {
     </header>
 
     <div class="preview-character__character-info">
-      <CharacterAvatar :character-avatar-url="characterImage" class="image" />
+      <CharacterAvatar
+        :character-avatar-url="character.appeareance"
+        class="image"
+      />
 
       <div class="preview-character__character-info-block info">
         <div
