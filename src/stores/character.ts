@@ -74,6 +74,19 @@ export const useCharacterStore = defineStore("character", () => {
     }
   }
 
+  async function deleteCharacter(characterId: string) {
+    try {
+      const { error } = await supabase
+        .from("characters")
+        .delete()
+        .eq("id", characterId);
+
+      if (error) throw new Error(error.message);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function getCharacter(characterId: string) {
     try {
       const { data: character_data, error } = await supabase
@@ -139,5 +152,6 @@ export const useCharacterStore = defineStore("character", () => {
     getCharacter,
     character,
     status,
+    deleteCharacter,
   };
 });
