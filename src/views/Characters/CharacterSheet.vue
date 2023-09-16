@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useFilters } from "@/composables/useFilters";
-import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth";
 import { useCharacterStore } from "@/stores/character";
 import { CharacterAvatar } from "@/components/Characters/CharacterSheet";
 import { storeToRefs } from "pinia";
 
 const { user } = useAuthStore();
-const { getCharacter } = useCharacterStore();
+const { getCharacter, deleteCharacter } = useCharacterStore();
 const { character, status } = storeToRefs(useCharacterStore());
 function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.substring(1);
@@ -18,20 +17,14 @@ function capitalize(word: string) {
 const route = useRoute();
 const router = useRouter();
 const { statusFilter, questionsFilter } = useFilters();
-const characterImage = ref<any>({ publicUrl: "" });
 const isDemigod = (race: string) => race === "demigod";
 
-async function deleteCharacter() {
+async function handleDeleteCharacter() {
   try {
-    const { error } = await supabase
-      .from("characters")
-      .delete()
-      .eq("id", route.params.id);
-
+    await deleteCharacter(route.params.id as string);
     router.push("/my-profile");
-    if (error) throw new Error(error.message);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -161,7 +154,7 @@ onMounted(async () => {
         </details>
       </div>
 
-      <button @click="deleteCharacter()">Excluir personagem</button>
+      <button @click="handleDeleteCharacter()">Excluir personagem</button>
     </div>
   </section>
 </template>
