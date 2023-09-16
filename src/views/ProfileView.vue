@@ -3,25 +3,24 @@ import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { onMounted, ref } from "vue";
 import { supabase } from "@/lib/supabase";
+import { storeToRefs } from "pinia";
 
-const { user } = useAuthStore();
+const { user } = storeToRefs(useAuthStore());
 
 const fetchedCharacters = ref<any>(null);
 
 async function getCharacters() {
   try {
-    console.log(user);
     const { data: character, error } = await supabase
       .from("characters")
       .select("id, character_info")
-      .eq("user_id", user.id);
+      .eq("user_id", user.value.id);
     if (error) {
-      alert(error.message);
+      alert("Erro ao buscar personagens: " + error.message);
       console.error("There was an error inserting", error);
       return null;
     }
 
-    console.log(character);
     fetchedCharacters.value = character;
     return character;
   } catch (err) {
