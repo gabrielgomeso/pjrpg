@@ -62,6 +62,7 @@ const routes = [
       {
         path: ":id",
         name: "character",
+        beforeEnter: checkSession,
         component: CharacterSheet,
       },
     ],
