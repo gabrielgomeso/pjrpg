@@ -35,6 +35,7 @@ export const useCharacterStore = defineStore("character", () => {
     status: {},
     level: 1,
     experiencePoints: 0,
+    userId: "",
   });
 
   const status = computed(() => {
@@ -97,6 +98,7 @@ export const useCharacterStore = defineStore("character", () => {
       character.value = character_data[0].character_info;
       const userId = character_data[0].user_id;
 
+      character.value.userId = userId;
       character.value.appeareance = await getCharacterAvatar(userId);
 
       if (error) {
