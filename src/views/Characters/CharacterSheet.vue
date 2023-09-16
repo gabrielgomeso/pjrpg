@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useFilters } from "@/composables/useFilters";
 import { useAuthStore } from "@/stores/auth";
@@ -7,7 +7,7 @@ import { useCharacterStore } from "@/stores/character";
 import { CharacterAvatar } from "@/components/Characters/CharacterSheet";
 import { storeToRefs } from "pinia";
 
-const { user } = useAuthStore();
+const { user } = storeToRefs(useAuthStore());
 const { getCharacter, deleteCharacter } = useCharacterStore();
 const { character, status } = storeToRefs(useCharacterStore());
 function capitalize(word: string) {
@@ -18,6 +18,10 @@ const route = useRoute();
 const router = useRouter();
 const { statusFilter, questionsFilter } = useFilters();
 const isDemigod = (race: string) => race === "demigod";
+
+const isCharacterOwner = computed(
+  () => user.value.id === character.value.userId
+);
 
 async function handleDeleteCharacter() {
   try {
@@ -154,7 +158,9 @@ onMounted(async () => {
         </details>
       </div>
 
-      <button @click="handleDeleteCharacter()">Excluir personagem</button>
+      <button v-if="isCharacterOwner" @click="handleDeleteCharacter()">
+        Excluir personagem
+      </button>
     </div>
   </section>
 </template>
