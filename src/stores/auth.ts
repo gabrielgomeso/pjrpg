@@ -1,15 +1,22 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { supabase } from "@/lib/supabase";
+import type { IUser } from "@/data/models";
 
 export const useAuthStore = defineStore("user", () => {
-  const user = ref(null);
+  const user = ref<IUser>({
+    id: "",
+    aud: "",
+    role: "",
+    email: "",
+    created_at: "",
+    updated_at: "",
+  });
 
   async function getSession() {
     try {
-      if (user.value !== null) return;
+      if (user.value.id) return;
       const { data } = await supabase.auth.getSession();
-      console.log(data);
       if (data.session != null) setUser(data.session?.user);
     } catch (error) {
       throw new Error(`There was an error: ${error}`);
@@ -60,7 +67,7 @@ export const useAuthStore = defineStore("user", () => {
     }
   }
 
-  const isLoggedIn = computed(() => user.value !== null);
+  const isLoggedIn = computed(() => Boolean(user.value.id));
 
   function setUser(session: any) {
     user.value = session;
