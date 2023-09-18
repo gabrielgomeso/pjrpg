@@ -52,6 +52,7 @@ const routes = [
       {
         path: "new",
         name: "new_character",
+        beforeEnter: authGuard,
         component: NewCharacter,
       },
       {
