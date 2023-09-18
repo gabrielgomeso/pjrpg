@@ -4,20 +4,23 @@ import { useRoute, useRouter } from "vue-router";
 import { useFilters } from "@/composables/useFilters";
 import { useAuthStore } from "@/stores/auth";
 import { useCharacterStore } from "@/stores/character";
-import { CharacterAvatar } from "@/components/Characters/CharacterSheet";
+import {
+  CharacterAvatar,
+  CharacterGeneralInfo,
+} from "@/components/Characters/CharacterSheet";
 import { storeToRefs } from "pinia";
 
 const { user } = storeToRefs(useAuthStore());
 const { getCharacter, deleteCharacter } = useCharacterStore();
 const { character, status } = storeToRefs(useCharacterStore());
+
 function capitalize(word: string) {
   return word.charAt(0).toUpperCase() + word.substring(1);
 }
 
 const route = useRoute();
 const router = useRouter();
-const { statusFilter, questionsFilter } = useFilters();
-const isDemigod = (race: string) => race === "demigod";
+const { statusFilter } = useFilters();
 
 const isCharacterOwner = computed(
   () => user.value.id === character.value.userId
@@ -50,43 +53,17 @@ onMounted(async () => {
         class="image"
       />
 
-      <div class="preview-character__character-info-block info">
-        <div
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-          "
-        >
-          <span>
-            <h2>
-              {{ character.name }},
-              <span v-if="isDemigod(character.race)">Filho(a) de</span>
-              {{ character.group }}
-            </h2>
-            <h3>Nível {{ character.level }}</h3>
-            <p>Pontos de Experiência: {{ character.experiencePoints }}/100</p>
-            <progress max="100" :value="character.experiencePoints"></progress>
-          </span>
-        </div>
-        <p>
-          Idade:
-          <span>{{ character.age }}</span>
-        </p>
-
-        <p>
-          Origem:
-          <span>{{ character.origin }}</span>
-        </p>
-
-        <div class="preview-character__character-questions">
-          <div v-for="(question, key) in character.questions" :key="key">
-            <h3>{{ questionsFilter(key.toString()) }}</h3>
-            <p>{{ question }}</p>
-          </div>
-        </div>
-      </div>
+      <CharacterGeneralInfo
+        class="info"
+        :age="character.age"
+        :name="character.name"
+        :group="character.group"
+        :race="character.race"
+        :level="character.level"
+        :experience-points="character.experiencePoints"
+        :origin="character.origin"
+        :questions="character.questions"
+      />
 
       <div class="preview-character__character-info-block attributes">
         <h2>Atributos</h2>
@@ -102,7 +79,7 @@ onMounted(async () => {
       <div class="preview-character__character-info-block others">
         <h2>Status</h2>
         <div class="preview-character__status">
-          <span v-for="(points, key) in status" :key="points">
+          <span v-for="(points, key) in status" :key="key">
             <div class="preview-character__status-value">
               {{ points }}
             </div>
@@ -120,14 +97,14 @@ onMounted(async () => {
           </summary>
 
           <h2>Vantagens</h2>
-          <span v-for="(advantage, index) in character.advantages" :key="index">
+          <span v-for="advantage in character.advantages" :key="advantage.name">
             <p>{{ advantage.name }} ({{ advantage.cost }})</p>
             <p>{{ advantage.description }}</p>
           </span>
           <h2>Desvantagens</h2>
           <span
-            v-for="(disadvantage, index) in character.disadvantages"
-            :key="index"
+            v-for="disadvantage in character.disadvantages"
+            :key="disadvantage.name"
           >
             <p>{{ disadvantage.name }} ({{ disadvantage.cost }})</p>
             <p>{{ disadvantage.description }}</p>
@@ -139,8 +116,8 @@ onMounted(async () => {
         <details>
           <summary class="preview-character__summary">Poderes divinos</summary>
           <span
-            v-for="(initialPower, index) in character.initialPowers"
-            :key="index"
+            v-for="initialPower in character.initialPowers"
+            :key="initialPower.name"
           >
             <p>{{ initialPower.name }}</p>
             <p>{{ initialPower.description }}</p>
@@ -151,7 +128,7 @@ onMounted(async () => {
 
         <details>
           <summary class="preview-character__summary">Inventário</summary>
-          <span v-for="(item, index) in character.items" :key="index">
+          <span v-for="item in character.items" :key="item.name">
             <p>{{ item.name }}</p>
             <p>{{ item.description }}</p>
           </span>
@@ -204,14 +181,6 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-}
-
-.preview-character__character-questions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  gap: 12px;
-  margin-top: 14px;
 }
 
 .preview-character__status {
