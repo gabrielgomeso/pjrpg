@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-const props = defineProps({
-  characterAvatarUrl: {
-    type: String,
-    required: true,
-  },
-});
+const props = defineProps<{
+  characterAvatarUrl: string;
+}>();
 </script>
 
 <template>
