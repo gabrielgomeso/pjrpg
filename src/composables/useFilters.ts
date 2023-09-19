@@ -47,9 +47,14 @@ export function useFilters() {
     }
   };
 
+  const capitalize = (word: string) => {
+    return word.charAt(0).toUpperCase() + word.substring(1);
+  };
+
   return {
     raceFilter,
     statusFilter,
     questionsFilter,
+    capitalize,
   };
 }
