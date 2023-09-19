@@ -1,9 +1,9 @@
 export interface IAttributes {
-  strenght: number;
-  agility: number;
-  wisdom: number;
-  intelligence: number;
-  constitution: number;
-  charisma: number;
-  available: number;
+  força: number;
+  agilidade: number;
+  sabedoria: number;
+  inteligência: number;
+  constituição: number;
+  carisma: number;
+  available?: number;
 }
