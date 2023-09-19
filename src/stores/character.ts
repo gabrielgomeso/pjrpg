@@ -1,12 +1,11 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-// import type { IAttributes, ICharacterData } from "../data/models";
-// import type { Ref } from "vue";
+import type { ICharacter } from "../data/models";
 import { supabase } from "@/lib/supabase";
 import { STATUS_MULTIPLIER, HEROIC_MULTIPLIER } from "@/assets/ts/constants";
 
 export const useCharacterStore = defineStore("character", () => {
-  const character = ref({
+  const character = ref<ICharacter>({
     name: "",
     appeareance: "",
     age: 10,
@@ -32,7 +31,12 @@ export const useCharacterStore = defineStore("character", () => {
     advantages: [],
     disadvantages: [],
     initialPowers: [],
-    status: {},
+    status: {
+      healthPoints: 0,
+      energyPoints: 0,
+      magicPoints: 0,
+      heroicPoints: 0,
+    },
     level: 1,
     experiencePoints: 0,
     userId: "",
