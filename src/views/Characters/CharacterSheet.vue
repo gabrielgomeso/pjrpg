@@ -7,16 +7,13 @@ import { useCharacterStore } from "@/stores/character";
 import {
   CharacterAvatar,
   CharacterGeneralInfo,
+  CharacterAttributes,
 } from "@/components/Characters/CharacterSheet";
 import { storeToRefs } from "pinia";
 
 const { user } = storeToRefs(useAuthStore());
 const { getCharacter, deleteCharacter } = useCharacterStore();
 const { character, status } = storeToRefs(useCharacterStore());
-
-function capitalize(word: string) {
-  return word.charAt(0).toUpperCase() + word.substring(1);
-}
 
 const route = useRoute();
 const router = useRouter();
@@ -65,16 +62,10 @@ onMounted(async () => {
         :questions="character.questions"
       />
 
-      <div class="preview-character__character-info-block attributes">
-        <h2>Atributos</h2>
-        <span
-          v-for="(attribute, key) in character.attributes"
-          :key="attribute"
-          style="display: flex; flex-direction: column"
-        >
-          {{ capitalize(key) }}: {{ attribute }}
-        </span>
-      </div>
+      <CharacterAttributes
+        :attributes="character.attributes"
+        class="attributes"
+      />
 
       <div class="preview-character__character-info-block others">
         <h2>Status</h2>
