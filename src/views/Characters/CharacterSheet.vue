@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useFilters } from "@/composables/useFilters";
 import { useAuthStore } from "@/stores/auth";
 import { useCharacterStore } from "@/stores/character";
 import {
   CharacterAvatar,
   CharacterGeneralInfo,
   CharacterAttributes,
+  CharacterStatus,
 } from "@/components/Characters/CharacterSheet";
 import { storeToRefs } from "pinia";
 
@@ -17,7 +17,6 @@ const { character, status } = storeToRefs(useCharacterStore());
 
 const route = useRoute();
 const router = useRouter();
-const { statusFilter } = useFilters();
 
 const isCharacterOwner = computed(
   () => user.value.id === character.value.userId
@@ -68,17 +67,7 @@ onMounted(async () => {
       />
 
       <div class="preview-character__character-info-block others">
-        <h2>Status</h2>
-        <div class="preview-character__status">
-          <span v-for="(points, key) in status" :key="key">
-            <div class="preview-character__status-value">
-              {{ points }}
-            </div>
-            <span class="preview-character__status-name">
-              {{ statusFilter(key) }}
-            </span>
-          </span>
-        </div>
+        <CharacterStatus :status="status" />
 
         <hr class="section-divider" />
 
@@ -172,24 +161,6 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-}
-
-.preview-character__status {
-  display: flex;
-  flex-direction: row;
-  margin-top: 8px;
-  text-align: center;
-  gap: 14px;
-}
-
-.preview-character__status-name {
-  margin-bottom: 14px;
-}
-
-.preview-character__status-value {
-  background-color: lightgray;
-  padding: 8px;
-  font-size: 1.5em;
 }
 
 .preview-character__summary {
