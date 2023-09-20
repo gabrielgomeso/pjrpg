@@ -28,6 +28,9 @@ async function handleLogout() {
     <RouterLink v-show="isLoggedIn" class="navigation-link" to="/my-profile">
       Meu perfil
     </RouterLink>
+    <RouterLink class="navigation-link" to="/timeline">
+      Linha do tempo
+    </RouterLink>
     <RouterLink class="navigation-link" to="/about">Sobre</RouterLink>
     <button
       class="navigation-desktop__logout-button"

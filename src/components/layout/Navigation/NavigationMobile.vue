@@ -50,6 +50,13 @@ async function handleLogout() {
       >
         Meu perfil
       </RouterLink>
+      <RouterLink
+        @click="isOpen = !isOpen"
+        class="navigation-link"
+        to="/timeline"
+      >
+        Linha do tempo
+      </RouterLink>
       <RouterLink @click="isOpen = !isOpen" class="navigation-link" to="/about">
         Sobre
       </RouterLink>

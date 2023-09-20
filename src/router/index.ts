@@ -80,6 +80,12 @@ const routes = [
     component: () => import("../views/ProfileView.vue"),
   },
   {
+    path: "/timeline",
+    name: "timeline",
+    beforeEnter: checkSession,
+    component: () => import("../views/TimelineView.vue"),
+  },
+  {
     path: "/about",
     name: "about",
     // route level code-splitting
