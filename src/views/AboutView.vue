@@ -1,6 +1,6 @@
 <template>
   <section class="section-container">
-    <h1>SOBRE ESSE PROJETO</h1>
+    <h1>Sobre este projeto</h1>
     <p>
       Esse é um projeto desenvolvido por um narrador de RPG. Eu queria criar um
       local onde meus jogadores pudessem criar sua ficha e interagir com outros
