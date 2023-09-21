@@ -1,16 +1,5 @@
 <script lang="ts" setup>
-const moments = [
-  {
-    title: "O Ladrão de Raios",
-    date: "2008",
-    description: "O livro um onde tudo começou.",
-  },
-  {
-    title: "O Mar de Monstros",
-    date: "2008",
-    description: "O livro um onde tudo começou.",
-  },
-];
+import * as timeline from "../../timeline.json";
 </script>
 
 <template>
@@ -25,14 +14,14 @@ const moments = [
 
     <div class="timeline">
       <div
-        v-for="(moment, index) in moments"
+        v-for="(moment, index) in timeline['default']"
         :key="moment.title + index"
+        :style="`animation-delay: ${index}; border-color: red;`"
         class="container"
         :class="{
           'right-container': index % 2 === 1,
           'left-container': index % 2 === 0,
         }"
-        :style="`animation-delay: ${index}`"
       >
         <div class="text-box">
           <h2>{{ moment.title }}</h2>
@@ -96,7 +85,7 @@ const moments = [
   }
 }
 
-.container:nth-child(1) {
+/* .container:nth-child(1) {
   animation-delay: 0s;
 }
 
@@ -106,7 +95,7 @@ const moments = [
 
 .container:nth-child(3) {
   animation-delay: 2s;
-}
+} */
 
 .text-box {
   padding: 20px 30px;
