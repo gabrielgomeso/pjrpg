@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import * as timeline from "../../timeline.json";
+import * as timeline from "../../moments.json";
 </script>
 
 <template>
@@ -16,7 +16,6 @@ import * as timeline from "../../timeline.json";
       <div
         v-for="(moment, index) in timeline['default']"
         :key="moment.title + index"
-        :style="`animation-delay: ${index}; border-color: red;`"
         class="container"
         :class="{
           'right-container': index % 2 === 1,
@@ -84,18 +83,6 @@ import * as timeline from "../../timeline.json";
     transform: translateY(0px);
   }
 }
-
-/* .container:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.container:nth-child(2) {
-  animation-delay: 1s;
-}
-
-.container:nth-child(3) {
-  animation-delay: 2s;
-} */
 
 .text-box {
   padding: 20px 30px;
