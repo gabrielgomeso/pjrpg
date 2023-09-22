@@ -3,54 +3,54 @@
     "type": "livro",
     "title": "O Ladrão de Raios",
     "date": "2006",
-    "description": "O livro um onde tudo começou."
+    "description": "Percy Jackson descobre ser um semideus e parte em uma missão para recuperar o raio de Zeus e evitar uma guerra entre deuses."
   },
   {
     "type": "livro",
     "title": "O Mar de Monstros",
     "date": "2007",
-    "description": "O livro um onde tudo começou."
+    "description": "Percy e seus amigos enfrentam perigosas criaturas mitológicas em uma busca pelo Velocino de Ouro, que pode salvar o acampamento Meio-Sangue."
   },
   {
     "type": "livro",
     "title": "A Maldição do Titã",
     "date": "2008",
-    "description": "O livro um onde tudo começou."
+    "description": "Percy se une a seus amigos para impedir os planos malignos de Kronos enquanto lida com traições inesperadas."
   },
   {
     "type": "aventura",
-    "title": "Um problema canino",
+    "title": "O Povo-cão",
     "date": "2008",
-    "description": "Houve um problema na floresta do acampamento."
+    "description": "Diversas criaturas começaram a surgir na floresta do acampamento meio-sangue e um grupo de semideuses foi selecionado para investigar. Descobriram um povo-cão se refugiando e o povo que parecia uma ameaça se tornou um importante aliado."
   },
   {
     "type": "aventura",
     "title": "O Resgate de Dionísio",
     "date": "2008",
-    "description": "O livro um onde tudo começou."
+    "description": "Na tentativa de aumentar os reforços dos deuses do Olimpo, Dionísio buscou a ajuda de deuses menores. Mas o deus do vinho foi sequestrado e um grupo de semideuses foi selecionado para resgatá-lo, descobrindo que a deusa Hécate o tinha aprisionado."
   },
   {
     "type": "aventura",
     "title": "Reforços para a Batalha do Labirinto",
     "date": "2008",
-    "description": "O livro um onde tudo começou."
+    "description": "Após salvar Dionísio, o grupo de semideuses retornou ao acampamento meio-sangue durante a Batalha do Labirinto. Semideuses, sátiros e o povo-cão se uniram para impedir o exército de Cronos a tomar o acampamento."
   },
   {
     "type": "livro",
     "title": "A Batalha do Labirinto",
     "date": "2008",
-    "description": "O livro um onde tudo começou."
+    "description": "Percy explora o Labirinto de Dédalo para evitar a invasão de Cronos, enfrentando armadilhas mortais e segredos sombrios. O labirinto é destruído, mas o exército de Cronos está mais forte do que nunca."
   },
   {
     "type": "aventura",
     "title": "Em busca de aliados",
     "date": "2008",
-    "description": "O livro um onde tudo começou."
+    "description": "O grupo de semideuses, agora chamado de Esquadrão Ômega, vai atrás de Notus, o Vento do Sul, para ajudá-los na luta contra Cronos."
   },
   {
     "type": "livro",
     "title": "O Último Olimpiano",
     "date": "2009",
-    "description": "O livro um onde tudo começou."
+    "description": "Uma guerra épica entre deuses e titãs se desenrola, e Percy lidera os semideuses na batalha final para salvar o Olimpo."
   }
 ]
