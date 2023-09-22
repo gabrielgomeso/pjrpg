@@ -96,6 +96,7 @@ const momentText = (type: string) =>
   color: whitesmoke;
   font-size: 14px;
   z-index: 999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .moment-information__type:hover .moment-information__type-text {
