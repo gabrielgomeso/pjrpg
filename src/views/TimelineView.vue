@@ -35,14 +35,14 @@ import * as timeline from "../../moments.json";
   z-index: 10;
 }
 
-.timeline::after {
+.timeline::before {
   content: "";
   position: absolute;
   width: 6px;
   height: 100%;
   top: 0;
   left: 50%;
-  background-color: rgb(82, 81, 81);
+  background-color: rgb(44, 44, 44);
   animation: moveline 6s linear forwards;
 }
 
