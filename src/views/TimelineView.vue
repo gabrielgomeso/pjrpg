@@ -51,7 +51,7 @@ import * as timeline from "../../moments.json";
     margin: 50px auto;
   }
 
-  .timeline::after {
+  .timeline::before {
     left: 31px;
   }
 }
