@@ -81,13 +81,15 @@ const momentText = (type: string) =>
   cursor: pointer;
   position: relative;
   font-size: 0.75rem;
+  width: 15px;
+  display: block;
 }
 
 .moment-information__type-text {
   display: none;
   position: absolute;
   top: 15px;
-  right: -175px;
+  left: 15px;
   background-color: rgb(82, 81, 81);
   padding: 0.5rem;
   width: 350px;
@@ -128,6 +130,12 @@ const momentText = (type: string) =>
   border-right: 15px solid rgb(82, 81, 81);
 }
 
+@media screen and (max-width: 486px) {
+  .moment-information__type-text {
+    left: -100px;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .timeline-moment {
     width: 100%;
@@ -147,10 +155,6 @@ const momentText = (type: string) =>
     border-left: none;
     left: -15px;
     border-right: 15px solid rgb(82, 81, 81);
-  }
-
-  .moment-information__type-text {
-    left: 0;
   }
 }
 </style>
