@@ -1,25 +1,54 @@
 [
   {
+    "type": "livro",
     "title": "O Ladrão de Raios",
     "date": "2006",
     "description": "O livro um onde tudo começou."
   },
   {
+    "type": "livro",
     "title": "O Mar de Monstros",
     "date": "2007",
     "description": "O livro um onde tudo começou."
   },
   {
+    "type": "livro",
     "title": "A Maldição do Titã",
     "date": "2008",
     "description": "O livro um onde tudo começou."
   },
   {
+    "type": "aventura",
+    "title": "Um problema canino",
+    "date": "2008",
+    "description": "Houve um problema na floresta do acampamento."
+  },
+  {
+    "type": "aventura",
+    "title": "O Resgate de Dionísio",
+    "date": "2008",
+    "description": "O livro um onde tudo começou."
+  },
+  {
+    "type": "aventura",
+    "title": "Reforços para a Batalha do Labirinto",
+    "date": "2008",
+    "description": "O livro um onde tudo começou."
+  },
+  {
+    "type": "livro",
     "title": "A Batalha do Labirinto",
     "date": "2008",
     "description": "O livro um onde tudo começou."
   },
   {
+    "type": "aventura",
+    "title": "Em busca de aliados",
+    "date": "2008",
+    "description": "O livro um onde tudo começou."
+  },
+  {
+    "type": "livro",
     "title": "O Último Olimpiano",
     "date": "2009",
     "description": "O livro um onde tudo começou."
