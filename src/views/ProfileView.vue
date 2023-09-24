@@ -43,15 +43,18 @@ onMounted(async () => {
     <h2>Meus personagens</h2>
 
     <div class="profile-view__character-list">
-      <div
+      <RouterLink
         v-for="(character, index) in fetchedCharacters"
         :key="index"
         class="profile-view__create-character-button"
+        :to="`/characters/${character.id}`"
       >
-        <RouterLink :to="`/characters/${character.id}`">
-          {{ character.character_info.name }}
-        </RouterLink>
-      </div>
+        <p>
+          {{ character.character_info.name }},
+          {{ character.character_info.group }}
+        </p>
+        <p>Nível: {{ character.character_info.level }}</p>
+      </RouterLink>
 
       <RouterLink
         to="/characters/new"
@@ -78,9 +81,6 @@ onMounted(async () => {
 }
 
 .profile-view__create-character-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -88,11 +88,13 @@ onMounted(async () => {
   width: 250px;
   height: 350px;
   background-color: rgb(182, 182, 182);
-  transition: transform 0.4s ease-in-out;
+  transition-property: transform, box-shadow;
+  transition: 0.4s ease-in-out;
   padding: 8px;
 }
 
 .profile-view__create-character-button:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 </style>
