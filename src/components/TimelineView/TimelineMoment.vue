@@ -73,7 +73,7 @@ const momentText = (type: string) =>
   position: relative;
   border-radius: 6px;
   border: 1px solid rgb(82, 81, 81);
-
+  transition: box-shadow 0.3s ease-in-out;
   font-size: 15px;
 }
 
@@ -96,6 +96,10 @@ const momentText = (type: string) =>
   color: whitesmoke;
   font-size: 14px;
   z-index: 999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.moment-information:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
