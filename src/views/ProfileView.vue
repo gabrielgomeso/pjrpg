@@ -1,36 +1,22 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useCharacterStore } from "@/stores/character";
 import { onMounted, ref } from "vue";
-import { supabase } from "@/lib/supabase";
 import { storeToRefs } from "pinia";
+import { useFilters } from "@/composables/useFilters";
 
 const { user } = storeToRefs(useAuthStore());
-
+const { getAllCharactersFromUser } = useCharacterStore();
+const { raceFilter } = useFilters();
 const fetchedCharacters = ref<any>(null);
 
-async function getCharacters() {
-  try {
-    const { data: character, error } = await supabase
-      .from("characters")
-      .select("id, character_info")
-      .eq("user_id", user.value.id);
-    if (error) {
-      alert("Erro ao buscar personagens: " + error.message);
-      console.error("There was an error inserting", error);
-      return null;
-    }
-
-    fetchedCharacters.value = character;
-    return character;
-  } catch (err) {
-    alert("Error while fething profile characters data");
-    console.error("Unknown problem getting from the db", err);
-    return null;
-  }
-}
 onMounted(async () => {
-  await getCharacters();
+  try {
+    fetchedCharacters.value = await getAllCharactersFromUser(user.value.id);
+  } catch {
+    console.log("Erro ao buscar personagens");
+  }
 });
 </script>
 
@@ -49,11 +35,18 @@ onMounted(async () => {
         class="profile-view__create-character-button"
         :to="`/characters/${character.id}`"
       >
+        <p style="font-weight: 800">
+          {{ character.character_info.name }}
+        </p>
         <p>
-          {{ character.character_info.name }},
+          {{ raceFilter(character.character_info.race) }},
           {{ character.character_info.group }}
         </p>
+
         <p>Nível: {{ character.character_info.level }}</p>
+        <p>Experiência: {{ character.character_info.experiencePoints }}/100</p>
+        <p>Origem: {{ character.character_info.origin }}</p>
+        <p>Idade: {{ character.character_info.age }}</p>
       </RouterLink>
 
       <RouterLink
@@ -63,13 +56,6 @@ onMounted(async () => {
         Criar novo personagem
       </RouterLink>
     </div>
-
-    <!-- <p v-if="isLoading">Loading characters...</p>
-    <ul v-else>
-      <li v-for="(character, index) in characters" :key="index">
-        {{ character.character_info.character_data.name }}
-      </li>
-    </ul> -->
   </section>
 </template>
 
@@ -82,11 +68,9 @@ onMounted(async () => {
 
 .profile-view__create-character-button {
   text-decoration: none;
-  text-transform: uppercase;
   font-weight: bold;
   color: var(--vt-c-white);
-  width: 250px;
-  height: 350px;
+  width: 300px;
   background-color: rgb(182, 182, 182);
   transition-property: transform, box-shadow;
   transition: 0.4s ease-in-out;
