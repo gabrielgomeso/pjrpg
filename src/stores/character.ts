@@ -119,6 +119,26 @@ export const useCharacterStore = defineStore("character", () => {
     }
   }
 
+  async function getAllCharactersFromUser(userId: string) {
+    try {
+      const { data: characters, error } = await supabase
+        .from("characters")
+        .select("id, character_info")
+        .eq("user_id", userId);
+      if (error) {
+        alert("Erro ao buscar personagens: " + error.message);
+        console.error("There was an error inserting", error);
+        return null;
+      }
+
+      return characters;
+    } catch (err) {
+      alert("Error while fething profile characters data");
+      console.error("Unknown problem getting from the db", err);
+      return null;
+    }
+  }
+
   async function getCharacterAvatar(userId: string) {
     const { data } = await supabase.storage
       .from("character-images")
@@ -156,6 +176,7 @@ export const useCharacterStore = defineStore("character", () => {
   return {
     createCharacter,
     getCharacter,
+    getAllCharactersFromUser,
     character,
     status,
     deleteCharacter,
