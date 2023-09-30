@@ -27,7 +27,7 @@ async function signIn() {
     />
   </label>
   <label class="form-label" for="password">
-    <span class="form-label__text"> Password: </span>
+    <span class="form-label__text"> Senha: </span>
 
     <input
       class="form-input"

@@ -18,7 +18,7 @@ async function signUp() {
 
 <template>
   <label class="form-label" for="email">
-    <span class="form-label__text"> E-mai: </span>
+    <span class="form-label__text"> E-mail: </span>
     <input
       class="form-input"
       v-model="email"
