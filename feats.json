@@ -401,11 +401,6 @@
         "name": "Anêmico",
         "cost": 2,
         "description": "Personagens anêmicos têm uma contagem baixa de glóbulos vermelhos, o que pode levar à fadiga, tontura e falta de resistência física."
-      },
-      {
-        "name": "Vitiligo",
-        "cost": 2,
-        "description": "Personagens com vitiligo têm perda de coloração da pele. Devido ao preconceito no mundo, eles enfrentam desafios sociais e precisam ter o dobro de sucesso em testes de Carisma."
       }
     ],
     "mitologicas": [
