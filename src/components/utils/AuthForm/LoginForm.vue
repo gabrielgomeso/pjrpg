@@ -17,7 +17,7 @@ async function signIn() {
 
 <template>
   <label class="form-label" for="email">
-    E-mail:
+    <span class="form-label__text"> E-mail: </span>
     <input
       class="form-input"
       v-model="email"
@@ -27,7 +27,8 @@ async function signIn() {
     />
   </label>
   <label class="form-label" for="password">
-    Password:
+    <span class="form-label__text"> Password: </span>
+
     <input
       class="form-input"
       v-model="password"
@@ -38,3 +39,9 @@ async function signIn() {
   </label>
   <button class="form-button" type="button" @click="signIn">Login</button>
 </template>
+
+<style>
+.form-label__text {
+  color: white;
+}
+</style>

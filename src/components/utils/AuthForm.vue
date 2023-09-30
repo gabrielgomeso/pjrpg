@@ -13,7 +13,7 @@ const toggleAuthForm = ref(true);
         class="auth-form__header-button"
         :class="{ 'auth-form__header--selected': toggleAuthForm }"
       >
-        Login
+        Entrar
       </button>
       <button
         @click="toggleAuthForm = !toggleAuthForm"
@@ -21,7 +21,7 @@ const toggleAuthForm = ref(true);
         class="auth-form__header-button"
         :class="{ 'auth-form__header--selected': !toggleAuthForm }"
       >
-        Register
+        Registrar
       </button>
     </div>
     <div v-if="toggleAuthForm" class="auth-form__body">
