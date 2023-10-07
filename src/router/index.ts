@@ -6,6 +6,7 @@ import {
   PreviewCharacter,
   CharacterSheet,
 } from "@/views/Characters";
+import { AdminView } from "@/views/Admin";
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
@@ -84,6 +85,24 @@ const routes = [
     name: "timeline",
     beforeEnter: checkSession,
     component: () => import("../views/TimelineView.vue"),
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    beforeEnter: checkSession,
+    children: [
+      {
+        path: "",
+        name: "admin",
+        component: AdminView,
+      },
+      {
+        path: "characters_panel",
+        name: "characters_panel",
+        component: () =>
+          import("../views/Admin/Characters/CharactersPanel.vue"),
+      },
+    ],
   },
   {
     path: "/about",
