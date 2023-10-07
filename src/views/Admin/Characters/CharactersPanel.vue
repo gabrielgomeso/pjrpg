@@ -1,3 +1,19 @@
+<script lang="ts" setup>
+import { onMounted, ref } from "vue";
+import { useCharacterStore } from "@/stores/character";
+import { storeToRefs } from "pinia";
+const { getAllCharacters } = useCharacterStore();
+
+const characterList = ref([]);
+
+onMounted(async () => {
+  try {
+    characterList.value = await getAllCharacters();
+  } catch (err) {
+    console.error(err);
+  }
+});
+</script>
 <template>
   <section class="section-container">
     <header class="section-container__header">
@@ -13,11 +29,24 @@
             <th>Raça</th>
             <th>Nível</th>
             <th>Experiência</th>
-            <th>Origem</th>
-            <th>Idade</th>
             <th>Ações</th>
           </tr>
         </thead>
+        <tbody>
+          <tr v-for="character in characterList" :key="character.id">
+            <td>{{ character.character_info.name }}</td>
+            <td>{{ character.character_info.group }}</td>
+            <td>{{ character.character_info.race }}</td>
+            <td>{{ character.character_info.level }}</td>
+            <td>{{ character.character_info.experiencePoints }}</td>
+            <td>
+              <button>Editar</button>
+              <button>Excluir</button>
+              <button>Subir de nível</button>
+              <button>Dar item</button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </section>
@@ -40,6 +69,10 @@
 
 .characters-panel__characters-list table {
   border: 1px solid black;
+}
+
+.characters-panel__characters-list table td {
+  padding: 4px;
 }
 
 @media (min-width: 768px) {
