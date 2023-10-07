@@ -173,10 +173,30 @@ export const useCharacterStore = defineStore("character", () => {
     return data.publicUrl;
   }
 
+  async function getAllCharacters() {
+    try {
+      const { data: characters, error } = await supabase
+        .from("characters")
+        .select("id, character_info");
+      if (error) {
+        alert("Erro ao buscar personagens: " + error.message);
+        console.error("There was an error inserting", error);
+        return null;
+      }
+
+      return characters;
+    } catch (err) {
+      alert("Error while fething profile characters data");
+      console.error("Unknown problem getting from the db", err);
+      return null;
+    }
+  }
+
   return {
     createCharacter,
     getCharacter,
     getAllCharactersFromUser,
+    getAllCharacters,
     character,
     status,
     deleteCharacter,
