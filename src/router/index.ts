@@ -6,20 +6,23 @@ import {
   PreviewCharacter,
   CharacterSheet,
 } from "@/views/Characters";
+import { ForumView } from "@/views/Forum";
 import { AdminView } from "@/views/Admin";
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from 'pinia';
 
 const authGuard = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const { getSession, isLoggedIn } = useAuthStore();
+  const { getSession } = useAuthStore();
+  const { isLoggedIn } = storeToRefs(useAuthStore());
 
   try {
     await getSession();
-    if (isLoggedIn) {
+    if (isLoggedIn.value) {
       next();
     } else {
       next("/");
@@ -35,7 +38,7 @@ const checkSession = async () => {
   try {
     await getSession();
   } catch (error) {
-    throw new Error(`There was an error while getting the session: ${error}`);
+    throw new Error(`There was an error while checking the session: ${error}`);
   }
 };
 
@@ -101,6 +104,17 @@ const routes = [
         name: "characters_panel",
         component: () =>
           import("../views/Admin/Characters/CharactersPanel.vue"),
+      },
+    ],
+  },
+  {
+    path: "/forum",
+    name: "forum",
+    children: [
+      {
+        path: "",
+        name: "forum",
+        component: ForumView,
       },
     ],
   },
