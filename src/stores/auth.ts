@@ -2,24 +2,49 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { supabase } from "@/lib/supabase";
 import type { IUser } from "@/data/models";
+import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore("user", () => {
+  const router = useRouter();
+
   const user = ref<IUser>({
     id: "",
-    aud: "",
-    role: "",
-    email: "",
     created_at: "",
-    updated_at: "",
+    email: "",
+    username: "",
+    role: "user",
   });
 
   async function getSession() {
     try {
       if (user.value.id) return;
       const { data } = await supabase.auth.getSession();
-      if (data.session != null) setUser(data.session?.user);
+
+      if (data.session?.user.email && data.session?.user.email) {
+        const fetchedUser = await getUser(data.session?.user.email);
+        if (fetchedUser) {
+          user.value = fetchedUser;
+        }
+      }
     } catch (error) {
       throw new Error(`There was an error: ${error}`);
+    }
+  }
+
+  async function getUser(email: string) {
+    try {
+      const { data: users, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("email", email);
+
+      if (users) {
+        return users[0];
+      }
+
+      if (error) throw new Error(error.message);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -30,12 +55,14 @@ export const useAuthStore = defineStore("user", () => {
         password,
       });
 
-      if (error) throw new Error(error.message);
-
-      if (data.session) {
-        setUser(data.user);
-        alert("O login foi um sucesso!");
+      if (data.user && data.user.email) {
+        const fetchedUser = await getUser(data.user.email);
+        if (fetchedUser) {
+          user.value = fetchedUser;
+        }
       }
+
+      if (error) throw new Error(error.message);
     } catch (error) {
       console.log(error);
     }
@@ -61,17 +88,32 @@ export const useAuthStore = defineStore("user", () => {
   async function logout() {
     try {
       await supabase.auth.signOut();
-      setUser(null);
+
+      console.log('logout');
+
+      user.value = {
+        id: "",
+        created_at: "",
+        email: "",
+        username: "",
+        role: "user",
+      };
+
+      router.push("/");
     } catch (error) {
       console.log("error while logging out", error);
     }
   }
 
-  const isLoggedIn = computed(() => Boolean(user.value.id));
+  const isLoggedIn = computed(() => user.value.id);
 
-  function setUser(session: any) {
-    user.value = session;
-  }
-
-  return { user, isLoggedIn, setUser, getSession, login, register, logout };
+  return {
+    user,
+    getUser,
+    getSession,
+    login,
+    register,
+    logout,
+    isLoggedIn,
+  };
 });
