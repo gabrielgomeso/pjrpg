@@ -1,27 +1,9 @@
 <script setup lang="ts">
-import { reactive, onMounted } from "vue";
 import { useAuth } from "../composables/useAuth";
 import AuthForm from "../components/utils/AuthForm.vue";
 import WelcomeDisplay from "../components/HomeView/WelcomeDisplay.vue";
 
-const { isLoggedIn, user, setUser, supabase, router } = useAuth();
-
-const state = reactive({
-  loading: false,
-});
-
-onMounted(() => {
-  supabase.auth.onAuthStateChange((_, session) => {
-    state.loading = true;
-    if (!session) {
-      router.push("/");
-    } else {
-      setUser(session ? session.user : null);
-      router.forward();
-    }
-    state.loading = false;
-  });
-});
+const { isLoggedIn } = useAuth();
 </script>
 
 <template>
