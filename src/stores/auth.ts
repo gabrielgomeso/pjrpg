@@ -89,7 +89,7 @@ export const useAuthStore = defineStore("user", () => {
     try {
       await supabase.auth.signOut();
 
-      console.log('logout');
+      router.push("/");
 
       user.value = {
         id: "",
@@ -98,8 +98,6 @@ export const useAuthStore = defineStore("user", () => {
         username: "",
         role: "user",
       };
-
-      router.push("/");
     } catch (error) {
       console.log("error while logging out", error);
     }
