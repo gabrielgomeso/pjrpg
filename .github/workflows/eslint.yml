@@ -13,8 +13,7 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "master" ]
+    types: [opened, synchronize, ready_for_review, labeled]
 
 jobs:
  lint:
@@ -22,5 +21,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run lint
-        path: ../../
         run: npm run lint
+        
