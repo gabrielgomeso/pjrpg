@@ -13,6 +13,11 @@
   justify-content: center;
   padding: 1rem;
   background-color: var(--vt-c-black-mute);
+  color: white;
   min-height: 100px;
+}
+
+.footer a {
+  color: lightblue;
 }
 </style>

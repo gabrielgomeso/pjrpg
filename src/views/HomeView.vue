@@ -9,7 +9,7 @@ const { isLoggedIn } = useAuth();
 <template>
   <main>
     <div class="home-view">
-      <h1 class="home-view__title">Herdeiros do Olímpo</h1>
+      <h1 class="home-view__title">PERCY JACKSON RPG</h1>
       <div class="home-view__auth">
         <AuthForm v-if="!isLoggedIn" />
         <WelcomeDisplay v-else />
@@ -25,7 +25,7 @@ const { isLoggedIn } = useAuth();
   padding: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-    url("../assets/images/first-fold.jpg") no-repeat center / cover;
+    url("../assets/images/first-fold.webp") no-repeat center / cover;
 }
 
 .home-view__title {

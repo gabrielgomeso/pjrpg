@@ -20,6 +20,7 @@ async function handleLogout() {
       <img
         src="../../../assets/logo.png"
         alt="Percy Jackson and the Olympians logo"
+        width="75"
         height="75"
       />
     </figure>
