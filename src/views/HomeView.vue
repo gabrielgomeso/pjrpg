@@ -7,62 +7,65 @@ const { isLoggedIn } = useAuth();
 </script>
 
 <template>
-  <main>
-    <div class="home-view">
+  <main class="home-view">
+    <header>
       <h1 class="home-view__title">PERCY JACKSON RPG</h1>
-      <div class="home-view__auth">
-        <AuthForm v-if="!isLoggedIn" />
-        <WelcomeDisplay v-else />
-      </div>
+      <p class="home-view__subtitle">
+        Aventure-se em um mundo tomado por deuses mitológicos, conquiste a
+        glória e se torne um ícone eterno.
+      </p>
+    </header>
+    <div class="home-view__auth">
+      <AuthForm v-if="!isLoggedIn" />
+      <WelcomeDisplay v-else />
     </div>
   </main>
 </template>
 <style>
 .home-view {
   display: flex;
+  height: 100%;
   flex-direction: column;
-  height: 100vh;
   padding: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-    url("../assets/images/first-fold.webp") no-repeat center / cover;
+    url("../assets/images/first-fold.webp") no-repeat top / cover;
+}
+
+.home-view__title,
+.home-view__subtitle {
+  text-transform: uppercase;
+  letter-spacing: 0.25rem;
+  color: white;
+  text-align: center;
+  text-shadow: 0 0 10px black;
 }
 
 .home-view__title {
-  text-transform: uppercase;
-  letter-spacing: 0.25rem;
-  text-align: center;
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  color: white;
-  text-shadow: 0 0 10px black;
-  animation: fade-in 1s ease-out forwards;
-  margin-block-start: 3rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.home-view__subtitle {
+  font-size: 0.75rem;
   margin-block-end: 1rem;
+  max-width: 650px;
+  margin: 0.5rem auto;
+  text-align: left;
 }
 
 .home-view__auth {
   display: flex;
-  justify-content: center;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  50% {
-    opacity: 0.5;
-    transform: translateY(-25px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
   .home-view {
-    height: calc(100vh - 100px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
   }
 }
 </style>

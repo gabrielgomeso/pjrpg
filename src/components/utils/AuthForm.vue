@@ -50,21 +50,23 @@ const toggleAuthForm = ref(true);
 }
 
 .auth-form__header--selected {
-  color: #a78787;
-  border-bottom: 2px solid #fff;
-  background-color: #272727;
+  color: #dddddd;
+  border-bottom: 2px solid #4b4b4bc0;
+  background-color: #27272785;
+  border-radius: 15px;
+  padding: 10px;
 }
 
 .auth-form__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  min-width: 80%;
   gap: 15px;
   min-height: 300px;
   padding: 1rem;
   border-radius: 15px;
-  background-color: #272727;
+  background-color: #2727278e;
 }
 
 .auth-form__body {
