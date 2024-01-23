@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import { TheHeader, TheFooter } from "@/components/layout";
+import { TheFooter } from "@/components/layout";
 </script>
 
 <template>
   <div class="main-container">
-    <TheHeader />
     <main class="main-content">
       <RouterView v-slot="{ Component }" mode="out-in">
         <transition name="slide">
