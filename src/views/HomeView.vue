@@ -30,6 +30,7 @@ const { isLoggedIn } = useAuth();
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
     url("../assets/images/first-fold.webp") no-repeat top / cover;
+  align-items: center;
 }
 
 .home-view__title,
