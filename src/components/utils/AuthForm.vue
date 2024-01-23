@@ -24,10 +24,10 @@ const toggleAuthForm = ref(true);
         Registrar
       </button>
     </div>
-    <div v-if="toggleAuthForm" class="auth-form__body">
+    <div v-if="toggleAuthForm">
       <LoginForm />
     </div>
-    <div v-else class="auth-form__body">
+    <div v-else>
       <RegisterForm />
     </div>
   </div>
@@ -41,38 +41,34 @@ const toggleAuthForm = ref(true);
 .auth-form__header-button {
   background-color: transparent;
   font-size: large;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   border: none;
   color: #fff;
-}
-
-.auth-form__header > h2 {
+  border-bottom: 2px solid #1a1717c0;
+  background-color: #27272785;
   cursor: pointer;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
 }
 
 .auth-form__header--selected {
   color: #dddddd;
-  border-bottom: 2px solid #4b4b4bc0;
-  background-color: #27272785;
-  border-radius: 15px;
-  padding: 10px;
+  border-bottom: 2px solid #1a1717c0;
+  background-color: #7e7d7d85;
 }
 
 .auth-form__container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-width: 80%;
   gap: 15px;
-  min-height: 300px;
+  min-height: 450px;
   padding: 1rem;
-  border-radius: 15px;
-  background-color: #2727278e;
-}
-
-.auth-form__body {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  background-color: #272727d8;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
