@@ -1,5 +1,16 @@
 <script lang="ts" setup>
 import { RouterLink } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+
+const { logout } = useAuthStore();
+
+async function handleLogout() {
+  try {
+    await logout();
+  } catch (error) {
+    console.log("Error while loggin out", error);
+  }
+}
 </script>
 <template>
   <div class="welcome-display__container">
@@ -8,9 +19,20 @@ import { RouterLink } from "vue-router";
       Acesse seu perfil para modificar suas informações, criar seu personagem e
       iniciar sua jornada.
     </p>
-    <RouterLink class="welcome-display__profile-link" to="/my-profile">
-      Meu perfil ➡️
-    </RouterLink>
+
+    <div class="welcome-display__container-actions">
+
+      
+      <RouterLink class="welcome-display__profile-link" to="/my-profile">
+        Meu perfil ➡️
+      </RouterLink>
+      <button
+        class="navigation-desktop__logout-button"
+        @click="handleLogout()"
+      >
+        Sair 🚪
+      </button>
+    </div>
   </div>
 </template>
 <style>
@@ -32,5 +54,12 @@ import { RouterLink } from "vue-router";
   color: white;
   text-align: center;
   text-decoration: none;
+}
+
+.welcome-display__container-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
 }
 </style>
