@@ -22,6 +22,9 @@ onMounted(async () => {
 
 <template>
   <section class="section-container">
+    <RouterLink class="profile-view__return-link" to="/">
+      ⬅️ Voltar
+    </RouterLink>
     <header class="section-container__header">
       <h1>Meu perfil</h1>
       <p>Todas as informações da sua conta e de seus personagens!</p>
@@ -60,6 +63,20 @@ onMounted(async () => {
 </template>
 
 <style>
+.profile-view__return-link {
+  margin: 8px 0 16px 0;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #4d4d4d;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: block;
+  max-width: 125px;
+}
+
 .profile-view__character-list {
   display: flex;
   gap: 8px;
